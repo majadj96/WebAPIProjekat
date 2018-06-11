@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            
+            $("#registracijaDeo").css('display', 'none');
+           
+
+            $("p").click(function () {
+                alert($(this).text());
+            });
+            $("#load-products").click(function () {
+                $.get("/api/registracija", function (data, status) {
+                    let tableOfProducts = "<table border='1'>";
+                    for (korisnik in data) {
+                        tableOfProducts += `<tr><td>${data[korisnik].KorisnickoIme}</td><td>${data[korisnik].Lozinka}</td></tr>`;
+                    }
+                    tableOfProducts += "</table>";
+                    $("#content").html(tableOfProducts);
+                });
+            });
+
+            $("#prijava").click(function () {
+                let korisnik = {
+                    KorisnickoIme: `${$('#korIme').val()}`,
+                    Lozinka: `${$('#korPass').val()}`,
+                };
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Prijava',
+                    data: JSON.stringify(korisnik),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data != "Uspesno") {
+                            $("#greskaPrijava").html("<p>" + data + "</p>");
+                        } else {
+                            $(location).attr('href', 'single.html')
+
+                        }
+                    }
+                })
+            });
+
+
+            $("#prikazi").click(function () {
+
+                $("#prikazi").hide(1000);
+                $("#registracijaDeo").show(1000);
+
+
+
+            });
+
+
+
+            $("#registracija").click(function () {
+                let korisnik = {
+                    KorisnickoIme: `${$('#korImeReg').val()}`,
+                    Lozinka: `${$('#korPassReg').val()}`,
+                    Ime: `${$('#ime').val()}`,
+                    Prezime: `${$('#prezime').val()}`,
+                    Pol: `${$('#pol').val()}`,
+                    JMBG: `${$('#jmbg').val()}`,
+                    Email: `${$('#emailAdr').val()}`,
+                    KontaktTelefon: `${$('#brTelefona').val()}`,
+                };
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Registracija',
+                    data: JSON.stringify(korisnik),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data) {
+                            $("#greska").css("color", "red");
+                            $("#greska").text("Postoji korisnik sa tim username-om");
+                        }
+                        else
+                            $("#greska").text("");
+                  }      
+                })
+            });
+
+
+        });
+
+
+    </script>
+</head>
+<body>
+
+
+    <div id="prijavaDeo">
+        <h2> Prijava :)</h2>
+
+
+        <table>
+            <tr>
+                <td>Ime</td>
+                <td><input id="korIme" type="text" name="KorisnickoIme" /></td>
+            </tr>
+            <tr>
+                <td>Pass</td>
+                <td><input id="korPass" type="password" name="Lozinka" /></td>
+            </tr>
+        </table>
+        <button id="prijava" type="button">Prijavi se</button>
+    </div>
+
+    <div id="greskaPrijava"></div>
+
+    <button id="prikazi" type="button">Nemas nalog?</button>
+    <div id="registracijaDeo">
+        <h2> Registracija :)</h2>
+
+
+        <table border=1>
+            <tr>
+                <td>Korisnicko ime</td>
+                <td>
+                    <input id="korImeReg" type="text" name="KorisnickoIme" />
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>Lozinka</td>
+                <td><input id="korPassReg" type="password" name="Lozinka" /></td>
+            </tr>
+
+            <tr>
+                <td>Ime</td>
+                <td><input id="ime" type="text" name="Ime" /></td>
+            </tr>
+
+            <tr>
+                <td>Prezime</td>
+                <td><input id="prezime" type="text" name="Prezime" /></td>
+            </tr>
+
+
+            <tr>
+                <td>JMBG</td>
+                <td><input id="jmbg" type="text" name="JMBG" /></td>
+            </tr>
+
+            <tr>
+                <td>Pol</td>
+                <td>
+                    <select name="Pol" id="pol">
+                        <option>
+                            Zenski
+                        </option>
+                        <option>
+                            Muski
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Broj telefona</td>
+                <td><input id="brTelefona" type="text" name="KontaktTelefon" /></td>
+            </tr>
+
+            <tr>
+                <td>Email adresa</td>
+                <td><input id="emailAdr" type="email" name="Email" /></td>
+            </tr>
+
+        </table>
+        <button id="registracija" type="button">Registruj se</button>
+        <p id="greska"></p>
+    </div>
+
+</body>
+</html>
