@@ -22,10 +22,21 @@ namespace WebAPI.Controllers
 
 
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
+            Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
 
-            foreach(var k in korisnici.list)
+
+            foreach (var k in korisnici.list)
             {
                 if(k.Value.KorisnickoIme==korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
+                {
+
+                    return "Uspesno";
+                }
+            }
+
+            foreach (var k in dispeceri.list)
+            {
+                if (k.Value.KorisnickoIme == korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
                 {
 
                     return "Uspesno";

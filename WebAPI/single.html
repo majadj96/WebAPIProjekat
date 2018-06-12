@@ -1,13 +1,253 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-	<meta charset="utf-8" />
+    <title>Falmingo taxi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="Scripts/jquery-1.10.2.js"></script>
+
+    <style>
+        body {
+            font: 20px Montserrat, sans-serif;
+            line-height: 1.8;
+            color: black;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .margin {
+            margin-bottom: 45px;
+        }
+
+        .bg-1 {
+            background-color: #1abc9c; /* Green */
+            color: #ffffff;
+        }
+
+        .bg-2 {
+            background-color: #474e5d; /* Dark Blue */
+            color: #ffffff;
+        }
+
+        .bg-3 {
+            background-color: #ffffff; /* White */
+            color: #555555;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f; /* Black Gray */
+            color: #fff;
+        }
+
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .navbar {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+    </style>
+
     <script type="text/javascript">
         $(document).ready(function () {
-            $.get("/api/prijava", function (data, status)
-           
+            $("#profil").hide();
+            $("#korisnik").css("display", "none");
+            $("#dispecer").css("display", "none");
+            $("#vozac").css("display", "none");
+            $("#izmeni").hide();
+            let korisnik1 = "";
+
+            var ime = localStorage.getItem("korisnik");
+            $("#wel").text(ime);
+
+            let korisnik = {
+                KorisnickoIme: `${ime}`,
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/Pocetna/',
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    korisnik1 = data;
+                    if (data.Uloga == 0) {
+                        alert("Musterija logovana");
+                        $("#korisnik").css("display", "inline");
+
+
+                    } else if (data.Uloga == 1) {
+                        alert("Dispecer logovan");
+                        $("#dispecer").css("display", "inline");
+
+                    }
+                    else if (data.Uloga == 2) {
+                        alert("Vozac logovana");
+                        $("#vozac").css("display", "inline");
+
+                    }
+                }
+
+            })
+
+            $("#korisnikProfil").click(function () {
+                $("#pocetna").hide(500);
+                $("#pocetna1").hide(500);
+                $('#profil').show(500);
+                let informacije = "<table id=\"tabelaObicna\" border='1'>";
+                informacije += `<tr>
+                                    <td>Korisnicko ime:</td>
+                                    <td>${korisnik1.KorisnickoIme}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lozinka:</td>
+                                    <td>${korisnik1.Lozinka}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ime:</td>
+                                    <td>${korisnik1.Ime}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prezime:</td>
+                                    <td>${korisnik1.Prezime}</td>
+                                </tr>
+                                 <tr>
+                                    <td>Telefon:</td>
+                                    <td>${korisnik1.KontaktTelefon}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>${korisnik1.Email}</td>
+                                </tr>
+               
+                               
+                                    `;
+                informacije += "</table>";
+                $('#profil').html(informacije);
+                $('#izmeni').show();
+
+
+            });
+
+            $("#izmeni").click(function () {
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
+                    $("#izmeni").text("Sacuvaj");
+
+                    $("#tabelaObicna").hide(500);
+                    let informacije = "<table id=\"tabelaNeobicna\" border='1'>";
+                    informacije += `<tr>
+                                    <td>Korisnicko ime:</td>
+                                    <td><input type=\"text\" id=\"korisnickoImeIzmeni\" value=\"${korisnik1.KorisnickoIme}\" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Lozinka:</td>
+                                    <td><input type=\"text\" id=\"lozinkaIzmeni\" value=\"${korisnik1.Lozinka}\" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Ime:</td>
+                                    <td><input type=\"text\" id=\"imeIzmeni\" value=\"${korisnik1.Ime}\" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Prezime:</td>
+                                    <td><input type=\"text\" id=\"prezimeIzmeni\" value=\"${korisnik1.Prezime}\" /></td>
+                                </tr>
+                                 <tr>
+                                    <td>Telefon:</td>
+                                    <td><input type=\"text\" id=\"telefonIzmeni\" value=\"${korisnik1.KontaktTelefon}\" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><input type=\"text\" id=\"emailIzmeni\" value=\"${korisnik1.Email}\" /></td>
+                                </tr>
+               
+                                
+                                    `;
+                    informacije += "</table>";
+                    $('#profil').html(informacije);
+                } else {
+                    $("#izmeni").text("Promeni informacije");
+            
+                    let korisnik = {
+                        KorisnickoIme: `${korisnik1.KorisnickoIme};`+`${$('#korisnickoImeIzmeni').val()}`,
+                        Lozinka: `${$('#lozinkaIzmeni').val()}`,
+                        Ime: `${$('#imeIzmeni').val()}`,
+                        Prezime: `${$('#prezimeIzmeni').val()}`,
+                        Email: `${$('#emailIzmeni').val()}`,
+                        KontaktTelefon: `${$('#telefonIzmeni').val()}`,
+                    };
+                    korisnik1 = korisnik;
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Izmeni',
+                        data: JSON.stringify(korisnik),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                        
+                        }
+                    })
+
+
+
+                    $("#tabelaNeobicna").hide(500);
+                    let informacije = "<table id=\"tabelaObicna\" border='1'>";
+                    informacije += `<tr>
+                                    <td>Korisnicko ime:</td>
+                                    <td>${korisnik1.KorisnickoIme}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lozinka:</td>
+                                    <td>${korisnik1.Lozinka}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ime:</td>
+                                    <td>${korisnik1.Ime}</td>
+                                </tr>
+                                <tr>
+                                    <td>Prezime:</td>
+                                    <td>${korisnik1.Prezime}</td>
+                                </tr>
+                                 <tr>
+                                    <td>Telefon:</td>
+                                    <td>${korisnik1.KontaktTelefon}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td>${korisnik1.Email}</td>
+                                </tr>
+               
+                               
+                                    `;
+                    informacije += "</table>";
+                    $('#profil').html(informacije);
+
+
+
+
+                }
+
+
+            });
 
         });
 
@@ -16,8 +256,74 @@
 </head>
 <body>
 
-    
-    <p> WELKAM</p>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" id="korisnikProfil" href="#"><p id="wel"></p></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">WHO</a></li>
+                    <li><a href="#">WHAT</a></li>
+                    <li><a href="#">WHERE</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- First Container -->
+    <div id="pocetna1" class="container-fluid bg-1 text-center">
+        <h3 class="margin">Dobrodosli!</h3>
+        <img src="flamingo3.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
+        <h3>064 309 3116</h3>
+    </div>
+    <!-- Second Container -->
+    <div id="pocetna" class="container-fluid bg-2 text-center">
+        <h3 class="margin">What Am I?</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <a href="#" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-search"></span> Search
+        </a>
+    </div>
+
+    <div id="profil" style="width:800px; margin:0 auto;">
+
+        PROFIL
+    </div>
+   
+
+
+
+    <div id="korisnik">
+
+        CAO KORISNICE
+
+    </div>
+
+    <div id="dispecer">
+        <div  style="width:800px; margin:0 auto;">
+            <button id="izmeni">Promeni informacije</button><br />
+        </div>
+            CAO DISPECERU
+
+    </div>
+
+    <div id="vozac">
+
+        CAO VOZACU
+
+    </div>
+
+
+
+    <footer class="container-fluid bg-4 text-center">
+        <p>All rights reserved-Maja Djordjevic</p>
+    </footer>
 
 </body>
 </html>

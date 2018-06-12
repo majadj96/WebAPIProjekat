@@ -1,15 +1,83 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
-	<meta charset="utf-8" />
+    <title>Flamingo taxi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="Scripts/jquery-1.10.2.js"></script>
+
+    <style>
+        body {
+            font: 20px Montserrat, sans-serif;
+            line-height: 1.8;
+            color: #ef2415;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .margin {
+            margin-bottom: 45px;
+        }
+
+        .bg-1 {
+            background-color: #1abc9c; /* Green */
+            color: #ffffff;
+        }
+
+        .bg-2 {
+            background-color: #474e5d; /* Dark Blue */
+            color: #ffffff;
+        }
+
+        .bg-3 {
+            background-color: #ffffff; /* White */
+            color: #555555;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f; /* Black Gray */
+            color: #fff;
+        }
+
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .navbar {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+
+        body {
+            background-image: url(flamingo33333.jpg);
+            background-repeat: repeat;
+        }
+
+      
+
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
 
-            
+
             $("#registracijaDeo").css('display', 'none');
-           
+
 
             $("p").click(function () {
                 alert($(this).text());
@@ -42,6 +110,7 @@
                         if (data != "Uspesno") {
                             $("#greskaPrijava").html("<p>" + data + "</p>");
                         } else {
+                            localStorage.setItem("korisnik", korisnik.KorisnickoIme);
                             $(location).attr('href', 'single.html')
 
                         }
@@ -83,11 +152,12 @@
                     success: function (data) {
                         if (!data) {
                             $("#greska").css("color", "red");
-                            $("#greska").text("Postoji korisnik sa tim username-om");
+                            // $("#greska").text("Postoji korisnik sa tim username-om");
+                            alert("Postoji korinsnik sa tim username-om");
                         }
                         else
                             $("#greska").text("");
-                  }      
+                    }
                 })
             });
 
@@ -99,34 +169,55 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+            </div>
 
-    <div id="prijavaDeo">
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+                <ul class="nav navbar-nav navbar-right"></ul>
+            </div>
+            <h3>Flamingo TAXI</h3>
+
+        </div>
+    </nav>
+   
+    <div id="prijavaDeo" style="width:800px; margin:0 auto;">
+
         <h2> Prijava :)</h2>
 
 
         <table>
             <tr>
-                <td>Ime</td>
+                <td>Ime: </td>
                 <td><input id="korIme" type="text" name="KorisnickoIme" /></td>
             </tr>
             <tr>
-                <td>Pass</td>
+                <td>Lozinka: </td>
                 <td><input id="korPass" type="password" name="Lozinka" /></td>
             </tr>
+            <tr><td><br /> </td><td></td></tr>
+            <tr>
+                <td></td>
+                <td>  <button id="prikazi" type="button">Nemas nalog?</button>  <button id="prijava" type="button">Prijavi se</button></td>
+            </tr>
+
         </table>
-        <button id="prijava" type="button">Prijavi se</button>
+
+
+        <div id="greskaPrijava"></div>
+
+
     </div>
-
-    <div id="greskaPrijava"></div>
-
-    <button id="prikazi" type="button">Nemas nalog?</button>
-    <div id="registracijaDeo">
+    <br />
+    <div id="registracijaDeo" style="width:800px; margin:0 auto;">
         <h2> Registracija :)</h2>
 
 
-        <table border=1>
+        <table>
             <tr>
-                <td>Korisnicko ime</td>
+                <td>Korisnicko ime: </td>
                 <td>
                     <input id="korImeReg" type="text" name="KorisnickoIme" />
                 </td>
@@ -134,28 +225,28 @@
 
             </tr>
             <tr>
-                <td>Lozinka</td>
+                <td>Lozinka: </td>
                 <td><input id="korPassReg" type="password" name="Lozinka" /></td>
             </tr>
 
             <tr>
-                <td>Ime</td>
+                <td>Ime: </td>
                 <td><input id="ime" type="text" name="Ime" /></td>
             </tr>
 
             <tr>
-                <td>Prezime</td>
+                <td>Prezime: </td>
                 <td><input id="prezime" type="text" name="Prezime" /></td>
             </tr>
 
 
             <tr>
-                <td>JMBG</td>
+                <td>JMBG: </td>
                 <td><input id="jmbg" type="text" name="JMBG" /></td>
             </tr>
 
             <tr>
-                <td>Pol</td>
+                <td>Pol: </td>
                 <td>
                     <select name="Pol" id="pol">
                         <option>
@@ -169,19 +260,26 @@
             </tr>
 
             <tr>
-                <td>Broj telefona</td>
+                <td>Broj telefona: </td>
                 <td><input id="brTelefona" type="text" name="KontaktTelefon" /></td>
             </tr>
 
             <tr>
-                <td>Email adresa</td>
+                <td>Email adresa:</td>
                 <td><input id="emailAdr" type="email" name="Email" /></td>
+            </tr>
+            <tr><td><br /></td></tr>
+            <tr>
+                <td></td>
+                <td align="right"> <button id="registracija" type="button">Registruj se</button></td>
             </tr>
 
         </table>
-        <button id="registracija" type="button">Registruj se</button>
+
+
         <p id="greska"></p>
     </div>
+
 
 </body>
 </html>

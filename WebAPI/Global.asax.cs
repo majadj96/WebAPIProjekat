@@ -23,6 +23,9 @@ namespace WebAPI
 
             Korisnici korisnici = new Korisnici("~/App_Data/korisnici.txt");
             HttpContext.Current.Application["korisnici"] = korisnici;
+
+            Dispeceri dispeceri = new Dispeceri("~/App_Data/dispeceri.txt");
+            HttpContext.Current.Application["dispeceri"] = dispeceri;
         }
 
         protected void Application_PostAuthorizeRequest()

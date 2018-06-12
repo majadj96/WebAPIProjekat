@@ -33,7 +33,21 @@ namespace WebAPI.Controllers
         {
 
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
+            Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
+
             bool postoji = false;
+
+            foreach (var k in dispeceri.list)
+            {
+                if (k.Value.KorisnickoIme == korisnik.KorisnickoIme)
+                {
+                    postoji = true;
+                    break;
+                }
+
+
+            }
+
 
             foreach(var k in korisnici.list)
             {
