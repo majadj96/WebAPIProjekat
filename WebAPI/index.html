@@ -118,6 +118,7 @@
                                 $("#greskaPrijava").html("<p>" + data + "</p>");
                             } else {
                                 localStorage.setItem("korisnik", korisnik.KorisnickoIme);
+                                $("#greskaPrijava").html("<p>"+" "+"</p>");
                                 $(location).attr('href', 'single.html')
 
                             }
@@ -187,6 +188,8 @@
                     })
                 }
             });
+
+
 
 
         });

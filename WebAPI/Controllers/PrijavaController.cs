@@ -14,15 +14,17 @@ namespace WebAPI.Controllers
 
         public string Post([FromBody]Korisnik korisnik)
         {
-           /* var session = HttpContext.Current.Session;
+            /* var session = HttpContext.Current.Session;
 
 
-            if (session != null)
-                session["korisnik"] = k;*/
+             if (session != null)
+                 session["korisnik"] = k;*/
 
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
+
 
 
             foreach (var k in korisnici.list)
@@ -44,6 +46,19 @@ namespace WebAPI.Controllers
                     return "Uspesno";
                 }
             }
+
+            foreach (var k in vozaci.list)
+            {
+                if (k.Value.KorisnickoIme == korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
+                {
+
+                    return "Uspesno";
+                }
+
+
+            }
+
+
 
             return "Neuspesna prijava";
 

@@ -25,16 +25,60 @@ namespace WebAPI.Controllers
             string id = "";
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+
 
             bool dispecer = false;
             bool musterija = false;
-            bool vozac = false;
+            bool vozacB = false;
             Korisnik kmaja = new Korisnik();
+            Vozac vozac = new Vozac();
+
+            foreach (var k in vozaci.list)
+            {
+                if (k.Value.KorisnickoIme == noviUser)
+                {
+                    if (stariUser == noviUser)
+                    {
+                        id = k.Value.Id;
+                        kmaja = k.Value;
+                        vozacB = true;
+                        vozac = k.Value;
+                        break;
+                    }
+                    //vec postoji ! greska!
+                    kmaja.KorisnickoIme = "postoji";
+                    return kmaja;
+                }
+            }
+            foreach (var k in vozaci.list)
+            {
+                if (k.Value.KorisnickoIme == stariUser)
+                {
+                    id = k.Value.Id;
+                    kmaja = k.Value;
+                    vozacB = true;
+                    vozac = k.Value;
+                    break;
+                }
+            }
+
+
+
+
 
             foreach (var k in dispeceri.list)
             {
                 if (k.Value.KorisnickoIme == noviUser)
                 {
+                    if (stariUser == noviUser)
+                    {
+                        id = k.Value.Id;
+                        kmaja = k.Value;
+                        dispecer = true;
+                        break;
+                    }
                     //vec postoji ! greska!
                     kmaja.KorisnickoIme = "postoji";
                     return kmaja;
@@ -57,6 +101,14 @@ namespace WebAPI.Controllers
 
                 if (k.Value.KorisnickoIme == noviUser)
                 {
+                    if (stariUser == noviUser)
+                    {
+                        id = k.Value.Id;
+                        kmaja = k.Value;
+                        musterija = true;
+                        break;
+                    }
+
                     //vec postoji ! greska!
                     kmaja.KorisnickoIme = "postoji";
                     return kmaja;
@@ -79,6 +131,8 @@ namespace WebAPI.Controllers
             kmaja.Prezime = korisnik.Prezime;
             kmaja.Ime = korisnik.Ime;
             kmaja.Email = korisnik.Email;
+
+
 
             if (musterija)
             {
@@ -106,6 +160,33 @@ namespace WebAPI.Controllers
                         dispeceri = new Dispeceri("~/App_Data/dispeceri.txt");
                         HttpContext.Current.Application["dispeceri"] = dispeceri;
             
+
+
+            }
+
+            if (vozacB)
+            {
+                string path = "~/App_Data/vozaci.txt";
+                path = HostingEnvironment.MapPath(path);
+
+                var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+                korisnik = kmaja;
+
+                vozac.KorisnickoIme = korisnik.KorisnickoIme;
+                vozac.Lozinka = korisnik.Lozinka;
+                vozac.Ime = korisnik.Ime;
+                vozac.Prezime = korisnik.Prezime;
+                vozac.KontaktTelefon = korisnik.KontaktTelefon;
+                vozac.Email = korisnik.Email;
+
+
+
+                lines[int.Parse(id)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip;
+                File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
+
+                vozaci = new Vozaci("~/App_Data/vozaci.txt");
+                HttpContext.Current.Application["vozaci"] = vozaci;
+
 
 
             }
