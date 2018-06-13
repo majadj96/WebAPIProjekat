@@ -94,28 +94,36 @@
             });
 
             $("#prijava").click(function () {
-                let korisnik = {
-                    KorisnickoIme: `${$('#korIme').val()}`,
-                    Lozinka: `${$('#korPass').val()}`,
-                };
+
+                let ki = $('#korIme').val();
+                let p = $('#korPass').val();
+                if (ki == "" || p == "") {
+                    alert("Morate popuniti sva polja!");
+                } else {
+
+                    let korisnik = {
+                        KorisnickoIme: `${$('#korIme').val()}`,
+                        Lozinka: `${$('#korPass').val()}`,
+                    };
 
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/Prijava',
-                    data: JSON.stringify(korisnik),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data != "Uspesno") {
-                            $("#greskaPrijava").html("<p>" + data + "</p>");
-                        } else {
-                            localStorage.setItem("korisnik", korisnik.KorisnickoIme);
-                            $(location).attr('href', 'single.html')
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Prijava',
+                        data: JSON.stringify(korisnik),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data != "Uspesno") {
+                                $("#greskaPrijava").html("<p>" + data + "</p>");
+                            } else {
+                                localStorage.setItem("korisnik", korisnik.KorisnickoIme);
+                                $(location).attr('href', 'single.html')
 
+                            }
                         }
-                    }
-                })
+                    })
+                }
             });
 
 
@@ -131,34 +139,53 @@
 
 
             $("#registracija").click(function () {
-                let korisnik = {
-                    KorisnickoIme: `${$('#korImeReg').val()}`,
-                    Lozinka: `${$('#korPassReg').val()}`,
-                    Ime: `${$('#ime').val()}`,
-                    Prezime: `${$('#prezime').val()}`,
-                    Pol: `${$('#pol').val()}`,
-                    JMBG: `${$('#jmbg').val()}`,
-                    Email: `${$('#emailAdr').val()}`,
-                    KontaktTelefon: `${$('#brTelefona').val()}`,
-                };
+
+                let ki = $('#korImeReg').val();
+                let p = $('#korPassReg').val();
+                let i = $('#ime').val();
+                let pr = $('#prezime').val();
+                let j = $('#jmbg').val();
+                let e = $('#emailAdr').val();
+                let t = $('#brTelefona').val();
+
+                if (ki == "" || p == "" || i == "" || pr == "" || j == "" || e == "" || t == "") {
+                    alert("Morate popuniti sva polja!");
+                } else {
+
+                    let korisnik = {
+                        KorisnickoIme: `${$('#korImeReg').val()}`,
+                        Lozinka: `${$('#korPassReg').val()}`,
+                        Ime: `${$('#ime').val()}`,
+                        Prezime: `${$('#prezime').val()}`,
+                        Pol: `${$('#pol').val()}`,
+                        JMBG: `${$('#jmbg').val()}`,
+                        Email: `${$('#emailAdr').val()}`,
+                        KontaktTelefon: `${$('#brTelefona').val()}`,
+                    };
 
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/Registracija',
-                    data: JSON.stringify(korisnik),
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
-                    success: function (data) {
-                        if (!data) {
-                            $("#greska").css("color", "red");
-                            // $("#greska").text("Postoji korisnik sa tim username-om");
-                            alert("Postoji korinsnik sa tim username-om");
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Registracija',
+                        data: JSON.stringify(korisnik),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (!data) {
+                                $("#greska").css("color", "red");
+                                // $("#greska").text("Postoji korisnik sa tim username-om");
+                                $("#korImeReg").focus();
+                                alert("Korisnicko ime je zauzeto");
+                            }
+                            else {
+                                $("#greska").text("");
+                                $("#prikazi").show();
+                                $("#registracijaDeo").hide(1000);
+                            }
+
                         }
-                        else
-                            $("#greska").text("");
-                    }
-                })
+                    })
+                }
             });
 
 

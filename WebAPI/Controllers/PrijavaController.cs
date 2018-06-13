@@ -27,11 +27,13 @@ namespace WebAPI.Controllers
 
             foreach (var k in korisnici.list)
             {
-                if(k.Value.KorisnickoIme==korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
-                {
+                
+                    if ((k.Value.KorisnickoIme.Equals(korisnik.KorisnickoIme)) && (k.Value.Lozinka.Equals(korisnik.Lozinka)))
+                    {
 
-                    return "Uspesno";
-                }
+                        return "Uspesno";
+                    }
+                
             }
 
             foreach (var k in dispeceri.list)

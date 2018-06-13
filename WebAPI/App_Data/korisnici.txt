@@ -1,6 +1,4 @@
-0;m;m;maja;m;m;98;Zenski;maja@gmail.com
+0;kaca;kaca;majakaca<33;kaca;m;22222;Zenski;kaca@gmail.com
 1;m;m;maja1;m;m;m;Muski;m
-2;l;l;l;l;l;l;Zenski;l
-3;;;;;;;Zenski;
-4;;;m;;;;Zenski;
-5;;;ew;rwe;;;Zenski;
+2;maja;maja;maja111;maja;l;maja;Zenski;maja
+3;maja;kaca;majakaca<333;kaca;m;m;Muski;m

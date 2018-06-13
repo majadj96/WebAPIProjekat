@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
     public class IzmeniController : ApiController
     {
 
-        public bool Post([FromBody]Korisnik korisnik)
+        public Korisnik Post([FromBody]Korisnik korisnik)
         {
 
             string[] korisnickaImena = korisnik.KorisnickoIme.Split(';');
@@ -29,8 +29,17 @@ namespace WebAPI.Controllers
             bool dispecer = false;
             bool musterija = false;
             bool vozac = false;
-            Korisnik kmaja = null;
+            Korisnik kmaja = new Korisnik();
 
+            foreach (var k in dispeceri.list)
+            {
+                if (k.Value.KorisnickoIme == noviUser)
+                {
+                    //vec postoji ! greska!
+                    kmaja.KorisnickoIme = "postoji";
+                    return kmaja;
+                }
+            }
             foreach (var k in dispeceri.list)
             {
                 if (k.Value.KorisnickoIme == stariUser)
@@ -42,6 +51,17 @@ namespace WebAPI.Controllers
                 }
             }
 
+
+            foreach (var k in korisnici.list)
+            {
+
+                if (k.Value.KorisnickoIme == noviUser)
+                {
+                    //vec postoji ! greska!
+                    kmaja.KorisnickoIme = "postoji";
+                    return kmaja;
+                }
+            }
 
             foreach (var k in korisnici.list)
             {
@@ -62,19 +82,16 @@ namespace WebAPI.Controllers
 
             if (musterija)
             {
-                string path = @"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt";
-                StringBuilder sb = new StringBuilder();
-                korisnik.Id = korisnici.list.Count.ToString();
-                sb.Append(korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email + "\n");
+                string path = "~/App_Data/korisnici.txt";
+                path = HostingEnvironment.MapPath(path);
 
-                if (!File.Exists(path))
-                    File.WriteAllText(path, sb.ToString());
-                else
-                    File.AppendAllText(path, sb.ToString());
+                var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt");
+                korisnik = kmaja;
+                lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
+                File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt", lines);
 
                 korisnici = new Korisnici("~/App_Data/korisnici.txt");
                 HttpContext.Current.Application["korisnici"] = korisnici;
-                return true;
             }
             if (dispecer)
             {
@@ -93,7 +110,7 @@ namespace WebAPI.Controllers
 
             }
 
-            return false;
+            return korisnik;
         }
     }
     }

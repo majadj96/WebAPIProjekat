@@ -71,7 +71,14 @@
             $("#korisnik").css("display", "none");
             $("#dispecer").css("display", "none");
             $("#vozac").css("display", "none");
-            $("#izmeni").hide();
+            $("#dugmeIzmeni").hide();
+            $('#dodajVozaca').hide();
+            $('#dodavanjeKorisnikaDiv').hide();
+            $("#dugmeDodajVozaca").hide();
+
+            
+
+
             let korisnik1 = "";
 
             var ime = localStorage.getItem("korisnik");
@@ -97,6 +104,8 @@
                     } else if (data.Uloga == 1) {
                         alert("Dispecer logovan");
                         $("#dispecer").css("display", "inline");
+                        $('#dodajVozaca').show();
+
 
                     }
                     else if (data.Uloga == 2) {
@@ -109,10 +118,11 @@
             })
 
             $("#korisnikProfil").click(function () {
-                $("#pocetna").hide(500);
-                $("#pocetna1").hide(500);
+                $('#dodavanjeKorisnikaDiv').hide();
+                $("#pocetna").hide();
+                $("#pocetna1").hide();
                 $('#profil').show(500);
-                let informacije = "<table id=\"tabelaObicna\" border='1'>";
+                let informacije = "<br /><table id=\"tabelaObicna\" border='1'>";
                 informacije += `<tr>
                                     <td>Korisnicko ime:</td>
                                     <td>${korisnik1.KorisnickoIme}</td>
@@ -142,7 +152,19 @@
                                     `;
                 informacije += "</table>";
                 $('#profil').html(informacije);
-                $('#izmeni').show();
+                $('#dugmeIzmeni').show(500);
+
+
+            });
+
+            $("#pocetnaStranica").click(function () {
+                $('#dodavanjeKorisnikaDiv').hide();
+                $("#dugmeDodajVozaca").hide();
+                $("#profil").hide();
+                $("#pocetna1").show();
+                $("#pocetna").show();
+                $('#dugmeIzmeni').hide();
+
 
 
             });
@@ -151,9 +173,10 @@
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
                     $("#izmeni").text("Sacuvaj");
+                    $("#dugmeDodajVozaca").hide();
 
                     $("#tabelaObicna").hide(500);
-                    let informacije = "<table id=\"tabelaNeobicna\" border='1'>";
+                    let informacije = "<br /><table id=\"tabelaNeobicna\" border='1'>";
                     informacije += `<tr>
                                     <td>Korisnicko ime:</td>
                                     <td><input type=\"text\" id=\"korisnickoImeIzmeni\" value=\"${korisnik1.KorisnickoIme}\" /></td>
@@ -178,13 +201,10 @@
                                     <td>Email:</td>
                                     <td><input type=\"text\" id=\"emailIzmeni\" value=\"${korisnik1.Email}\" /></td>
                                 </tr>
-               
-                                
-                                    `;
+                                `;
                     informacije += "</table>";
                     $('#profil').html(informacije);
                 } else {
-                    $("#izmeni").text("Promeni informacije");
             
                     let korisnik = {
                         KorisnickoIme: `${korisnik1.KorisnickoIme};`+`${$('#korisnickoImeIzmeni').val()}`,
@@ -194,7 +214,6 @@
                         Email: `${$('#emailIzmeni').val()}`,
                         KontaktTelefon: `${$('#telefonIzmeni').val()}`,
                     };
-                    korisnik1 = korisnik;
 
                     $.ajax({
                         type: 'POST',
@@ -203,15 +222,20 @@
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (data) {
-                        
-                        }
-                    })
 
+                            if (data.KorisnickoIme == "postoji") {
+                                alert("Zauzeto korisnicko ime!");
 
+                            } else {
+                                $("#izmeni").text("Promeni informacije");
 
-                    $("#tabelaNeobicna").hide(500);
-                    let informacije = "<table id=\"tabelaObicna\" border='1'>";
-                    informacije += `<tr>
+                                korisnik1 = data;
+                                localStorage.setItem("korisnik", korisnik1.KorisnickoIme);
+                                var ime = localStorage.getItem("korisnik");
+                                $("#wel").text(ime);
+                                $("#tabelaNeobicna").hide(500);
+                                let informacije = "<br /><table id=\"tabelaObicna\" border='1'>";
+                                informacije += `<tr>
                                     <td>Korisnicko ime:</td>
                                     <td>${korisnik1.KorisnickoIme}</td>
                                 </tr>
@@ -238,8 +262,13 @@
                
                                
                                     `;
-                    informacije += "</table>";
-                    $('#profil').html(informacije);
+                                informacije += "</table>";
+                                $('#profil').html(informacije);
+                            }
+                        }
+                    })
+
+
 
 
 
@@ -247,6 +276,60 @@
                 }
 
 
+            });
+
+            $('#dodajVozaca').click(function () {
+                $("#dugmeDodajVozaca").show();
+                $("#profil").hide();
+                $("#pocetna1").hide();
+                $("#pocetna").hide();
+                $('#dugmeIzmeni').hide();
+                $('#dodavanjeKorisnikaDiv').show();
+
+                let informacije = "<table id=\"tabelaVozaca\" border='1'>";
+                informacije += `<tr>
+                                    <td>Korisnicko ime:</td>
+                                    <td><input type=\"text\" id=\"korisnickoImeVozac\"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Lozinka:</td>
+                                    <td><input type=\"text\" id=\"lozinkaVozac\"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Ime:</td>
+                                    <td><input type=\"text\" id=\"imeVozac\"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Prezime:</td>
+                                    <td><input type=\"text\" id=\"prezimeVozac\"/></td>
+                                </tr>
+                                 <tr>
+                                    <td>Telefon:</td>
+                                    <td><input type=\"text\" id=\"telefonVozac\"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><input type=\"text\" id=\"emailVozac\"/></td>
+                                </tr>
+             
+                               
+                                    `;
+                informacije += "</table>";
+                $('#dodavanjeKorisnikaDiv').html(informacije);
+
+
+
+            });
+
+            $('#odlogovanje').click(function () {
+                localStorage.setItem("korisnik", "");
+                $(location).attr('href', 'index.html')
+
+
+            });
+
+            $('#subBut').click(function () {
+                alert("KLIK");
             });
 
         });
@@ -268,9 +351,9 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">WHO</a></li>
-                    <li><a href="#">WHAT</a></li>
-                    <li><a href="#">WHERE</a></li>
+                    <li><a id="pocetnaStranica" href="#">POCETNA</a></li>
+                    <li><a id="dodajVozaca" href="#">DODAJ VOZACA</a></li>
+                    <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
                 </ul>
             </div>
         </div>
@@ -295,7 +378,7 @@
 
         PROFIL
     </div>
-   
+
 
 
 
@@ -306,10 +389,8 @@
     </div>
 
     <div id="dispecer">
-        <div  style="width:800px; margin:0 auto;">
-            <button id="izmeni">Promeni informacije</button><br />
-        </div>
-            CAO DISPECERU
+
+        CAO DISPECERU
 
     </div>
 
@@ -319,9 +400,19 @@
 
     </div>
 
+    <div id="dodavanjeKorisnikaDiv" style="width:800px; margin:0 auto;">
+        DODAJEM KORISNIKA ODJE
+    </div>
 
+    <div id="dugmeIzmeni" style="width:800px; margin:0 auto;">
+        <button id="izmeni">Promeni informacije</button><br />
+    </div>
 
-    <footer class="container-fluid bg-4 text-center">
+    <div id="dugmeDodajVozaca" style="width:800px; margin:0 auto;">
+        <button id="subBut">Dodaj vozaca</button>
+    </div>
+
+   <br /> <footer class="container-fluid bg-4 text-center">
         <p>All rights reserved-Maja Djordjevic</p>
     </footer>
 
