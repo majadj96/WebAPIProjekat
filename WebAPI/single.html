@@ -79,13 +79,27 @@
             $("#dugmeDodajVozaca").hide();
             $("#dugmePromeniLokacijuDiv").hide();
             $("#promeniLokacijuDiv").hide();
+            $("#naruciVoznjuDiv").hide();
+            $("#dugmeNaruciVoznjuDiv").hide();
             
 
             
 
             
-
-            
+            //poslacu ajax poziv da mi ucita listu voznju i da mi vrati :)
+         /*
+          *
+          *   let imehehe = localStorage.getItem("korisnik");
+                        $.get("/api/Voznja/" + imehehe, function (data, status) {
+                            let tabelaVoznji = "<table border='1'>";
+                            for (voznja in data) {
+                                tabelaVoznji += `<tr><td>${data[voznja].DatumVreme}</td><td>${data[voznja].idKorisnik}</td></tr>`;
+                            }
+                            tabelaVoznji += "</table>";
+                            $("#korisnik").html(tabelaVoznji);
+                        });
+          * 
+          * */
 
 
             let korisnik1 = "";
@@ -109,8 +123,15 @@
                         alert("Musterija logovana");
                         $("#korisnik").css("display", "inline");
                         $('#naruciVoznju').show();
-
-
+                     
+                        let id = localStorage.getItem("korisnik");
+                        $.ajax({
+                            type: 'GET',
+                            url: '/api/Voznja/',
+                            contentType: 'application/json; charset=utf-8',
+                            data: id,
+                            dataType: 'json',
+                        })
 
                     } else if (data.Uloga == 1) {
                         alert("Dispecer logovan");
@@ -131,6 +152,11 @@
             })
 
             $("#korisnikProfil").click(function () {
+                $("#korisnik").css("display", "none");
+
+                $("#naruciVoznjuDiv").hide();
+                $("#dugmeNaruciVoznjuDiv").hide();
+
                 $("#dugmePromeniLokacijuDiv").hide();
                 $("#dugmeDodajVozaca").hide();
                 $('#dodavanjeKorisnikaDiv').hide();
@@ -174,7 +200,11 @@
             });
 
             $("#pocetnaStranica").click(function () {
-                $("#dugmeADDVozaca").hide();
+                $("#korisnik").css("display", "inline");
+
+                $("#naruciVoznjuDiv").hide();
+                $("#dugmeNaruciVoznjuDiv").hide();
+              //  $("#dugmeADDVozaca").hide();
                 $('#dodavanjeKorisnikaDiv').hide();
                 $("#dugmeDodajVozaca").hide();
                 $("#profil").hide();
@@ -200,6 +230,10 @@
 
                     $("#promeniLokacijuDiv").hide();
                     $("#dugmePromeniLokacijuDiv").hide();
+
+                    $("#naruciVoznjuDiv").hide();
+                    $("#dugmeNaruciVoznjuDiv").hide();
+
 
                     $("#tabelaObicna").hide(500);
                     let informacije = "<br /><table id=\"tabelaNeobicna\" border='1'>";
@@ -315,6 +349,7 @@
                 $('#dodavanjeKorisnikaDiv').show();
                 $("#promeniLokacijuDiv").hide();
                 $("#dugmePromeniLokacijuDiv").hide();
+
 
                 let informacije = "<table id=\"tabelaVozaca\" border='1'>";
                 informacije += `<tr>
@@ -588,9 +623,109 @@
 
 
             $('#naruciVoznju').click(function () {
+                $("#korisnik").css("display", "none");
+
+                alert("Narucuje se voznja"); 
+                $("#pocetna1").hide();
+                $("#profil").hide();
+                $("#pocetna").hide();
+                $("#dugmeDodajVozaca").hide();
+                $("#dodavanjeKorisnikaDiv").hide();
+                $("#dugmeIzmeni").hide();
+                $("#promeniLokacijuDiv").hide();
+                $("#dugmePromeniLokacijuDiv").hide();
+
+                $("#naruciVoznjuDiv").show();//tu dodajem tabelu
+                $("#dugmeNaruciVoznjuDiv").show();
 
 
-                alert("Narucuje se voznja");
+                let informacije = "<br /><table border='1'>";
+                // Tabela ima objekat voznja + tip auta da se izabere
+                informacije += `  <tr>        
+                                <td>X koorginata</td>
+                                    <td><input type=\"text\" id=\"xVoznja\"/></td>
+                            </tr>
+
+                             <tr>        
+                                <td>Y koorginata</td>
+                                    <td><input type=\"text\" id=\"yVoznja\"/></td>
+                            </tr>
+
+                             <tr>        
+                                <td>Ulica i broj</td>
+                                    <td><input type=\"text\" id=\"ulicaibrojVoznja\"/></td>
+                            </tr>
+
+                            <tr>        
+                                <td>Mesto</td>
+                                    <td><input type=\"text\" id=\"mestoVoznja\"/></td>
+                            </tr>
+
+                            <tr>        
+                                <td>Postanski broj</td>
+                                    <td><input type=\"text\" id=\"postanskiBrojVoznja\"/></td>
+                            </tr>
+                             <tr>        
+                                <td>Tip automobila:</td>
+                                    <td>
+                                    <select name="Tip" id="automobilVoznja">
+                                        <option>
+                                            Putnicki
+                                        </option>
+                                        <option>
+                                            Kombi
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                                `;
+                informacije += "</table>";
+                $('#naruciVoznjuDiv').html(informacije);
+
+            });
+
+            $("#naruciVoznjuBut").click(function () {
+                alert("Saljem voznju!");
+                let ime = localStorage.getItem("korisnik");
+                let voznja = {
+                    Lokacija: `${""}`,
+                    Automobil: `${$('#automobilVoznja').val()}`,
+                    idKorisnik: ime,
+                };
+
+
+                let lokacija = {
+                    X: `${$('#xVoznja').val()}`,
+                    Y: `${$('#yVoznja').val()}`,
+                    Adresa: `${""}`,
+                };
+
+                let adresa = {
+                    UlicaBroj: `${$('#ulicaibrojVoznja').val()}`,
+                    NaseljenoMesto: `${$('#mestoVoznja').val()}`,
+                    PozivniBrojMesta: `${$('#postanskiBrojVoznja').val()}`,
+                };
+
+                lokacija.Adresa = adresa;
+                voznja.Lokacija = lokacija;
+
+                // OVDE IDE PARSIRANJE VOZNJE I AJAKS!
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Voznja',
+                    data: JSON.stringify(voznja),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            alert("Vasa voznja je narucena :)");
+                            $(location).attr('href', 'single.html')
+                        }
+                    }
+                })
 
             });
 
@@ -650,7 +785,7 @@
 
     <div id="korisnik">
 
-        CAO KORISNICE
+        CAO KORISNICE ovde ide njegova tabela :) .html cu gore
 
     </div>
 
@@ -687,7 +822,17 @@
         <button id="promeniLokacijuBut">Promeni</button>
     </div>
 
-   
+    <div id="naruciVoznjuDiv" style="width:800px; margin:0 auto;">
+
+       NARUCI VOZNJU
+    </div>
+
+    <div id="dugmeNaruciVoznjuDiv" style="width:800px; margin:0 auto;">
+        <button id="naruciVoznjuBut">Naruci</button>
+    </div>
+
+
+
 
 
 
