@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     public class VoznjaController : ApiController
     {
 
-        public List<Voznja> Get([FromBody]string id)//ovo je username
+        public List<Voznja> Get(string id)//ovo je username
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
 
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
             voznja.DatumVreme = DateTime.Now;
             voznja.StatusVoznje = Models.Enums.Enumss.StatusVoznje.Kreirana;
 
-            sb.Append(voznja.Id + ";" + voznja.DatumVreme.ToString() + ";" + voznja.Lokacija.X + ";" + voznja.Lokacija.Y + ";" + voznja.Lokacija.Adresa.UlicaBroj + ";" + voznja.Lokacija.Adresa.NaseljenoMesto + ";" + voznja.Lokacija.Adresa.PozivniBrojMesta + ";" + voznja.Automobil + ";" + voznja.idKorisnik + ";0;0; ; ; ; ; ;0; ; ; ; ; ;" + voznja.StatusVoznje + "\n");
+            sb.Append(voznja.Id + ";" + voznja.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voznja.Lokacija.X + ";" + voznja.Lokacija.Y + ";" + voznja.Lokacija.Adresa.UlicaBroj + ";" + voznja.Lokacija.Adresa.NaseljenoMesto + ";" + voznja.Lokacija.Adresa.PozivniBrojMesta + ";" + voznja.Automobil + ";" + voznja.idKorisnik + ";0;0; ; ; ; ; ;0; ; ; ; ; ;" + voznja.StatusVoznje + "\n");
 
             if (!File.Exists(path))
                 File.WriteAllText(path, sb.ToString());

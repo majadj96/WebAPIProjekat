@@ -62,10 +62,49 @@
 
         .navbar-nav li a:hover {
             color: #1abc9c !important;
+            font-size: 150%;
         }
+
+        #korisnikProfil {
+            color: #1abc9c;
+        }
+
+        #korisnikProfil:hover {
+             background-color: #1abc9c;
+             color: white;
+             font-weight:bold;
+             font-size:x-large;
+        }
+
+        th, td {
+            padding: 4px;
+            text-align: left;
+        }
+
+
     </style>
 
     <script type="text/javascript">
+
+        function getEnumStatus(id) {
+            switch (id) {
+                case 0: return "Kreirana";
+                case 1: return "Formirana";
+                case 2: return "Obradjena";
+                case 3: return "Prihvacena";
+                case 4: return "Otkazana";
+                case 5: return "Neuspesna";
+                case 6: return "Uspesna";
+            }
+        }
+
+        function getEnumTipAutomobila(id) {
+            switch (id) {
+                case 0: return "Putnicki";
+                case 1: return "Kombi";
+            }
+        }
+        
         $(document).ready(function () {
             $("#profil").hide();
             $("#korisnik").css("display", "none");
@@ -82,9 +121,9 @@
             $("#naruciVoznjuDiv").hide();
             $("#dugmeNaruciVoznjuDiv").hide();
             
+            var uloga = '';
 
             
-
             
             //poslacu ajax poziv da mi ucita listu voznju i da mi vrati :)
          /*
@@ -119,18 +158,42 @@
                 dataType: 'json',
                 success: function (data) {
                     korisnik1 = data;
+                   uloga = data.Uloga; // 0 korisnik , 1 dispecer , 2 vozac
                     if (data.Uloga == 0) {
                         alert("Musterija logovana");
-                        $("#korisnik").css("display", "inline");
+                        $("#korisnik").css("display", "block");
+                    //    $("#korisnik").css("float", "right");
+                        $("#korisnik").css("clear", "both");
+                        $("#korisnik").css("position", "sticky");
+                        
                         $('#naruciVoznju').show();
                      
-                        let id = localStorage.getItem("korisnik");
+                       var id = localStorage.getItem("korisnik");
                         $.ajax({
                             type: 'GET',
                             url: '/api/Voznja/',
-                            contentType: 'application/json; charset=utf-8',
-                            data: id,
-                            dataType: 'json',
+                       //     contentType: 'application/json; charset=utf-8',
+                            data: {
+                                "id": id
+                            },
+                         //   dataType: 'json',
+                            success: function (data) {
+                             
+                                let tabelaVoznji = "<table border='1'><tr><td>Id voznje</td><td>Datum i vreme</td><td>Tip automobila</td><td>Status voznje</td><td colspan=\"2\"></td></tr>";
+                                for (voznja in data) {
+                                    tabelaVoznji += `<tr>
+                                                    <td>${data[voznja].Id}</td>
+                                                    <td>${data[voznja].DatumVreme}</td>
+                                                    <td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                    <td>${getEnumStatus(data[voznja].StatusVoznje)}</td>
+                                                    <td><button id="otkaziVoznju" value="${data[voznja].Id}">Otkazi</button></td>
+                                                    <td><button id="izmeniVoznju" value="${data[voznja].Id}">Izmeni</button></td>
+
+                                                        </tr>`;
+                                }
+                                tabelaVoznji += "</table>";
+                                $("#tabelaVoznji").html(tabelaVoznji);
+                            }
                         })
 
                     } else if (data.Uloga == 1) {
@@ -151,8 +214,15 @@
 
             })
 
+            //LINK U MENIJU PROFIL
             $("#korisnikProfil").click(function () {
+
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
+
                 $("#korisnik").css("display", "none");
+                $("#dispecer").css("display", "none");
+                $("#vozac").css("display", "none");
 
                 $("#naruciVoznjuDiv").hide();
                 $("#dugmeNaruciVoznjuDiv").hide();
@@ -195,12 +265,33 @@
                 informacije += "</table>";
                 $('#profil').html(informacije);
                 $('#dugmeIzmeni').show(500);
+                } else {
+                    alert("Niste sacuvali izmene.");
+                    $("#izmeni").css("background-color", "#ff4d4d");
 
+                }
 
             });
 
+            //LINK POCETNA STRANICA
             $("#pocetnaStranica").click(function () {
-                $("#korisnik").css("display", "inline");
+
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
+                  
+
+                    if (uloga == 0) {
+                        $("#korisnik").css("display", "block");
+                        //    $("#korisnik").css("float", "right");
+                        $("#korisnik").css("clear", "both");
+                        $("#korisnik").css("position", "sticky");
+                    } else if (uloga == 1) {
+                        $("#dispecer").css("display", "block");
+
+                        //dispecer tabele
+                    } else if (uloga == 2) {
+                        $("#vozac").css("display", "block");
+                    }
 
                 $("#naruciVoznjuDiv").hide();
                 $("#dugmeNaruciVoznjuDiv").hide();
@@ -214,12 +305,17 @@
 
                 $("#promeniLokacijuDiv").hide();
                 $("#dugmePromeniLokacijuDiv").hide();
+                } else {
+                    alert("Niste sacuvali izmene.");
+                    $("#izmeni").css("background-color", "#ff4d4d");
 
+                }
 
 
 
             });
 
+            //DUGME PROMENI INFORMACJE _ SACUVAJ
             $("#izmeni").click(function () {
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
@@ -265,7 +361,9 @@
                     informacije += "</table>";
                     $('#profil').html(informacije);
                 } else {
-            
+            //ako je udjeno u to
+                    $("#izmeni").css("background-color", '');
+
                     let korisnik = {
                         KorisnickoIme: `${korisnik1.KorisnickoIme};`+`${$('#korisnickoImeIzmeni').val()}`,
                         Lozinka: `${$('#lozinkaIzmeni').val()}`,
@@ -338,21 +436,26 @@
 
             });
 
+
+            //IZGLED ZA DODAVANJE VOZACA  , link u meniju
             $('#dodajVozaca').click(function () {
-                $("#dugmeDodajVozaca").show();
-                $("#subBut").show();                
-                $("#profil").hide();
-                $("#pocetna1").hide();
-                $("#pocetna").hide();
-                $('#dugmeIzmeni').hide();
-                $("#promeniLokacijuDiv").hide();
-                $('#dodavanjeKorisnikaDiv').show();
-                $("#promeniLokacijuDiv").hide();
-                $("#dugmePromeniLokacijuDiv").hide();
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
+
+                    $("#dugmeDodajVozaca").show();
+                    $("#subBut").show();
+                    $("#profil").hide();
+                    $("#pocetna1").hide();
+                    $("#pocetna").hide();
+                    $('#dugmeIzmeni').hide();
+                    $("#promeniLokacijuDiv").hide();
+                    $('#dodavanjeKorisnikaDiv').show();
+                    $("#promeniLokacijuDiv").hide();
+                    $("#dugmePromeniLokacijuDiv").hide();
 
 
-                let informacije = "<table id=\"tabelaVozaca\" border='1'>";
-                informacije += `<tr>
+                    let informacije = "<table id=\"tabelaVozaca\" border='1'>";
+                    informacije += `<tr>
                                     <td>Ime:</td>
                                     <td><input type=\"text\" id=\"imeVozac\"/></td>
                                 </tr>
@@ -445,20 +548,32 @@
                             </tr>
                                     `;
 
-                informacije += "</table>";
-                $('#dodavanjeKorisnikaDiv').html(informacije);
+                    informacije += "</table>";
+                    $('#dodavanjeKorisnikaDiv').html(informacije);
 
+                } else {
+                    alert("Niste sacuvali izmene.");
+                    $("#izmeni").css("background-color", "#ff4d4d");
+                }
+
+            });
+
+            //LOGOUT
+            $('#odlogovanje').click(function () {
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
+                    localStorage.setItem("korisnik", "");
+                    $(location).attr('href', 'index.html')
+                  } else {
+                    alert("Niste sacuvali izmene.");
+                    $("#izmeni").css("background-color","#ff4d4d");
+
+                }
                
 
-            });
-
-            $('#odlogovanje').click(function () {
-                localStorage.setItem("korisnik", "");
-                $(location).attr('href', 'index.html')
-
 
             });
-
+            //DODAVANJE VOZAZCA, sta se radi kada se klikne na dugme
             $('#subBut').click(function () {
                 alert("Saljem vozaca");
 
@@ -526,6 +641,7 @@
             });
 
 
+            //LINK U MENIJU - PROMENI LOKACIJU - VOZAC ima to
             $('#promeniLokaciju').click(function () {
                 $("#pocetna1").hide();
                 $("#profil").hide();
@@ -567,10 +683,9 @@
 
             });
 
+            //DUGME U DA SE PROMENI LOKACIJA U VOZACU 
             $("#promeniLokacijuBut").click(function () {
                 
-                alert("PROMENAA");
-
                 let ime = localStorage.getItem("korisnik");
                 let vozac = {
                     KorisnickoIme: ime,
@@ -622,26 +737,29 @@
             });
 
 
+            //LINK U MENIJU NARUCI VOZNJU _ DISPECER to ima
             $('#naruciVoznju').click(function () {
-                $("#korisnik").css("display", "none");
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
 
-                alert("Narucuje se voznja"); 
-                $("#pocetna1").hide();
-                $("#profil").hide();
-                $("#pocetna").hide();
-                $("#dugmeDodajVozaca").hide();
-                $("#dodavanjeKorisnikaDiv").hide();
-                $("#dugmeIzmeni").hide();
-                $("#promeniLokacijuDiv").hide();
-                $("#dugmePromeniLokacijuDiv").hide();
+                    $("#korisnik").css("display", "none");
 
-                $("#naruciVoznjuDiv").show();//tu dodajem tabelu
-                $("#dugmeNaruciVoznjuDiv").show();
+                    $("#pocetna1").hide();
+                    $("#profil").hide();
+                    $("#pocetna").hide();
+                    $("#dugmeDodajVozaca").hide();
+                    $("#dodavanjeKorisnikaDiv").hide();
+                    $("#dugmeIzmeni").hide();
+                    $("#promeniLokacijuDiv").hide();
+                    $("#dugmePromeniLokacijuDiv").hide();
+
+                    $("#naruciVoznjuDiv").show();//tu dodajem tabelu
+                    $("#dugmeNaruciVoznjuDiv").show();
 
 
-                let informacije = "<br /><table border='1'>";
-                // Tabela ima objekat voznja + tip auta da se izabere
-                informacije += `  <tr>        
+                    let informacije = "<br /><table border='1'>";
+                    // Tabela ima objekat voznja + tip auta da se izabere
+                    informacije += `  <tr>        
                                 <td>X koorginata</td>
                                     <td><input type=\"text\" id=\"xVoznja\"/></td>
                             </tr>
@@ -680,13 +798,17 @@
                             </tr>
 
                                 `;
-                informacije += "</table>";
-                $('#naruciVoznjuDiv').html(informacije);
-
+                    informacije += "</table>";
+                    $('#naruciVoznjuDiv').html(informacije);
+                } else {
+                    alert("Niste sacuvali izmene.");
+                    $("#izmeni").css("background-color","#ff4d4d");
+               
+                }
             });
 
+            //KADA SE KLIKNE NA DUGME NARUCI VOZNJU 
             $("#naruciVoznjuBut").click(function () {
-                alert("Saljem voznju!");
                 let ime = localStorage.getItem("korisnik");
                 let voznja = {
                     Lokacija: `${""}`,
@@ -729,6 +851,17 @@
 
             });
 
+            //OTKAZ VOZNJE KOD KLIJENATA
+            $(document).on("click", "#otkaziVoznju", function () {
+                //ovde ces ajaxom da saljes i da menjas voznje :)
+                alert($(this).val());
+            });
+
+            $(document).on("click", "#izmeniVoznju", function () {
+                //ovde ces ajaxom da saljes i da menjas voznje :)
+                alert($(this).val()+" voznja se memanja");
+            });
+
 
         });
 
@@ -737,7 +870,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" id="naki" >
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -767,26 +900,23 @@
         <h3>064 309 3116</h3>
     </div>
     <!-- Second Container -->
-    <div id="pocetna" class="container-fluid bg-2 text-center">
-        <h3 class="margin">What Am I?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-        <a href="#" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-search"></span> Search
-        </a>
-    </div>
+
 
     <div id="profil" style="width:800px; margin:0 auto;">
 
         PROFIL
     </div>
 
+  
 
 
-
-    <div id="korisnik">
-
-        CAO KORISNICE ovde ide njegova tabela :) .html cu gore
-
+    <div  id="korisnik" style="width:800px; margin:0 auto;">
+        <h3  style="text-align:center;color:#1abc9c;font-weight:bold;">Sve voznje </h3>
+        <hr />
+        <div id="tabelaVoznji">
+            CAO KORISNICE ovde ide njegova tabela :) .html cu gore
+        </div>
+        <hr />
     </div>
 
     <div id="dispecer">
@@ -824,7 +954,7 @@
 
     <div id="naruciVoznjuDiv" style="width:800px; margin:0 auto;">
 
-       NARUCI VOZNJU
+        NARUCI VOZNJU
     </div>
 
     <div id="dugmeNaruciVoznjuDiv" style="width:800px; margin:0 auto;">
@@ -834,7 +964,13 @@
 
 
 
-
+    <div id="pocetna" class="container-fluid bg-2 text-center">
+        <h3 class="margin">What Am I?</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <a href="#" class="btn btn-default btn-lg">
+            <span class="glyphicon glyphicon-search"></span> Search
+        </a>
+    </div>
 
     <br /> <footer class="container-fluid bg-4 text-center">
         <p>All rights reserved-Maja Djordjevic</p>
