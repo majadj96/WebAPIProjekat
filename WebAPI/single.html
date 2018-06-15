@@ -21,6 +21,10 @@
             font-size: 16px;
         }
 
+        textarea {
+            resize: none;
+        }
+
         .margin {
             margin-bottom: 45px;
         }
@@ -128,7 +132,7 @@
             $("#dugmeNaruciVoznjuDiv").hide();
             
             var uloga = '';
-
+            var korisnikovAJDI = '';
             
             
             //poslacu ajax poziv da mi ucita listu voznju i da mi vrati :)
@@ -163,6 +167,7 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 success: function (data) {
+                    korisnikovAJDI = data.Id;
                     korisnik1 = data;
                    uloga = data.Uloga; // 0 korisnik , 1 dispecer , 2 vozac
                     if (data.Uloga == 0) {
@@ -174,7 +179,8 @@
 
                         $('#naruciVoznju').show();
 
-                        var id = localStorage.getItem("korisnik")+";k";
+                        var id = localStorage.getItem("korisnik");
+                        //Posalji zahtev za voznjom - da bi se na pocetnoj ispisala lista  // OVDE SAM MENJALA STAVILA SAM UMESTO POST ->GET*******************************
                         $.ajax({
                             type: 'GET',
                             url: '/api/Voznja/',
@@ -184,30 +190,73 @@
                             },
                             //   dataType: 'json',
                             success: function (data) {
+                                if (data.length!=0) {
+                                    let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                    tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
+                                    tabelaVoznji += "<th>Komentar</th>";
+                                    tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th> <th colspan=\"2\"></th></tr>";
+                                    for (voznja in data) {
+                                        var currentdate = new Date(Date.parse(data[voznja].DatumVreme));
 
-                                let tabelaVoznji = "<table border='1'><tr><td>Id voznje</td><td>Datum i vreme</td><td>Tip automobila</td><td>Status voznje</td><td colspan=\"2\"></td></tr>";
-                                for (voznja in data) {
-                                    tabelaVoznji += `<tr>
+                                        var datum =
+                                            currentdate.getUTCFullYear() + "/" +
+                                            ("0" + (currentdate.getUTCMonth() + 1)).slice(-2) + "/" +
+                                            ("0" + currentdate.getUTCDate()).slice(-2);
+                                            
+                                        var vreme = ("0" + currentdate.getUTCHours()).slice(-2) + ":" +
+                                            ("0" + currentdate.getUTCMinutes()).slice(-2);
+                                        tabelaVoznji += `<tr>
                                                     <td>${data[voznja].Id}</td>
-                                                    <td>${data[voznja].DatumVreme}</td>
-                                                    <td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                    <td>${datum} u ${vreme}h</td>
+                                                    <td>
+
+                                                    ${data[voznja].Lokacija.Adresa.UlicaBroj}, 
+                                                   ${data[voznja].Lokacija.Adresa.NaseljenoMesto}, 
+                                                    ${data[voznja].Lokacija.Adresa.PozivniBrojMesta} 
+                                                   </td>`;
+
+
+                                        if (data[voznja].Iznos != "0") {
+                                            tabelaVoznji += `<td>
+
+                                                    ${data[voznja].Odrediste.Adresa.UlicaBroj}, 
+                                                   ${data[voznja].Odrediste.Adresa.NaseljenoMesto}, 
+                                                    ${data[voznja].Odrediste.Adresa.PozivniBrojMesta} 
+                                                        </td>
+                                                        <td>${data[voznja].Iznos}</td>`;
+                                        } else {
+                                            tabelaVoznji += `<td></td>
+                                                        <td></td>`;
+                                        }
+
+                                        if (data[voznja].Komentar.Ocena == "1" || data[voznja].Komentar.Ocena == "2" || data[voznja].Komentar.Ocena == "3" || data[voznja].Komentar.Ocena == "4" || data[voznja].Komentar.Ocena == "5"  ) {
+                                            tabelaVoznji += `<td><textarea rows="4" cols="30" disabled>Korisnicko ime:${data[voznja].Komentar.idKorisnik}\nTekst:${data[voznja].Komentar.Opis}\nOcena:${data[voznja].Komentar.Ocena}\nDatum:${data[voznja].Komentar.DatumObjave}</textarea></td>`;
+                                    
+                                        } else {
+                                            tabelaVoznji += `<td> </td>`;
+
+                                        }
+
+
+                                        tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
                                                     <td>${getEnumStatus(data[voznja].StatusVoznje)}</td>
                                                     `;
-                                    if (data[voznja].StatusVoznje == 0) {
+                                        if (data[voznja].StatusVoznje == 0) {
 
 
-                                        tabelaVoznji += `
-                                                    <td><button id="otkaziVoznju" value="${data[voznja].Id}">Otkazi</button></td>
+                                            tabelaVoznji += `
+                                                    <td><button id="otkaziVoznju" value="${data[voznja].Id}">Odustani</button></td>
                                                     <td><button id="izmeniVoznju" value="${data[voznja].Id}">Izmeni</button></td>
                                                         </tr>`;
-                                    } else {
-                                        tabelaVoznji += `
+                                        } else {
+                                            tabelaVoznji += `
                                                     <td colspan=\"2\"></td>
                                                         </tr>`;
+                                        }
                                     }
+                                    tabelaVoznji += "</table>";
+                                    $("#tabelaVoznji").html(tabelaVoznji);
                                 }
-                                tabelaVoznji += "</table>";
-                                $("#tabelaVoznji").html(tabelaVoznji);
                             }
                         })
 
@@ -249,7 +298,7 @@
                 $("#pocetna").hide();
                 $("#pocetna1").hide();
                 $('#profil').show(500);
-                let informacije = "<br /><table id=\"tabelaObicna\" border='1'>";
+                    let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaObicna\" border='1'>";
                     informacije += `
                                 <tr>
                                     <td>JMBG:</td>
@@ -356,7 +405,7 @@
 
 
                     $("#tabelaObicna").hide(500);
-                    let informacije = "<br /><table id=\"tabelaNeobicna\" border='1'>";
+                    let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaNeobicna\" border='1'>";
                     informacije += ` <tr>
                                     <td>JMBG:</td>
                                     <td>${korisnik1.JMBG}</td>
@@ -406,13 +455,9 @@
 
 
 
-                    let idd = korisnik.KorisnickoIme;
-                    alert(idd);
-
-
                     $.ajax({
                         type: 'PUT',
-                        url: '/api/Izmeni/'+idd,
+                        url: '/api/Izmeni/' + korisnik1.Id,
                         data: JSON.stringify(korisnik),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
@@ -429,7 +474,7 @@
                                 var ime = localStorage.getItem("korisnik");
                                 $("#wel").text(ime);
                                 $("#tabelaNeobicna").hide(500);
-                                let informacije = "<br /><table id=\"tabelaObicna\" border='1'>";
+                                let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaObicna\" border='1'>";
                                 informacije += ` <tr>
                                     <td>JMBG:</td>
                                     <td>${korisnik1.JMBG}</td>
@@ -826,27 +871,27 @@
                     // Tabela ima objekat voznja + tip auta da se izabere
                     informacije += `  <tr>        
                                 <td>X koorginata</td>
-                                    <td><input type=\"text\" id=\"xVoznja\"/></td>
+                                    <td><input type=\"text\" id=\"xVoznja\" required/></td>
                             </tr>
 
                              <tr>        
                                 <td>Y koorginata</td>
-                                    <td><input type=\"text\" id=\"yVoznja\"/></td>
+                                    <td><input type=\"text\" id=\"yVoznja\" required/></td>
                             </tr>
 
                              <tr>        
                                 <td>Ulica i broj</td>
-                                    <td><input type=\"text\" id=\"ulicaibrojVoznja\"/></td>
+                                    <td><input type=\"text\" id=\"ulicaibrojVoznja\"required/></td>
                             </tr>
 
                             <tr>        
                                 <td>Mesto</td>
-                                    <td><input type=\"text\" id=\"mestoVoznja\"/></td>
+                                    <td><input type=\"text\" id=\"mestoVoznja\"required/></td>
                             </tr>
 
                             <tr>        
                                 <td>Postanski broj</td>
-                                    <td><input type=\"text\" id=\"postanskiBrojVoznja\"/></td>
+                                    <td><input type=\"text\" id=\"postanskiBrojVoznja\" required/></td>
                             </tr>
                              <tr>        
                                 <td>Tip automobila:</td>
@@ -874,94 +919,152 @@
 
             //KADA SE KLIKNE NA DUGME NARUCI VOZNJU 
             $("#naruciVoznjuBut").click(function () {
+
+                let x = document.getElementById("xVoznja");
+                let y = document.getElementById("yVoznja");
+                let ub = document.getElementById("ulicaibrojVoznja");
+                let m = document.getElementById("mestoVoznja");
+                let p = document.getElementById("postanskiBrojVoznja");
+                if (!x.checkValidity() || !y.checkValidity() || !ub.checkValidity() || !m.checkValidity() || !p.checkValidity() ) {
+                    alert("Morate uneti sva polja!");
+                } else {
+
+
+                    let ime = localStorage.getItem("korisnik");
+                    let voznja = {
+                        Lokacija: `${""}`,
+                        Automobil: `${$('#automobilVoznja').val()}`,
+                        idKorisnik: ime,
+                    };
+
+
+                    let lokacija = {
+                        X: `${$('#xVoznja').val()}`,
+                        Y: `${$('#yVoznja').val()}`,
+                        Adresa: `${""}`,
+                    };
+
+                    let adresa = {
+                        UlicaBroj: `${$('#ulicaibrojVoznja').val()}`,
+                        NaseljenoMesto: `${$('#mestoVoznja').val()}`,
+                        PozivniBrojMesta: `${$('#postanskiBrojVoznja').val()}`,
+                    };
+
+                    lokacija.Adresa = adresa;
+                    voznja.Lokacija = lokacija;
+
+                    // OVDE IDE PARSIRANJE VOZNJE I AJAKS!
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/Voznja',
+                        data: JSON.stringify(voznja),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data) {
+                                alert("Vasa voznja je narucena :)");
+                                $(location).attr('href', 'single.html')
+                            }
+                        }
+                    })
+                }
+            });
+
+            var idVoznje = '';
+            //OTKAZ VOZNJE KOD KLIJENATA
+            $(document).on("click", "#otkaziVoznju", function () {
+                idVoznje = $(this).val();
+
+                //ovde ces ajaxom da saljes i da menjas voznje :)
+                //i ako je nju formirao dispecer onda ne moze da se otkaze i to je to i ispise se poruka :)
+
+                id = $(this).val();
+                $.ajax({
+                    type: 'DELETE', //OVDE SAM STAVILA PUT UMESTO POST
+                    url: '/api/Voznja/'+id,
+                    //     contentType: 'application/json; charset=utf-8',
+                    data: {
+                        "idKor": korisnik1.Id
+                    },
+                    //   dataType: 'json',
+                    success: function (data) {
+                        if (data == false) { alert("Ova voznja ne moze biti otkazana jer je dispacer formirao"); }
+                        else {
+
+
+                            //treba da se otvori komentar za voznju :)
+
+
+                            //otvoricu novu formu dole i onda on neka popuni i to je to
+
+                            let informacije = "<br />Molim Vas, ostavite komentar<table border='1'>";
+                            // Tabela ima objekat voznja + tip auta da se izabere
+                            informacije += `  <tr>        
+                                <td>Opis</td>
+                                    <td><input type=\"text\" id=\"opis\"/></td>
+                            </tr>
+
+                             
+                             <tr>        
+                                <td>Ocena:</td>
+                                    <td>
+                                    <select name="Ocena" id="ocena">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </td>
+                            </tr>
+                                <tr>      
+                                    <td colspan=\"2\"><button id="dodajKomentar">OK</button></td>
+                            </tr>
+                                `;
+                            informacije += "</table><br />";
+                            $('#izmenaPojedinacneVoznjeDiv').html(informacije);
+
+                        }
+                    }
+                })
+
+            });
+
+
+            $(document).on("click", "#dodajKomentar", function () {
+                alert("dodaj kom, posalji ajaxom" + $("#otkaziVoznju").val() + korisnikovAJDI);
                 let ime = localStorage.getItem("korisnik");
-                let voznja = {
-                    Lokacija: `${""}`,
-                    Automobil: `${$('#automobilVoznja').val()}`,
+                let komentar = {
+                    Opis: `${$('#opis').val()}`,
+                    DatumObjave: `${""}`,
                     idKorisnik: ime,
+                    idVoznja: idVoznje,
+                    Ocena: `${$('#ocena').val()}`,
+
                 };
-
-
-                let lokacija = {
-                    X: `${$('#xVoznja').val()}`,
-                    Y: `${$('#yVoznja').val()}`,
-                    Adresa: `${""}`,
-                };
-
-                let adresa = {
-                    UlicaBroj: `${$('#ulicaibrojVoznja').val()}`,
-                    NaseljenoMesto: `${$('#mestoVoznja').val()}`,
-                    PozivniBrojMesta: `${$('#postanskiBrojVoznja').val()}`,
-                };
-
-                lokacija.Adresa = adresa;
-                voznja.Lokacija = lokacija;
-
-                // OVDE IDE PARSIRANJE VOZNJE I AJAKS!
-
 
                 $.ajax({
                     type: 'POST',
-                    url: '/api/Voznja',
-                    data: JSON.stringify(voznja),
+                    url: '/api/Komentar',
+                    data: JSON.stringify(komentar),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     success: function (data) {
                         if (data) {
-                            alert("Vasa voznja je narucena :)");
-                            $(location).attr('href', 'single.html')
-                        }
-                    }
-                })
-
-            });
-
-            //OTKAZ VOZNJE KOD KLIJENATA
-            $(document).on("click", "#otkaziVoznju", function () {
-                //ovde ces ajaxom da saljes i da menjas voznje :)
-                //i ako je nju formirao dispecer onda ne moze da se otkaze i to je to i ispise se poruka :)
-
-                id = $(this).val() + ";" + localStorage.getItem("korisnik");
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/Voznja/',
-                    //     contentType: 'application/json; charset=utf-8',
-                    data: {
-                        "id": id
-                    },
-                    //   dataType: 'json',
-                    success: function (data) {
-                        if (data==null) { alert("Ova voznja ne moze biti otkazana jer je dispacer formirao"); } else {
-                            let tabelaVoznji = "<table border='1'><tr><td>Id voznje</td><td>Datum i vreme</td><td>Tip automobila</td><td>Status voznje</td><td colspan=\"2\"></td></tr>";
-                            for (voznja in data) {
-                                tabelaVoznji += `<tr>
-                                                    <td>${data[voznja].Id}</td>
-                                                    <td>${data[voznja].DatumVreme}</td>
-                                                    <td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
-                                                    <td>${getEnumStatus(data[voznja].StatusVoznje)}</td>
-                                                    `;
-                                if (data[voznja].StatusVoznje == 0) {
-
-
-                                    tabelaVoznji += `
-                                                    <td><button id="otkaziVoznju" value="${data[voznja].Id}">Otkazi</button></td>
-                                                    <td><button id="izmeniVoznju" value="${data[voznja].Id}">Izmeni</button></td>
-                                                        </tr>`;
-                                } else {
-                                    tabelaVoznji += `
-                                                    <td colspan=\"2\"></td>
-                                                        </tr>`;
-                                }
+                            $("#izmenaPojedinacneVoznjeDiv").hide();
+                            $(location).attr('href', 'single.html');
                             }
-                            tabelaVoznji += "</table>";
-                            $("#tabelaVoznji").html(tabelaVoznji);
-
-                            //treba da se otvori komentar za voznju :)
-                        }
                     }
                 })
 
+           
+
             });
+
+
             var voznjaKojaSeMenja = '';
             $(document).on("click", "#izmeniVoznju", function () {
                 //ovde ces ajaxom da saljes i da menjas voznje :)
@@ -1045,8 +1148,8 @@
 
 
                 $.ajax({
-                    type: 'POST',
-                    url: '/api/IzmeniVoznju',
+                    type: 'PUT',
+                    url: '/api/Voznja/'+ajdi,
                     data: JSON.stringify(voznja),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
@@ -1106,16 +1209,14 @@
   
 
 
-    <div id="korisnik" style="width:800px; margin:0 auto;">
+    <div id="korisnik" style="margin-left:5px;">
         <h3 style="text-align:center;color:#1abc9c;font-weight:bold;">Sve voznje </h3>
         <hr />
         <div id="tabelaVoznji">
-            CAO KORISNICE ovde ide njegova tabela :) .html cu gore
         </div>
         <hr />
 
         <div id="izmenaPojedinacneVoznjeDiv">
-            ovde ide tabela za izmenu
         </div>
 
     </div>

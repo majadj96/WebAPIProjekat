@@ -32,6 +32,9 @@ namespace WebAPI
 
             Voznje voznje = new Voznje("~/App_Data/voznje.txt");
             HttpContext.Current.Application["voznje"] = voznje;
+
+            Komentari komentari = new Komentari("~/App_Data/komentari.txt");
+            HttpContext.Current.Application["komentari"] = komentari;
         }
 
         protected void Application_PostAuthorizeRequest()

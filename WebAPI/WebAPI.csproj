@@ -161,7 +161,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmeniController.cs" />
-    <Compile Include="Controllers\IzmeniVoznjuController.cs" />
+    <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\PocetnaController.cs" />
     <Compile Include="Controllers\PrijavaController.cs" />
@@ -179,6 +179,7 @@
     <Compile Include="Models\Dispeceri.cs" />
     <Compile Include="Models\Enums\Enumss.cs" />
     <Compile Include="Models\Komentar.cs" />
+    <Compile Include="Models\Komentari.cs" />
     <Compile Include="Models\Korisnici.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Lokacija.cs" />
@@ -207,6 +208,7 @@
     <Content Include="flamingo3333.jpg" />
     <Content Include="flamingo33333.jpg" />
     <Content Include="Global.asax" />
+    <Content Include="App_Data\komentari.txt" />
     <Content Include="single1.html" />
     <Content Include="Scripts\demo.js" />
     <Content Include="single.html" />
