@@ -161,6 +161,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IzmeniController.cs" />
+    <Compile Include="Controllers\IzmeniVoznjuController.cs" />
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\PocetnaController.cs" />
     <Compile Include="Controllers\PrijavaController.cs" />
@@ -206,6 +207,7 @@
     <Content Include="flamingo3333.jpg" />
     <Content Include="flamingo33333.jpg" />
     <Content Include="Global.asax" />
+    <Content Include="single1.html" />
     <Content Include="Scripts\demo.js" />
     <Content Include="single.html" />
     <Content Include="index.html" />

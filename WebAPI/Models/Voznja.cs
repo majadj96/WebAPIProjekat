@@ -50,7 +50,7 @@ namespace WebAPI.Models
             startAdr.NaseljenoMesto = mestoDolaziste;
             startAdr.PozivniBrojMesta = zipDolaziste;
             start.Adresa = startAdr;
-
+            Lokacija = start;
             if (tipAuta.Equals("Putnicki")) { Automobil =TipAuta.Putnicki; }else if (tipAuta.Equals("Kombi")) { Automobil = TipAuta.Kombi; };
             idKorisnik = idKorisnika;
 
@@ -62,6 +62,7 @@ namespace WebAPI.Models
             endAdr.NaseljenoMesto = mestoOdlaziste;
             endAdr.PozivniBrojMesta = zipOdlaziste;
             end.Adresa = endAdr;
+            Odrediste = end;
 
             idDispecer = idDispecera;
             idVozac = idVozaca;
@@ -94,7 +95,7 @@ namespace WebAPI.Models
             }
             else if (statusVoznje.Equals("Otkazana"))
             {
-                StatusVoznje = StatusVoznje.Formirana;
+                StatusVoznje = StatusVoznje.Otkazana;
             }
             else if (statusVoznje.Equals("Neuspesa"))
             {

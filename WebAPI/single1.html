@@ -69,19 +69,17 @@
             color: #1abc9c;
         }
 
-        #korisnikProfil:hover {
-             background-color: #1abc9c;
-             color: white;
-             font-weight:bold;
-             font-size:x-large;
-        }
+            #korisnikProfil:hover {
+                background-color: #1abc9c;
+                color: white;
+                font-weight: bold;
+                font-size: x-large;
+            }
 
         th, td {
             padding: 4px;
             text-align: left;
         }
-
-
     </style>
 
     <script type="text/javascript">
@@ -110,7 +108,7 @@
                     case 1: return "Muski";
                 }
         }
-        
+
         $(document).ready(function () {
             $("#profil").hide();
             $("#korisnik").css("display", "none");
@@ -126,11 +124,11 @@
             $("#promeniLokacijuDiv").hide();
             $("#naruciVoznjuDiv").hide();
             $("#dugmeNaruciVoznjuDiv").hide();
-            
+
             var uloga = '';
 
-            
-            
+
+
             //poslacu ajax poziv da mi ucita listu voznju i da mi vrati :)
          /*
           *
@@ -143,7 +141,7 @@
                             tabelaVoznji += "</table>";
                             $("#korisnik").html(tabelaVoznji);
                         });
-          * 
+          *
           * */
 
 
@@ -283,8 +281,8 @@
                                     <td>Email:</td>
                                     <td>${korisnik1.Email}</td>
                                 </tr>
-               
-                               
+
+
                                     `;
                 informacije += "</table>";
                 $('#profil').html(informacije);
@@ -302,7 +300,7 @@
 
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
-                  
+
 
                     if (uloga == 0) {
                         $("#korisnik").css("display", "block");
@@ -406,8 +404,8 @@
 
                     let idd = korisnik.KorisnickoIme;
                     $.ajax({
-                        type: 'POST',
-                        url: '/api/Izmeni/',
+                        type: 'PUT',
+                        url: '/api/Izmeni/' + idd,
                         data: JSON.stringify(korisnik),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
@@ -456,8 +454,8 @@
                                     <td>Email:</td>
                                     <td>${korisnik1.Email}</td>
                                 </tr>
-               
-                               
+
+
                                     `;
                                 informacije += "</table>";
                                 $('#profil').html(informacije);
@@ -522,7 +520,7 @@
                                     <td>Emal:</td>
                                     <td><input type=\"text\" id=\"emailVozac\"/></td>
                                 </tr>
-                               
+
                                 <tr>
                                 <td>Pol: </td>
                                 <td>
@@ -537,37 +535,37 @@
                                 </td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>X koorginata</td>
                                     <td><input type=\"text\" id=\"xVozac\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Y koorginata</td>
                                     <td><input type=\"text\" id=\"yVozac\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Ulica i broj</td>
                                     <td><input type=\"text\" id=\"ulicaibrojVozac\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Mesto</td>
                                     <td><input type=\"text\" id=\"mestoVozac\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Postanski broj</td>
                                     <td><input type=\"text\" id=\"postanskiBrojVozac\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Godiste auta</td>
                                     <td><input type=\"text\" id=\"godisteAutaVozac\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Registracija auta</td>
                                     <td><input type=\"text\" id=\"registracijaAutaVozac\"/></td>
                             </tr>
@@ -608,7 +606,7 @@
                     $("#izmeni").css("background-color","#ff4d4d");
 
                 }
-               
+
 
 
             });
@@ -692,27 +690,27 @@
                 $("#dugmePromeniLokacijuDiv").show();
 
                 let informacije = "<br /><table border='1'>";
-                informacije += `  <tr>        
+                informacije += `  <tr>
                                 <td>X koorginata</td>
                                     <td><input type=\"text\" id=\"xPromeni\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Y koorginata</td>
                                     <td><input type=\"text\" id=\"yPromeni\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Ulica i broj</td>
                                     <td><input type=\"text\" id=\"ulicaibrojPromeni\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Mesto</td>
                                     <td><input type=\"text\" id=\"mestoPromeni\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Postanski broj</td>
                                     <td><input type=\"text\" id=\"postanskiBrojPromeni\"/></td>
                             </tr>
@@ -722,9 +720,9 @@
 
             });
 
-            //DUGME U DA SE PROMENI LOKACIJA U VOZACU 
+            //DUGME U DA SE PROMENI LOKACIJA U VOZACU
             $("#promeniLokacijuBut").click(function () {
-                
+
                 let ime = localStorage.getItem("korisnik");
                 let vozac = {
                     KorisnickoIme: ime,
@@ -757,7 +755,7 @@
 
                 vozac.Lokacija = lokacija;
 
-                //AJAXOM CELOG VOZACA I VRATI GA A 
+                //AJAXOM CELOG VOZACA I VRATI GA A
 
                 $.ajax({
                     type: 'POST',
@@ -819,31 +817,31 @@
 
                     let informacije = "<br /><table border='1'>";
                     // Tabela ima objekat voznja + tip auta da se izabere
-                    informacije += `  <tr>        
+                    informacije += `  <tr>
                                 <td>X koorginata</td>
                                     <td><input type=\"text\" id=\"xVoznja\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Y koorginata</td>
                                     <td><input type=\"text\" id=\"yVoznja\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Ulica i broj</td>
                                     <td><input type=\"text\" id=\"ulicaibrojVoznja\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Mesto</td>
                                     <td><input type=\"text\" id=\"mestoVoznja\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Postanski broj</td>
                                     <td><input type=\"text\" id=\"postanskiBrojVoznja\"/></td>
                             </tr>
-                             <tr>        
+                             <tr>
                                 <td>Tip automobila:</td>
                                     <td>
                                     <select name="Tip" id="automobilVoznja">
@@ -863,11 +861,11 @@
                 } else {
                     alert("Niste sacuvali izmene.");
                     $("#izmeni").css("background-color","#ff4d4d");
-               
+
                 }
             });
 
-            //KADA SE KLIKNE NA DUGME NARUCI VOZNJU 
+            //KADA SE KLIKNE NA DUGME NARUCI VOZNJU
             $("#naruciVoznjuBut").click(function () {
                 let ime = localStorage.getItem("korisnik");
                 let voznja = {
@@ -964,31 +962,31 @@
                 //pokazem stranicu za izmenu i onda pokupim podatke i posaljem preko ajaxa i zamenimi vratim tabelu
                 let informacije = "<br />Izmena voznje<table border='1'>";
                 // Tabela ima objekat voznja + tip auta da se izabere
-                informacije += `  <tr>        
+                informacije += `  <tr>
                                 <td>X koorginata</td>
                                     <td><input type=\"text\" id=\"xIzmena\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Y koorginata</td>
                                     <td><input type=\"text\" id=\"yIzmena\"/></td>
                             </tr>
 
-                             <tr>        
+                             <tr>
                                 <td>Ulica i broj</td>
                                     <td><input type=\"text\" id=\"ulicaibrojIzmena\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Mesto</td>
                                     <td><input type=\"text\" id=\"mestoIzmena\"/></td>
                             </tr>
 
-                            <tr>        
+                            <tr>
                                 <td>Postanski broj</td>
                                     <td><input type=\"text\" id=\"postanskiBrojIzmena\"/></td>
                             </tr>
-                             <tr>        
+                             <tr>
                                 <td>Tip automobila:</td>
                                     <td>
                                     <select name="Tip" id="automobilIzmena">
@@ -1001,7 +999,7 @@
                                     </select>
                                 </td>
                             </tr>
-                                <tr>      
+                                <tr>
                                     <td colspan=\"2\"><button id="izmenaVoznjeForma">Sacuvaj izmene</button></td>
                             </tr>
                                 `;
@@ -1045,7 +1043,7 @@
                     data: JSON.stringify(voznja),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
-                    success: function (data) { 
+                    success: function (data) {
                         alert("Uspesna izmena");
                         $(location).attr('href', 'single.html');
 
@@ -1061,7 +1059,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-default" id="naki" >
+    <nav class="navbar navbar-default" id="naki">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -1098,7 +1096,7 @@
         PROFIL
     </div>
 
-  
+
 
 
     <div id="korisnik" style="width:800px; margin:0 auto;">
