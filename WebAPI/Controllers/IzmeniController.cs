@@ -15,14 +15,14 @@ namespace WebAPI.Controllers
     public class IzmeniController : ApiController
     {
 
-        public Korisnik Post([FromBody]Korisnik korisnik)
+        public Korisnik Put(string id,[FromBody]Korisnik korisnik)
         {
-
+            //lalala
             string[] korisnickaImena = korisnik.KorisnickoIme.Split(';');
 
             string stariUser = korisnickaImena[0];
             string noviUser = korisnickaImena[1];
-            string id = "";
+            string idd = "";
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
                 {
                     if (stariUser == noviUser)
                     {
-                        id = k.Value.Id;
+                        idd = k.Value.Id;
                         kmaja = k.Value;
                         vozacB = true;
                         vozac = k.Value;
@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
             {
                 if (k.Value.KorisnickoIme == stariUser)
                 {
-                    id = k.Value.Id;
+                    idd = k.Value.Id;
                     kmaja = k.Value;
                     vozacB = true;
                     vozac = k.Value;
@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
                 {
                     if (stariUser == noviUser)
                     {
-                        id = k.Value.Id;
+                        idd = k.Value.Id;
                         kmaja = k.Value;
                         dispecer = true;
                         break;
@@ -88,7 +88,7 @@ namespace WebAPI.Controllers
             {
                 if (k.Value.KorisnickoIme == stariUser)
                 {
-                    id = k.Value.Id;
+                    idd = k.Value.Id;
                     kmaja = k.Value;
                     dispecer = true;
                     break;
@@ -103,7 +103,7 @@ namespace WebAPI.Controllers
                 {
                     if (stariUser == noviUser)
                     {
-                        id = k.Value.Id;
+                        idd = k.Value.Id;
                         kmaja = k.Value;
                         musterija = true;
                         break;
@@ -119,7 +119,7 @@ namespace WebAPI.Controllers
             {
                 if (k.Value.KorisnickoIme == stariUser)
                 {
-                    id = k.Value.Id;
+                    idd = k.Value.Id;
                     kmaja = k.Value;
                     musterija = true;
                     break;
@@ -141,7 +141,7 @@ namespace WebAPI.Controllers
 
                 var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt");
                 korisnik = kmaja;
-                lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
+                lines[int.Parse(idd)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
                 File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt", lines);
 
                 korisnici = new Korisnici("~/App_Data/korisnici.txt");
@@ -154,7 +154,7 @@ namespace WebAPI.Controllers
                
                         var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\dispeceri.txt");
                         korisnik = kmaja;
-                        lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
+                        lines[int.Parse(idd)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
                         File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\dispeceri.txt", lines);
 
                         dispeceri = new Dispeceri("~/App_Data/dispeceri.txt");
@@ -181,7 +181,7 @@ namespace WebAPI.Controllers
 
 
 
-                lines[int.Parse(id)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip;
+                lines[int.Parse(idd)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip;
                 File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
 
                 vozaci = new Vozaci("~/App_Data/vozaci.txt");

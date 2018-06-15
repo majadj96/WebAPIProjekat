@@ -405,12 +405,14 @@
                     };
 
 
-                    alert("Klikuto");
 
                     let idd = korisnik.KorisnickoIme;
+                    alert(idd);
+
+
                     $.ajax({
-                        type: 'POST',
-                        url: '/api/Izmeni/',
+                        type: 'PUT',
+                        url: '/api/Izmeni/'+idd,
                         data: JSON.stringify(korisnik),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
