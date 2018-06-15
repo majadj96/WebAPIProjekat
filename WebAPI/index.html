@@ -118,7 +118,8 @@
                                 $("#greskaPrijava").html("<p>" + data + "</p>");
                             } else {
                                 localStorage.setItem("korisnik", korisnik.KorisnickoIme);
-                                $("#greskaPrijava").html("<p>"+" "+"</p>");
+                                $("#greskaPrijava").html("<p>" + " " + "</p>");
+                                alert("Prijavljeno");
                                 $(location).attr('href', 'single.html');
 
                             }
