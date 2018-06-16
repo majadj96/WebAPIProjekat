@@ -9,3 +9,7 @@
 8;06/15/2018 17:04;678;76;8;6789;57678;Putnicki;6;0;0; ; ; ; ; ;0;drfghjk;6/15/2018 5:05:00 PM;sneska;8;2;Otkazana
 9;06/15/2018 19:39;67;565;4.juli 89;Cuprija;35230;Putnicki;6;0;0; ; ; ; ; ;0;Nije mi se dopao taksista.;6/15/2018 7:40:54 PM;sneska7;9;2;Otkazana
 10;06/15/2018 21:35;78;786;huj;uih;juhjk;Putnicki; ;0;0; ; ; ;0;0;0; ; ; ; ; ;Formirana
+11;06/16/2018 14:58;890;890;ijk;ik;lk;Putnicki;7;0;0; ; ; ;0;0;0; ; ; ; ; ;Obradjena
+12;06/16/2018 14:59;879;678;76;uhj;uiuhkj;Putnicki;7;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+13;06/16/2018 15:00;76;768;hkj;jkn;jilkm;Kombi;7;0;0; ; ; ;0;1;0; ; ; ; ; ;Obradjena
+14;06/16/2018 15:08;678;678;yuhj;uhj;hj;Putnicki; ;0;0; ; ; ;2;2;0; ; ; ; ; ;Formirana
