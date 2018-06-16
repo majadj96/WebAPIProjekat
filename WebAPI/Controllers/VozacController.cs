@@ -69,32 +69,39 @@ namespace WebAPI.Controllers
             HttpContext.Current.Application["vozaci"] = vozaci;
             return false;
         }
-        public Lokacija Get(int id)
+   
+
+
+        public List<Vozac> Get(string id) //treba da se poklapaju tipovi auta voznje i vozaca
         {
-            Lokacija lokacija = new Lokacija();
-            //preuzecu lokaciju od vozaca:) i vratiti je nazad
-            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-
-            lokacija = vozaci.list[id.ToString()].Lokacija;
-
-
-            return lokacija;
-        }
+            Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
+            Voznja voznja = voznje.list[id];
+            bool svejedno = false;
+            if (voznja.Automobil == Models.Enums.Enumss.TipAuta.Svejedno)
+                svejedno = true;
 
 
-        public List<Vozac> Get()
-        {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             List<Vozac> listaSlobodnih = new List<Vozac>();
 
             foreach (var v in vozaci.list)
             {
-                if (v.Value.Zauzet == 0)
+                if (!svejedno)
+                {
+                    if (voznja.Automobil == v.Value.Automobil.Tip)
+                    {
+                        if (v.Value.Zauzet == 0)
+                        {
+                            listaSlobodnih.Add(v.Value);
+                        }
+                    }
+                }
+                else
                 {
                     listaSlobodnih.Add(v.Value);
+
                 }
             }
-
 
             return listaSlobodnih;
 

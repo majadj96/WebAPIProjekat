@@ -15,6 +15,16 @@ namespace WebAPI.Controllers
     public class IzmeniController : ApiController
     {
 
+        public Voznja Get(string id)
+        {
+            Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
+
+            Voznja v = voznje.list[id];
+
+            return v;
+        }
+
+
         public Korisnik Put(string id,[FromBody]Korisnik korisnik)
         {
             //lalala

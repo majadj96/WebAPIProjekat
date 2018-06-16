@@ -11,7 +11,7 @@ namespace WebAPI.Models.Enums
         public enum Uloga { Musterija, Dispecer, Vozac };
         public enum Pol { Zenski, Muski };
 
-        public enum TipAuta { Putnicki , Kombi };
+        public enum TipAuta { Svejedno, Putnicki , Kombi };
 
         public enum StatusVoznje
         {
@@ -21,7 +21,8 @@ namespace WebAPI.Models.Enums
             Prihvacena,
             Otkazana,
             Neuspesna,
-            Uspesna
+            Uspesna,
+            Utoku,
         }
 
     }

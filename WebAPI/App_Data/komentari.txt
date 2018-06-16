@@ -10,3 +10,10 @@
 9;;6/15/2018 5:04:38 PM;sneska;7;0
 10;drfghjk;6/15/2018 5:05:00 PM;sneska;8;2
 11;Nije mi se dopao taksista.;6/15/2018 7:40:54 PM;sneska7;9;2
+12;bezi bre;6/16/2018 6:18:42 PM;majadj96;16;2
+13;;6/16/2018 6:19:59 PM;majadj96;17;0
+14;675;6/16/2018 6:28:23 PM;majakaca<33;19;0
+15;lala;6/16/2018 6:28:33 PM;majakaca<33;20;2
+16;;6/16/2018 6:35:42 PM;majakaca<33;21;0
+17; caos;6/16/2018 7:57:55 PM;majakaca<33;33;1
+18;;6/16/2018 8:02:57 PM;majakaca<33;34;0

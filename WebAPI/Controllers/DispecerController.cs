@@ -90,6 +90,10 @@ namespace WebAPI.Controllers
 
         public bool Put(string id,[FromBody]Voznja voznja)
         {
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+            Vozac vv = vozaci.list[voznja.idVozac];
+
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
             Voznja voki = new Voznja();
@@ -102,6 +106,7 @@ namespace WebAPI.Controllers
                     break;
                 }
             }
+            voki.Automobil = vv.Automobil.Tip;
 
             voki.idDispecer = voznja.idDispecer;
             voki.idVozac = voznja.idVozac;
@@ -116,9 +121,7 @@ namespace WebAPI.Controllers
             //Update voznje
 
             //Sada vozaca
-            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-
-            Vozac vv = vozaci.list[voznja.idVozac];
+          
             vv.Zauzet = 1;
 
             lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");

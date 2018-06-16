@@ -51,7 +51,7 @@ namespace WebAPI.Models
             startAdr.PozivniBrojMesta = zipDolaziste;
             start.Adresa = startAdr;
             Lokacija = start;
-            if (tipAuta.Equals("Putnicki")) { Automobil =TipAuta.Putnicki; }else if (tipAuta.Equals("Kombi")) { Automobil = TipAuta.Kombi; };
+            if (tipAuta.Equals("Putnicki")) { Automobil =TipAuta.Putnicki; }else if (tipAuta.Equals("Kombi")) { Automobil = TipAuta.Kombi; } else if (tipAuta.Equals("Svejedno")) { Automobil = TipAuta.Svejedno; };
             idKorisnik = idKorisnika;
 
             Lokacija end = new Lokacija();
