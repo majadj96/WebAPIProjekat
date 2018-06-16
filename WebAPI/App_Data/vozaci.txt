@@ -1,5 +1,1 @@
-0;vozac;vozic;vokitoki;vokitoki;45678;5678;Muski;yg@id.com;67;76;tyygv 6;ytgy;76;100;2001;6798;Kombi
-1;elena;kevac;vozacElena;badminton;678;8798;Zenski;78;786;786;ygh 78;gyu;gyu;101;87;jhj;Kombi
-2;Elena;Kevac;eki;eki;87;6hb;Zenski;hj;300;300;Radnicka 3A;Novi Sad;11200;102;78;kj;Kombi
-3;tanja;radojcic;tanjamaher;maher;67867;765;Zenski;675;675;675;675fty;fty;ty;103;0;76;Putnicki
-4;flamingoTaksista;flamingoTaksista;flamingo;vozac;97897;8787;Zenski;uh;98;987;98gyuh;gguy;uyg;104;78;786yuh;Putnicki
+0;Elena;Kevac;eki;eki;6768;578697;Zenski;cgvh@gmail.com;76;78;yuggyu;yuggyu;786;100;2001;64378a;Kombi;0

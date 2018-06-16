@@ -9,14 +9,16 @@ namespace WebAPI.Models
     {
         public Lokacija Lokacija { get; set; }
         public Automobil Automobil { get; set; }
+        public int Zauzet { get; set; } // 0 - nije zauzet i 1 jeste
 
         public Vozac() { }
        
 
         public Vozac(string id, string ime, string prezime, string korisnickoIme, string lozinka, string jmbg, string kontakt, string pol, 
             string email,double x, double y, string ulicaBroj,string mesto,string zip,string brojAuta, int godisteAuta, string registracijaAuta
-            ,string tipAuta) : this()
+            ,string tipAuta,int z) : this()
         {
+            Zauzet = z;
             //Licne INFO
             Id = id;
             Ime = ime;

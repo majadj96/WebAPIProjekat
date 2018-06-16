@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
     public class VoznjaController : ApiController
     {
 
+        
 
 
         public void Put(string id, [FromBody]Voznja voznja)
@@ -78,7 +79,29 @@ namespace WebAPI.Controllers
 
         }
 
-            public List<Voznja> Get(string id)//ovo je username
+
+
+        public List<Voznja> Get()
+        {
+            Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
+            List<Voznja> kreiraneVoznje = new List<Voznja>();
+            foreach(var v in voznje.list)
+            {
+
+                if (v.Value.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Kreirana)
+                {
+                    kreiraneVoznje.Add(v.Value);
+                }
+
+            }
+
+
+            return kreiraneVoznje;
+        }
+
+
+
+        public List<Voznja> Get(string id)//ovo je username
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
 
@@ -116,16 +139,7 @@ namespace WebAPI.Controllers
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
 
-            string korisnickoIme = voznja.idKorisnik;
-            foreach(var k in korisnici.list)
-            {
-                if (k.Value.KorisnickoIme == korisnickoIme)
-                {
-                    voznja.idKorisnik = k.Key;
-                    break;
-                }
-            }
-
+        
 
             string path = @"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt";
             StringBuilder sb = new StringBuilder();

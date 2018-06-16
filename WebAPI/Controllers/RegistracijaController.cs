@@ -11,7 +11,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class RegistracijaController : ApiController
+    public class RegistracijaController : ApiController // Zvace se korisnik kontroler i izmenu ces da prebacis ovde
     {
         List<Korisnik> korisnici;
 

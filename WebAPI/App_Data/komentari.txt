@@ -7,3 +7,6 @@
 6;RADI MI PUT;6/15/2018 4:37:05 PM;sneska;5;1
 7;uyg;6/15/2018 4:44:52 PM;sneska;2;1
 8;fcghjkl;6/15/2018 4:47:11 PM;sneska;3;5
+9;;6/15/2018 5:04:38 PM;sneska;7;0
+10;drfghjk;6/15/2018 5:05:00 PM;sneska;8;2
+11;Nije mi se dopao taksista.;6/15/2018 7:40:54 PM;sneska7;9;2
