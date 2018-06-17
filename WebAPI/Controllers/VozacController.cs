@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
                 if (v.Value.Id == id1)
                 {
                     voznja = v.Value;
-                    if (voznja.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Neuspesna)
+                    if (voznja.StatusVoznje == Enumss.StatusVoznje.Neuspesna || voznja.StatusVoznje == Enumss.StatusVoznje.Otkazana || voznja.StatusVoznje == Enumss.StatusVoznje.Kreirana || voznja.StatusVoznje == Enumss.StatusVoznje.Uspesna)
                     {
-                        return false; //voznja je vec otkazana
+                        return false; //voznja je vec otkazana,uspesna,kreirana ili otkazana
                     }
                     break;
                 }
