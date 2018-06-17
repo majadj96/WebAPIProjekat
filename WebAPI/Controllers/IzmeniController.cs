@@ -12,7 +12,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class IzmeniController : ApiController
+    public class IzmeniController : ApiController // zvacu te korisnik
     {
 
         public Voznja Get(string id)

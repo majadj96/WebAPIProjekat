@@ -166,7 +166,6 @@
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\PocetnaController.cs" />
     <Compile Include="Controllers\PrijavaController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegistracijaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
@@ -210,7 +209,6 @@
     <Content Include="flamingo33333.jpg" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\komentari.txt" />
-    <Content Include="single1.html" />
     <Content Include="Scripts\demo.js" />
     <Content Include="single.html" />
     <Content Include="index.html" />

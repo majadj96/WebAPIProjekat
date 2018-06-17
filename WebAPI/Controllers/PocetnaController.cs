@@ -9,7 +9,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class PocetnaController : ApiController
+    public class PocetnaController : ApiController //mozes i ti kokrisnik da budes
     {
         public Korisnik Post([FromBody]Korisnik korisnik)
         {
