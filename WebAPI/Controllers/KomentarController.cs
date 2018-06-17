@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
     {
 
 
-        public bool Post([FromBody]Komentar komentar)
+        public bool Post([FromBody]Komentar komentar) //Za postavljanje komentara
         {
 
             //opis unosis i ocenu

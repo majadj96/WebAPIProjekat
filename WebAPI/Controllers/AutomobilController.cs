@@ -10,7 +10,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class AutomobilController : ApiController
+    public class AutomobilController : ApiController // Za izmenu automobila i dobavljanje istog
     {
         public Automobil Get(int id)
         {

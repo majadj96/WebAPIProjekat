@@ -14,6 +14,7 @@ namespace WebAPI.Controllers
 {
     public class VozacController : ApiController
     {
+        //put za uspesno
 
         public bool Delete(string id)//ovo je id voznje koja se stavlja na neuspesna
         {
@@ -120,7 +121,10 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    listaSlobodnih.Add(v.Value);
+                    if (v.Value.Zauzet == 0)
+                    {
+                        listaSlobodnih.Add(v.Value);
+                    }
 
                 }
             }

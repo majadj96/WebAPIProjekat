@@ -893,7 +893,7 @@
 
                     $.ajax({
                         type: 'PUT',
-                        url: '/api/Izmeni/' + korisnik1.Id,
+                        url: '/api/Korisnik/' + korisnik1.Id,
                         data: JSON.stringify(korisnik),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
@@ -1655,7 +1655,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/api/Izmeni/' + idVoznje,
+                    url: '/api/Voznja/' + idVoznje,
                     success: function (data) {
                         let staro = data;
 
@@ -2045,6 +2045,8 @@
                             $("#odabirVozaca").html(tabelaVoznji);
 
                         } else {
+                            $("#odabirVozaca").show();
+
                             $("#odabirVozaca").html("<h4>Nema slobodnih vozaca</h4>");
                         }
                     }

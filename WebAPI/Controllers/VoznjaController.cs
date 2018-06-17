@@ -14,8 +14,14 @@ namespace WebAPI.Controllers
     public class VoznjaController : ApiController
     {
 
-        
+        public Voznja Get(string id)
+        {
+            Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
+            Voznja v = voznje.list[id];
+
+            return v;
+        }
 
         public void Put(string id, [FromBody]Voznja voznja)
         {
