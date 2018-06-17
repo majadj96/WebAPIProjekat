@@ -210,7 +210,7 @@
             };
 
             $.ajax({
-                type: 'POST',
+                type: 'POST',//promeni na GET jer saljes samo korisnicko ime
                 url: '/api/Pocetna/',
                 data: JSON.stringify(korisnik),
                 contentType: 'application/json; charset=utf-8',

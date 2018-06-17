@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
 {
     public class PocetnaController : ApiController //mozes i ti kokrisnik da budes
     {
-        public Korisnik Post([FromBody]Korisnik korisnik)
+        public Korisnik Post([FromBody]Korisnik korisnik) //zvaces se GET sa id-jem i ides u KORISNIK KONTROLER
         {
             
             Korisnik k=null;
