@@ -1,3 +1,3 @@
 0;Elena;Kevac;eki;eki;6768;578697;Zenski;cgvh@gmail.com;76;78;yuggyu;yuggyu;786;100;2001;64378a;Kombi;1
-1;Mile;Kitic;mile;mile;678;678;Muski;mile@gmail.com;856;578;Sremska 44;Cuprija;35230;101;2013;32-45-21EE;Kombi;0
-2;Misa;Misic;miki;miki;567;657;Muski;67;67;75;fgh;yugjh;gjhb;102;786;87;Putnicki;1
+1;Mile;Kitic;mile;mile;678;678;Muski;mile@gmail.com;856;578;Sremska 44;Cuprija;35230;101;2013;32-45-21EE;Kombi;1
+2;Misa;Misic;miki;miki;567;657;Muski;67;67;75;fgh;yugjh;gjhb;102;786;87;Putnicki;0
