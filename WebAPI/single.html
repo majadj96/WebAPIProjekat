@@ -94,7 +94,10 @@
             color: #1abc9c;
             font-weight: bold;
         }
-
+        #stariAuto {
+            color: #1abc9c;
+            font-weight: bold;
+        }
 
 
         .dropbtn {
@@ -329,9 +332,9 @@
                                                 }
                                             }
                                         }
-                                            tabelaVoznji += "</table>";
-                                            $("#tabelaVoznji").html(tabelaVoznji);
-                                        
+                                        tabelaVoznji += "</table>";
+                                        $("#tabelaVoznji").html(tabelaVoznji);
+
                                     } else {
                                         $("#tabelaVoznji").html("<h3 align=\"center\">Nemate voznje</h3>");
 
@@ -339,7 +342,7 @@
                                 }
                             }
                         })
-                        
+
                     } else if (data.Uloga == 1) {
                         alert("Dispecer logovan");
                         $('#dodajVozaca').show();
@@ -422,11 +425,11 @@
 
                                     }
 
-                                else{
-                                    $("#tabelaVoznjiDispecera").html("<h3 align=\"center\">Trenitno nemate voznji</h3>");
+                                    else {
+                                        $("#tabelaVoznjiDispecera").html("<h3 align=\"center\">Trenitno nemate voznji</h3>");
 
+                                    }
                                 }
-                        }
                             }
                         })
 
@@ -437,7 +440,7 @@
                             type: 'GET',
                             url: '/api/Voznja',
                             success: function (data) {
-                              
+
 
                                 if (data.length == 0) {
                                     $("#tabelaVoznjiDispecera").html("<h4 align=\"center\">Trenutno nema voznji u sistemu :)</h4>");
@@ -532,7 +535,7 @@
                                     tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                     tabelaVoznji += "<th>Komentar</th>";
                                     tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th><th colspan =\"2\"></th></tr>";
-                                    
+
                                     for (voznja in data) {
                                         if (data[voznja].idVozac == korisnikovAJDI) {
 
@@ -580,7 +583,7 @@
                                                                 <td>${getEnumStatus(data[voznja].StatusVoznje)}</td>
                                                                 `;
 
-                                            tabelaVoznji += `<td><button id="neuspesnaDugme">Neuspesna</button></td><td><button id="uspesnaDugme">Uspesna</button></td></tr>`;
+                                            tabelaVoznji += `<td><button value="${data[voznja].Id}" id="neuspesnaDugme">Neuspesna</button></td><td><button value="${data[voznja].Id}" id="uspesnaDugme">Uspesna</button></td></tr>`;
                                         }
 
                                     }
@@ -672,7 +675,7 @@
 
             //LINK U MENIJU PROFIL
             $("#korisnikProfil").click(function () {
-          
+
                 var sadrzaj = $("#izmeni").text();
 
                 if ($("#opis").val() == "") {
@@ -689,6 +692,7 @@
                         $("#dugmeNaruciVoznjuDiv").hide();
 
                         $('#izmenaPojedinacneVoznjeDiv').hide();
+                        $('#neuspesnaVoznjaKomentarDiv').hide();
 
                         $("#dugmePromeniLokacijuDiv").hide();
                         $("#dugmeDodajVozaca").hide();
@@ -1073,7 +1077,7 @@
 
             //LOGOUT
             $('#odlogovanje').click(function () {
-                if ($("#opis").val()=="") {
+                if ($("#opis").val() == "") {
                     alert("Unesite komentar!");
                 } else {
                     var sadrzaj = $("#izmeni").text();
@@ -1186,7 +1190,7 @@
                     url: '/api/Lokacija/' + korisnik1.Id,
                     success: function (data) {
                         lokacija = data;
-                        let staraLokacija = `
+                        let staraLokacija = `<br />
                                     <details id="staraLokacijaP">
                                         <summary>Stara lokacija</summary>
                                         <p>X: ${lokacija.X}</p>
@@ -1216,7 +1220,7 @@
                     $("#promeniLokacijuDiv").show();
                     $("#dugmePromeniLokacijuDiv").show();
 
-                    let informacije = "<h3>Unesite novu lokaciju</h3><hr /><br /><table border='1'>";
+                    let informacije = "<h3>Unesite novu lokaciju</h3><table border='1'>";
                     informacije += `  <tr>
                                             <td>X koorginata</td>
                                                 <td><input type=\"text\" id=\"xPromeni\" required /></td>
@@ -1244,12 +1248,87 @@
                                             `;
                     informacije += "</table>";
                     $('#tabelaIzmeniLokaciju').html(informacije);
+
+                    //ovde ide tip auta..
+                    //get za tip auta..
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/api/Automobil/' + korisnikovAJDI,
+                        success: function (data) {
+                            automobil = data;
+                            let stariAuto = `<hr />
+                                    <details id="stariAuto">
+                                        <summary>Podaci o automobilu</summary>
+                                        <p>Broj: ${automobil.Broj}</p>
+                                        <p>Godiste: ${automobil.Godiste}</p>
+                                        <p>Registracija: ${automobil.Registracija}</p>
+                                        <p>Tip: ${getEnumTipAutomobila(automobil.Tip)}</p>
+
+                                    <hr /><h3><b>Promeni podatke</b></h3><table>
+                                    <tr><td>Broj auta:</td><td><input type="text" id="brojAuta" required></td></tr>
+                                    <tr><td>Godiste auta:</td><td><input type="text" id="godAuta" required></td></tr>
+                                    <tr><td>Registracija auta:</td><td><input type="text" id="regAuta" required></td></tr>
+                                    <tr><td>Tip auta:</td><td>
+                                    <select id="tipAuta">
+                                    <option>Putnicki</option><option>Kombi</option>
+                                    </select>
+                                    </td></tr>
+                                    <tr><td></td><td><button id="sacuvajAuto">Sacuvaj</button></td></tr>
+
+                                    </table>
+
+                                    </details><hr />`;
+
+
+                            $('#stariAuto').html(stariAuto);
+
+
+                        }
+
+                    })
                 } else {
                     alert("Niste sacuvali izmene.");
                     $("#izmeni").css("background-color", "#ff4d4d");
 
                 }
             });
+            $(document).on("click", "#sacuvajAuto", function () {
+                let p = document.getElementById("brojAuta");
+                let p1 = document.getElementById("godAuta");
+                let p2 = document.getElementById("regAuta");
+
+                if (!p.checkValidity() || !p1.checkValidity() || !p2.checkValidity()) {
+                    alert("Morate uneti sva polja!");
+                } else {
+                    let automobil = {
+                        Broj: `${$('#brojAuta').val()}`,
+                        Registracija: `${$('#regAuta').val()}`,
+                        Godiste: `${$('#godAuta').val()}`,
+                        Tip: `${$('#tipAuta').val()}`,
+
+                    };
+
+                    //putom menjam
+                    $.ajax({
+                        type: 'PUT',
+                        url: '/api/Automobil/' + korisnikovAJDI,
+                        data: JSON.stringify(automobil),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data) {
+                                alert("Uspesno promenjeno");
+                                $(location).attr('href', 'single.html');
+                            }
+
+                        }
+                    })
+
+
+                }
+            });
+
 
             //DUGME U DA SE PROMENI LOKACIJA U VOZACU
             $("#promeniLokacijuBut").click(function () {
@@ -1299,7 +1378,7 @@
 
                     $.ajax({
                         type: 'PUT',
-                        url: '/api/Vozac/' + korisnik1.Id,
+                        url: '/api/Lokacija/' + korisnik1.Id,
                         data: JSON.stringify(vozac),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
@@ -1327,6 +1406,7 @@
 
                         $("#korisnik").css("display", "none");
                         $('#izmenaPojedinacneVoznjeDiv').hide();
+
 
                         $("#pocetna1").hide();
                         $("#profil").hide();
@@ -1988,6 +2068,65 @@
 
 
             });
+
+            $(document).on("click", "#neuspesnaDugme", function () {
+                alert($(this).val());
+                $('#neuspesnaVoznjaKomentarDiv').show(500);
+
+                id = $(this).val() + ";"+korisnikovAJDI;
+                idVoznje = $(this).val();
+
+                $.ajax({
+                    type: 'DELETE', //OVDE SAM STAVILA PUT UMESTO POST
+                    url: '/api/Vozac/' + id,
+                    data: {
+                        "idKor": korisnik1.Id
+                    },
+                    success: function (data) {
+                        if (data == false) { alert("Ova voznja je vec otkazana"); }
+                        else {
+                            let informacije = "<br />Molim Vas, ostavite komentar<table border='1'>";
+
+                            informacije += `  <tr>
+                                            <td>Opis</td>
+                                                <td><input type=\"text\" id=\"opis\" required/></td>
+                                        </tr>
+
+
+                                         <tr>
+                                            <td>Ocena:</td>
+                                                <td>
+                                                <select name="Ocena" id="ocena">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                            <tr>
+                                                <td colspan=\"2\"><button id="dodajKomentar">OK</button></td>
+                                        </tr>
+                                            `;
+                            informacije += "</table><br />";
+                            $('#neuspesnaVoznjaKomentarDiv').html(informacije);
+
+                        }
+                    }
+                })
+
+
+
+            });
+
+            $(document).on("click", "#uspesnaDugme", function () {
+                alert($(this).val());
+
+            });
+
+
         });
 
 
@@ -2024,7 +2163,7 @@
                         </div>
                     </li>
                     <li><a id="naruciVoznju" href="#">NARUCI VOZNJU</a></li>
-                    <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU</a></li>
+                    <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU I AUTO</a></li>
                     <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
 
                 </ul>
@@ -2080,13 +2219,16 @@
         <hr />
         <div id="tabelaVoznjiVozaca">
         </div>
+        <hr />
+
+        <div id="neuspesnaVoznjaKomentarDiv">
+        </div>
 
         <h3 style="text-align:center;color:#1abc9c;font-weight:bold;">Sve voznje koje su na cekanju </h3>
         <hr />
         <div id="tabelaVoznjiNaCekanju">
         </div>
-        <hr />
-        
+
 
     </div>
 
@@ -2119,11 +2261,15 @@
     <div id="promeniLokacijuDiv" style="width:800px; margin:0 auto;">
         <div id="staraLokacija" style="margin-left:5px;"></div>
         <div id="tabelaIzmeniLokaciju"></div>
+        <div id="dugmePromeniLokacijuDiv" style="width:800px; margin:0 auto;">
+            <button id="promeniLokacijuBut">Promeni</button>
+        </div>
+        <div id="stariAuto" style="margin-left:5px;"></div>
+        <div id="tabelaIzmeniAuto"></div>
     </div>
 
-    <div id="dugmePromeniLokacijuDiv" style="width:800px; margin:0 auto;">
-        <button id="promeniLokacijuBut">Promeni</button>
-    </div>
+
+ 
 
     <div id="naruciVoznjuDiv" style="width:800px; margin:0 auto;">
 

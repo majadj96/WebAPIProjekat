@@ -17,3 +17,5 @@
 16;;6/16/2018 6:35:42 PM;majakaca<33;21;0
 17; caos;6/16/2018 7:57:55 PM;majakaca<33;33;1
 18;;6/16/2018 8:02:57 PM;majakaca<33;34;0
+19;Ispao iz auta musterija.;6/17/2018 5:53:17 PM;eki;;5
+20;lala;6/17/2018 5:58:08 PM;eki;0;1
