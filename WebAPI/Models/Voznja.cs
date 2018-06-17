@@ -97,7 +97,7 @@ namespace WebAPI.Models
             {
                 StatusVoznje = StatusVoznje.Otkazana;
             }
-            else if (statusVoznje.Equals("Neuspesa"))
+            else if (statusVoznje.Equals("Neuspesna"))
             {
                 StatusVoznje = StatusVoznje.Neuspesna;
             }

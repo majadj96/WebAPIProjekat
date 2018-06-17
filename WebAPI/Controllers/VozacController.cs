@@ -8,20 +8,24 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 using WebAPI.Models;
+using WebAPI.Models.Enums;
 
 namespace WebAPI.Controllers
 {
     public class VozacController : ApiController
     {
 
-        public bool Delete(string id, [FromBody]string idKor)//ovo je id voznje koja se stavlja na neuspesna
+        public bool Delete(string id)//ovo je id voznje koja se stavlja na neuspesna
         {
-            Voznje voznje1 = (Voznje)HttpContext.Current.Application["voznje"];//sve voznje
+            string[] ids = id.Split(';');
 
+            Voznje voznje1 = (Voznje)HttpContext.Current.Application["voznje"];//sve voznje
+            string id1 = ids[0];//voznje
+            string id2 = ids[1];//vozaca
             Voznja voznja = null;
             foreach (var v in voznje1.list)
             {
-                if (v.Value.Id == id)
+                if (v.Value.Id == id1)
                 {
                     voznja = v.Value;
                     if (voznja.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Neuspesna)
@@ -32,15 +36,27 @@ namespace WebAPI.Controllers
                 }
             }
            
-            voznja.StatusVoznje = Models.Enums.Enumss.StatusVoznje.Neuspesna;
+            voznja.StatusVoznje = Enumss.StatusVoznje.Neuspesna;
 
             var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt");
-            lines[int.Parse(id)] = voznja.Id + ";" + voznja.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voznja.Lokacija.X + ";" + voznja.Lokacija.Y + ";" + voznja.Lokacija.Adresa.UlicaBroj + ";" + voznja.Lokacija.Adresa.NaseljenoMesto + ";" + voznja.Lokacija.Adresa.PozivniBrojMesta + ";" + voznja.Automobil + ";" + voznja.idKorisnik + ";" + voznja.Odrediste.X + ";" + voznja.Odrediste.Y + ";" + voznja.Odrediste.Adresa.UlicaBroj + ";" + voznja.Odrediste.Adresa.NaseljenoMesto + ";" + voznja.Odrediste.Adresa.PozivniBrojMesta + ";" + voznja.idDispecer + ";" + voznja.idVozac + ";" + voznja.Iznos + ";" + voznja.Komentar.Opis + ";" + voznja.Komentar.DatumObjave + ";" + voznja.Komentar.idKorisnik + ";" + voznja.Komentar.idVoznja + ";" + voznja.Komentar.Ocena + ";" + voznja.StatusVoznje;
+            lines[int.Parse(id1)] = voznja.Id + ";" + voznja.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voznja.Lokacija.X + ";" + voznja.Lokacija.Y + ";" + voznja.Lokacija.Adresa.UlicaBroj + ";" + voznja.Lokacija.Adresa.NaseljenoMesto + ";" + voznja.Lokacija.Adresa.PozivniBrojMesta + ";" + voznja.Automobil + ";" + voznja.idKorisnik + ";" + voznja.Odrediste.X + ";" + voznja.Odrediste.Y + ";" + voznja.Odrediste.Adresa.UlicaBroj + ";" + voznja.Odrediste.Adresa.NaseljenoMesto + ";" + voznja.Odrediste.Adresa.PozivniBrojMesta + ";" + voznja.idDispecer + ";" + voznja.idVozac + ";" + voznja.Iznos + ";" + voznja.Komentar.Opis + ";" + voznja.Komentar.DatumObjave + ";" + voznja.Komentar.idKorisnik + ";" + voznja.Komentar.idVoznja + ";" + voznja.Komentar.Ocena + ";" + voznja.StatusVoznje;
             File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt", lines);
 
 
             Voznje voznje = new Voznje("~/App_Data/voznje.txt");
             HttpContext.Current.Application["voznje"] = voznje;
+
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];//sve voznje
+
+            Vozac vv = vozaci.list[id2];
+            vv.Zauzet = 0;
+
+            lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+            lines[int.Parse(id2)] = vv.Id + ";" + vv.Ime + ";" + vv.Prezime + ";" + vv.KorisnickoIme + ";" + vv.Lozinka + ";" + vv.JMBG + ";" + vv.KontaktTelefon + ";" + vv.Pol + ";" + vv.Email + ";" + vv.Lokacija.X + ";" + vv.Lokacija.Y + ";" + vv.Lokacija.Adresa.UlicaBroj + ";" + vv.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Automobil.Broj + ";" + vv.Automobil.Godiste + ";" + vv.Automobil.Registracija + ";" + vv.Automobil.Tip + ";" + vv.Zauzet;
+            File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
+
+            vozaci = new Vozaci("~/App_Data/vozaci.txt");
+            HttpContext.Current.Application["vozaci"] = vozaci;
 
 
 
