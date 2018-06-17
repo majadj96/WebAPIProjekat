@@ -609,9 +609,9 @@
                                     $("#tabelaVoznjiNaCekanju").html("<h4 align=\"center\">Trenutno nema voznji u na cekanju :)</h4>");
 
                                 } else {
-                                    if (imaSlob == 0) {
+                                    if (imaSlob == 1) {
 
-                                    } else {
+
 
                                         let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                         tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
@@ -667,10 +667,13 @@
 
                                             }
                                         }
-                                    }
-                                    tabelaVoznji += "</table>";
-                                    $("#tabelaVoznjiNaCekanju").html(tabelaVoznji);
 
+                                        tabelaVoznji += "</table>";
+                                        $("#tabelaVoznjiNaCekanju").html(tabelaVoznji);
+                                    } else {
+                                        $("#tabelaVoznjiNaCekanju").html("<h4 align=\"center\">Trenutno nema voznji u na cekanju :)</h4>");
+
+                                    }
                                 }
 
 
