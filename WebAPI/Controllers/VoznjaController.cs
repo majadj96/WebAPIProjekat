@@ -86,16 +86,8 @@ namespace WebAPI.Controllers
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
             List<Voznja> kreiraneVoznje = new List<Voznja>();
             foreach(var v in voznje.list)
-            {
-
-                if (v.Value.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Kreirana)
-                {
                     kreiraneVoznje.Add(v.Value);
-                }
-
-            }
-
-
+            
             return kreiraneVoznje;
         }
 
@@ -104,23 +96,14 @@ namespace WebAPI.Controllers
         public List<Voznja> Get(string id)//ovo je username
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
-
-            string korisnickoIme = "";
-            foreach (var k in korisnici.list)
-            {
-                if (k.Value.KorisnickoIme == id)
-                {
-                    korisnickoIme = k.Key;//to je id
-                    break;
-                }
-            }
+            
 
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
             List<Voznja> listaKorisnikovihVoznji = new List<Voznja>();
             foreach(var v in voznje.list)
             {
-                if (v.Value.idKorisnik == korisnickoIme)
+                if (v.Value.idKorisnik == id)
                 {
                     listaKorisnikovihVoznji.Add(v.Value);
                 }
