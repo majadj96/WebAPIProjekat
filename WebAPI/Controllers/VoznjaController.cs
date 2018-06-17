@@ -93,27 +93,6 @@ namespace WebAPI.Controllers
 
 
 
-        public List<Voznja> Get(string id)//ovo je username
-        {
-            Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
-            
-
-            Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
-
-            List<Voznja> listaKorisnikovihVoznji = new List<Voznja>();
-            foreach(var v in voznje.list)
-            {
-                if (v.Value.idKorisnik == id)
-                {
-                    listaKorisnikovihVoznji.Add(v.Value);
-                }
-            }
-
-            return listaKorisnikovihVoznji;
-        }
-
-
-
 
 
 

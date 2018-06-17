@@ -135,26 +135,7 @@ namespace WebAPI.Controllers
             return true;
         }
 
-        public List<Voznja> Get(string id)//ovo je username
-        {
-            Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
-
-
-            Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
-
-            List<Voznja> listaDispecerovihVoznji = new List<Voznja>();
-            foreach (var v in voznje.list)
-            {
-                if (v.Value.idDispecer == id)
-                {
-                    listaDispecerovihVoznji.Add(v.Value);
-                }
-            }
-
-            return listaDispecerovihVoznji;
-        }
-
-
+   
 
         public List<Voznja> Get()
         {
