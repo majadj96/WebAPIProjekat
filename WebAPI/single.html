@@ -2137,7 +2137,7 @@
             });
             var idVoznjee = '';
             $(document).on("click", "#uspesnaDugme", function () {
-                idVoznjee=alert($(this).val());
+                idVoznjee=$(this).val();
                 $('#neuspesnaVoznjaKomentarDiv').show(500);
 
 
@@ -2197,8 +2197,12 @@
             });
 
 
+            function uspesnoValidacija() {
+
+            }
+
             $(document).on("click", "#podaciUspesno", function () {
-                alert("saljem, tj apdejtujem voznju");//dodajem joj iznos i odrediste
+                alert("saljem, tj apdejtujem voznju");//dodajem joj iznos i odrediste // ne sme da se klikne ni na sta..dodaj
                 let x = document.getElementById("xU");
                 let y = document.getElementById("yU");
                 let ub = document.getElementById("ulicaibrojU");
