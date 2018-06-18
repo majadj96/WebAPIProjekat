@@ -18,39 +18,17 @@ namespace WebAPI.Controllers
 
 
 
-        public bool Put(string id)
+        public bool Put(string id, [FromBody]Vozac vozac)//menjam samo vozaca
+
         {
-            string[] ids = id.Split(';');
-
-            string idVoznje = ids[0];
-            string idVozaca = ids[1];
-
-            Voznje voznje1 = (Voznje)HttpContext.Current.Application["voznje"];//sve voznje, nadjem moju i kazem da je uspesna
-            Voznja voznja = voznje1.list[idVoznje];
-
-            if (voznja.StatusVoznje == Enumss.StatusVoznje.Neuspesna || voznja.StatusVoznje == Enumss.StatusVoznje.Uspesna || voznja.StatusVoznje == Enumss.StatusVoznje.Otkazana)
-            {
-                return false;//nije moguce postaviti voznju da je uspesna
-            }
-
-            voznja.StatusVoznje = Enumss.StatusVoznje.Uspesna;
-
-
-            var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt");
-            lines[int.Parse(idVoznje)] = voznja.Id + ";" + voznja.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voznja.Lokacija.X + ";" + voznja.Lokacija.Y + ";" + voznja.Lokacija.Adresa.UlicaBroj + ";" + voznja.Lokacija.Adresa.NaseljenoMesto + ";" + voznja.Lokacija.Adresa.PozivniBrojMesta + ";" + voznja.Automobil + ";" + voznja.idKorisnik + ";" + voznja.Odrediste.X + ";" + voznja.Odrediste.Y + ";" + voznja.Odrediste.Adresa.UlicaBroj + ";" + voznja.Odrediste.Adresa.NaseljenoMesto + ";" + voznja.Odrediste.Adresa.PozivniBrojMesta + ";" + voznja.idDispecer + ";" + voznja.idVozac + ";" + voznja.Iznos + ";" + voznja.Komentar.Opis + ";" + voznja.Komentar.DatumObjave + ";" + voznja.Komentar.idKorisnik + ";" + voznja.Komentar.idVoznja + ";" + voznja.Komentar.Ocena + ";" + voznja.StatusVoznje;
-            File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt", lines);
-            
-            Voznje voznje = new Voznje("~/App_Data/voznje.txt");
-            HttpContext.Current.Application["voznje"] = voznje;
-            //VOZNJA USPESNA
-
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];//sve voznje
+            
+            Vozac vv = vozaci.list[id];
+            
+            vv.Zauzet = vozac.Zauzet;
 
-            Vozac vv = vozaci.list[idVozaca];
-            vv.Zauzet = 0;
-
-            lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
-            lines[int.Parse(idVozaca)] = vv.Id + ";" + vv.Ime + ";" + vv.Prezime + ";" + vv.KorisnickoIme + ";" + vv.Lozinka + ";" + vv.JMBG + ";" + vv.KontaktTelefon + ";" + vv.Pol + ";" + vv.Email + ";" + vv.Lokacija.X + ";" + vv.Lokacija.Y + ";" + vv.Lokacija.Adresa.UlicaBroj + ";" + vv.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Automobil.Broj + ";" + vv.Automobil.Godiste + ";" + vv.Automobil.Registracija + ";" + vv.Automobil.Tip + ";" + vv.Zauzet;
+             var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+            lines[int.Parse(id)] = vv.Id + ";" + vv.Ime + ";" + vv.Prezime + ";" + vv.KorisnickoIme + ";" + vv.Lozinka + ";" + vv.JMBG + ";" + vv.KontaktTelefon + ";" + vv.Pol + ";" + vv.Email + ";" + vv.Lokacija.X + ";" + vv.Lokacija.Y + ";" + vv.Lokacija.Adresa.UlicaBroj + ";" + vv.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Automobil.Broj + ";" + vv.Automobil.Godiste + ";" + vv.Automobil.Registracija + ";" + vv.Automobil.Tip + ";" + vv.Zauzet;
             File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
 
             vozaci = new Vozaci("~/App_Data/vozaci.txt");
@@ -139,7 +117,7 @@ namespace WebAPI.Controllers
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
             Voznja voznja = voznje.list[id];
             bool svejedno = false;
-            if (voznja.Automobil == Models.Enums.Enumss.TipAuta.Svejedno)
+            if (voznja.Automobil == Enumss.TipAuta.Svejedno)
                 svejedno = true;
 
 

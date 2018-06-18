@@ -315,11 +315,15 @@
                                                     tabelaVoznji += `                                                                
                                                                 <td align="center" colspan="2"><button id="izmeniVoznju" value="${data[voznja].Id}">Izmeni</button></td>
                                                                     </tr>`;
+                                                }
+
+                                                else if (data[voznja].StatusVoznje == 6) {
+                                                    tabelaVoznji += `                                                                
+                                                                <td align="center" colspan="2"><button id="korisnikDodajKomentar" value="${data[voznja].Id}">Dodaj komentar</button></td>
+                                                                    </tr>`;
 
 
                                                 }
-
-
 
                                                 else {
                                                     if (sviPoz == 0) {
@@ -663,7 +667,7 @@
                                                 tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
                                                                 <td>${getEnumStatus(data[voznja].StatusVoznje)}</td>
                                                                 `;
-                                                tabelaVoznji += `<td><button id="prihvatiDugme">Prihvati</button></td></tr>`;
+                                                tabelaVoznji += `<td><button value=${data[voznja].Id} id="prihvatiDugme">Prihvati</button></td></tr>`;
 
                                             }
                                         }
@@ -2137,23 +2141,46 @@
             });
             var idVoznjee = '';
             $(document).on("click", "#uspesnaDugme", function () {
-                idVoznjee=$(this).val();
+                idVoznjee = $(this).val();
                 $('#neuspesnaVoznjaKomentarDiv').show(500);
 
 
                 id = $(this).val() + ";" + korisnikovAJDI;
                 idVoznje = $(this).val();
 
+                let voznja = {
+                    idVozac: korisnikovAJDI,
+                    StatusVoznje: 6,
+                };
+
                 $.ajax({
                     type: 'PUT',
-                    url: '/api/Vozac/' + '?' + $.param({ "Id": id }),
-
+                    url: '/api/Voznja/' + idVoznjee,
+                    data: JSON.stringify(voznja),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
                     success: function (data) {
-                        if (data == false) { alert("Ova voznja je vec uspesna :)"); }
-                        else {
-                            let informacije = "<br />Unesite podatke<table border='1'>";
+                        if (data) {
+                            alert("Uspesno prihvatanje voznje");
 
-                            informacije += `  <tr>
+
+                            let vozac = {
+                                Zauzet: 0,
+                            };
+
+                            $.ajax({
+                                type: 'PUT',
+                                url: '/api/Vozac/' + korisnikovAJDI,
+                                data: JSON.stringify(vozac),
+                                contentType: 'application/json; charset=utf-8',
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data) {
+                                        alert("Uspesno prihvatanje voznje");
+
+                                        let informacije = "<br />Unesite podatke<table border='1'>";
+
+                                        informacije += `  <tr>
                                             <td>Iznos</td>
                                                 <td><input type=\"text\" id=\"iznosU\" required/></td>
                                         </tr>
@@ -2188,18 +2215,27 @@
                                                 <td colspan=\"2\"><button id="podaciUspesno">OK</button></td>
                                         </tr>
                                             `;
-                            informacije += "</table><br />";
-                            $('#neuspesnaVoznjaKomentarDiv').html(informacije);
+                                        informacije += "</table><br />";
+                                        $('#neuspesnaVoznjaKomentarDiv').html(informacije);
 
+
+                                    } else {
+                                        alert("Neuspesno");
+                                    }
+
+                                }
+                            })
+
+
+                        } else {
+                            alert("Greska");
                         }
                     }
+
                 })
+
             });
-
-
-            function uspesnoValidacija() {
-
-            }
+        
 
             $(document).on("click", "#podaciUspesno", function () {
                 alert("saljem, tj apdejtujem voznju");//dodajem joj iznos i odrediste // ne sme da se klikne ni na sta..dodaj
@@ -2249,6 +2285,51 @@
                         }
                     })
                 }
+
+            });
+
+            $(document).on("click", "#prihvatiDugme", function () {
+                idVoznjee = $(this).val();
+
+                //menjam status voznje na prihvacena, menjam sebe na zauzet i stavljam idVozaca u voznji na moj id
+                let voznja = {
+                    idVozac: korisnikovAJDI,
+                    StatusVoznje:3,
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: '/api/Voznja/' + idVoznjee,
+                    data: JSON.stringify(voznja),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                        } else {
+
+                        }
+                    }
+                })
+
+                //treb vozaca da stavim da je slobodan (zauzet=0)
+                let vozac = {
+                    Zauzet: 1,
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: '/api/Vozac/' + korisnikovAJDI,
+                    data: JSON.stringify(vozac),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            alert("Uspesno prihvatanje voznje");
+                            $(location).attr('href', 'single.html');
+
+                        }
+                    }
+                })
 
             });
             

@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
             return v;
         }
 
-        public void Put(string id, [FromBody]Voznja voznja)
+        public bool Put(string id, [FromBody]Voznja voznja)
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
             
@@ -58,14 +58,35 @@ namespace WebAPI.Controllers
                 voki.Odrediste = voznja.Odrediste;
 
             if (voznja.StatusVoznje != 0)
+            {
+                if (voznja.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Prihvacena)
+                {
+                    if (voki.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Prihvacena || voki.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Neuspesna)
+                        return false;
+                }
+                
+                else if (voznja.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Uspesna)
+                {
+                    if (voki.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Uspesna || voki.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Neuspesna)
+                        return false;
+                }
+                else if (voznja.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Neuspesna)
+                {
+                    if (voki.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Uspesna || voki.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Neuspesna)
+                        return false;
+                }
+
                 voki.StatusVoznje = voznja.StatusVoznje;
-            
-            var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt");
+            }
+
+
+                var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt");
             lines[int.Parse(id)] = voki.Id + ";" + voki.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voki.Lokacija.X + ";" + voki.Lokacija.Y + ";" + voki.Lokacija.Adresa.UlicaBroj + ";" + voki.Lokacija.Adresa.NaseljenoMesto + ";" + voki.Lokacija.Adresa.PozivniBrojMesta + ";" + voki.Automobil + ";" + voki.idKorisnik + ";" + voki.Odrediste.X + ";" + voki.Odrediste.Y + ";" + voki.Odrediste.Adresa.UlicaBroj + ";" + voki.Odrediste.Adresa.NaseljenoMesto + ";" + voki.Odrediste.Adresa.PozivniBrojMesta + ";" + voki.idDispecer + ";" + voki.idVozac + ";" + voki.Iznos + ";" + voki.Komentar.Opis + ";" + voki.Komentar.DatumObjave + ";" + voki.Komentar.idKorisnik + ";" + voki.Komentar.idVoznja + ";" + voki.Komentar.Ocena + ";" + voki.StatusVoznje;
             File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt", lines);
 
             voznje = new Voznje("~/App_Data/voznje.txt");
             HttpContext.Current.Application["voznje"] = voznje;
+            return true;
         }
 
 
