@@ -2415,7 +2415,7 @@
             $(document).on("click", "#filterPoStanju", function () {
                 let stanje = $("#stanje").val();
                 alert($(this).val() + $("#stanje").val());
-
+                $("#tabelaPrikaza").show();
                 //get sve voznje
                 $.ajax({
                     type: 'GET',
@@ -2423,23 +2423,73 @@
                     success: function (data) {
                         //ispisi samo da je idKorisnika isti i ovaj status prokleti
 
+                        let ima = 0;
                         for (var voznja in data) {
-
-                            if (data[voznja].idKorisnik == korisnikovAJDI && data[voznja].StatusVoznje == stanje) {
-
-                                let tabela = `<table></table>`;
-
-
-
-
-                                $("#tabelaPrikaza").html();
-
-                            }
-
-
+                            if (data[voznja].StatusVoznje == stanje)
+                                ima = 1;
                         }
 
+                        if (data.length == 0 || ima==0) {
+                            $("#tabelaPrikaza").html("<h4 align=\"center\">Trenutno nemate voznje u sistemu</h4>");
 
+                        } else {
+                            let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                            tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
+                            tabelaVoznji += "<th>Komentar</th>";
+                            tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th></tr>";
+                            for (var voznja in data) {
+                                if (data[voznja].idKorisnik == korisnikovAJDI && data[voznja].StatusVoznje == stanje) {
+
+                                   
+                                        var currentdate = new Date(Date.parse(data[voznja].DatumVreme));
+
+                                        var datum =
+                                            currentdate.getUTCFullYear() + "/" +
+                                            ("0" + (currentdate.getUTCMonth() + 1)).slice(-2) + "/" +
+                                            ("0" + currentdate.getUTCDate()).slice(-2);
+
+                                        var vreme = ("0" + currentdate.getUTCHours()).slice(-2) + ":" +
+                                            ("0" + currentdate.getUTCMinutes()).slice(-2);
+                                        tabelaVoznji += `<tr>
+                                                                <td>${data[voznja].Id}</td>
+                                                                <td>${datum} u ${vreme}h</td>
+                                                                <td>
+
+                                                                ${data[voznja].Lokacija.Adresa.UlicaBroj},
+                                                               ${data[voznja].Lokacija.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Lokacija.Adresa.PozivniBrojMesta}
+                                                               </td>`;
+
+
+                                        if (data[voznja].Iznos != "0") {
+                                            tabelaVoznji += `<td>
+
+                                                                ${data[voznja].Odrediste.Adresa.UlicaBroj},
+                                                               ${data[voznja].Odrediste.Adresa.NaseljenoMesto},
+                                                                ${data[voznja].Odrediste.Adresa.PozivniBrojMesta}
+                                                                    </td>
+                                                                    <td>${data[voznja].Iznos}</td>`;
+                                        } else {
+                                            tabelaVoznji += `<td></td>
+                                                                    <td></td>`;
+                                        }
+
+                                        if (data[voznja].Komentar.Ocena == "1" || data[voznja].Komentar.Ocena == "2" || data[voznja].Komentar.Ocena == "3" || data[voznja].Komentar.Ocena == "4" || data[voznja].Komentar.Ocena == "5") {
+                                            tabelaVoznji += `<td><textarea rows="4" cols="30" disabled>Korisnicko ime:${data[voznja].Komentar.idKorisnik}\nTekst:${data[voznja].Komentar.Opis}\nOcena:${data[voznja].Komentar.Ocena}\nDatum:${data[voznja].Komentar.DatumObjave}</textarea></td>`;
+
+                                        } else {
+                                            tabelaVoznji += `<td> </td>`;
+
+                                        }
+                                        tabelaVoznji += `<td>${getEnumTipAutomobila(data[voznja].Automobil)}</td>
+                                                                <td>${getEnumStatus(data[voznja].StatusVoznje)}</td></tr>
+                                                                `;
+                                }
+                            }
+                                tabelaVoznji += "</table>";
+                                $("#tabelaPrikaza").html(tabelaVoznji);
+
+                        }
                     }
                 })
 
@@ -2481,8 +2531,8 @@
                             </div>
                         </div>
                     </li>
-                    <li><a id="naruciVoznju"href="#">NARUCI VOZNJU</a></li>
-                   
+                    <li><a id="naruciVoznju" href="#">NARUCI VOZNJU</a></li>
+
                     <li><button class="navbar-toggle, dropbtn" id="fitriranjeVoznji"><i class="fa fa-search" style="font-size:20px"></i></button></li>
                     <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU I AUTO</a></li>
                     <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
@@ -2493,8 +2543,9 @@
     </nav>
 
     <div id="filtriranje">
-        <div id="tabelaPrikaza"></div>
     </div>
+    <div id="tabelaPrikaza">jebi se</div>
+
 
 
     <!-- First Container -->
@@ -2595,7 +2646,7 @@
     </div>
 
 
- 
+
 
     <div id="naruciVoznjuDiv" style="width:800px; margin:0 auto;">
 
