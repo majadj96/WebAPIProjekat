@@ -209,9 +209,10 @@
                 KorisnickoIme: `${ime}`,
             };
 
+
             $.ajax({
-                type: 'POST',//promeni na GET jer saljes samo korisnicko ime
-                url: '/api/Pocetna/',
+                type: 'PUT',//promeni na GET jer saljes samo korisnicko ime
+                url: '/api/Prijava/' + 0,
                 data: JSON.stringify(korisnik),
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -235,9 +236,10 @@
                                 if (data.length != 0) {
                                     let sviPoz = 0;
                                     for (var v in data) {
-                                        if (data[v].StatusVoznje != 0 && data[v].StatusVoznje != 2) {
-
-                                        } else { sviPoz = 1; break; }
+                                        if (data[v].StatusVoznje == 0 || (data[v].StatusVoznje == 6 && data[v].Komentar.Opis == " ")) {
+                                            sviPoz = 1;
+                                            break;
+                                        }
                                     }
 
                                     let korisnikoveVoznje = 0;
@@ -317,7 +319,7 @@
                                                                     </tr>`;
                                                 }
 
-                                                else if (data[voznja].StatusVoznje == 6) {
+                                                else if (data[voznja].StatusVoznje == 6 && data[voznja].Komentar.Opis==" ") {
                                                     tabelaVoznji += `                                                                
                                                                 <td align="center" colspan="2"><button id="korisnikDodajKomentar" value="${data[voznja].Id}">Dodaj komentar</button></td>
                                                                     </tr>`;
@@ -784,6 +786,7 @@
                     var sadrzaj = $("#izmeni").text();
                     if (sadrzaj == "Promeni informacije") {
 
+                        $(location).attr('href', 'single.html');
 
                         if (uloga == 0) {
                             $("#korisnik").css("display", "block");
@@ -1361,21 +1364,7 @@
                 } else {
 
                     let ime = localStorage.getItem("korisnik");
-                    let vozac = {
-                        KorisnickoIme: ime,
-                        Lozinka: `${""}`,
-                        Ime: `${""}`,
-                        Prezime: `${""}`,
-                        Email: `${""}`,
-                        KontaktTelefon: `${""}`,
-                        Pol: `${""}`,
-                        JMBG: `${""}`,
-                        Lokacija: `${""}`,
-                        Automobil: `${""}`,
-                    };
-
-
-
+                  
                     let lokacija = {
                         X: `${$('#xPromeni').val()}`,
                         Y: `${$('#yPromeni').val()}`,
@@ -1389,20 +1378,17 @@
                     };
 
                     lokacija.Adresa = adresa; //NOVA LOKACIJA
-
-                    vozac.Lokacija = lokacija;
-
-                    //AJAXOM CELOG VOZACA I VRATI GA A
+                    
 
                     $.ajax({
                         type: 'PUT',
                         url: '/api/Lokacija/' + korisnik1.Id,
-                        data: JSON.stringify(vozac),
+                        data: JSON.stringify(lokacija),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (data) {
                             if (data) {
-                                alert("Uspesno promenjeno");
+                                alert("Uspesno promenjena lokacija");
                                 $(location).attr('href', 'single.html');
                             }
 
@@ -1574,7 +1560,7 @@
 
 
                             //otvoricu novu formu dole i onda on neka popuni i to je to
-
+                        
                             let informacije = "<br />Molim Vas, ostavite komentar<table border='1'>";
                             // Tabela ima objekat voznja + tip auta da se izabere
                             informacije += `  <tr>
@@ -1631,21 +1617,41 @@
 
                     };
 
+                    let voznja = {
+                        Komentar: komentar,
+                    };
+
                     $.ajax({
                         type: 'POST',
                         url: '/api/Komentar',
                         data: JSON.stringify(komentar),
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
+                    })
+                    //put za voznju da je update
+
+                    $.ajax({
+                        type: 'PUT',
+                        url: '/api/Voznja/' + idVoznje,
+                        data: JSON.stringify(voznja),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
                         success: function (data) {
                             if (data) {
-                                $("#izmenaPojedinacneVoznjeDiv").hide();
+                                alert("Uspesno dodeljen komentar voznji");
+                                alert("2");
                                 $(location).attr('href', 'single.html');
+
+
+                            } else {
+                                alert("Vec je postavljen komentar");
+
+
                             }
                         }
                     })
-
                 }
+                         
 
             });
 
@@ -2294,7 +2300,7 @@
                 //menjam status voznje na prihvacena, menjam sebe na zauzet i stavljam idVozaca u voznji na moj id
                 let voznja = {
                     idVozac: korisnikovAJDI,
-                    StatusVoznje:3,
+                    StatusVoznje: 3,
                 };
 
                 $.ajax({
@@ -2330,8 +2336,47 @@
                         }
                     }
                 })
-
             });
+
+                
+                $(document).on("click", "#korisnikDodajKomentar", function () {
+
+                    idVoznje = $(this).val();
+                    $('#izmenaPojedinacneVoznjeDiv').show();
+                    let informacije = "<br />Molim Vas, ostavite komentar<table border='1'>";
+                    // Tabela ima objekat voznja + tip auta da se izabere
+                    informacije += `  <tr>
+                                            <td>Opis</td>
+                                                <td><input type=\"text\" id=\"opis\" required/></td>
+                                        </tr>
+
+
+                                         <tr>
+                                            <td>Ocena:</td>
+                                                <td>
+                                                <select name="Ocena" id="ocena">
+                                                    <option>0</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                            <tr>
+                                                <td colspan=\"2\"><button id="dodajKomentar">OK</button></td>
+                                        </tr>
+                                            `;
+                    informacije += "</table><br />";
+                    $('#izmenaPojedinacneVoznjeDiv').html(informacije);
+
+                
+                    
+               
+
+
+                });
             
 
 

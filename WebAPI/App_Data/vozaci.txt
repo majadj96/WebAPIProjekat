@@ -1,3 +1,2 @@
-0;Elena;Kevac;eki;eki;6768;578697;Zenski;cgvh@gmail.com;65;56;u;u;u;5;2018;CU002PU;Kombi;0
-1;Mile;Kitic;mile;mile;678;678;Muski;mile@gmail.com;856;578;Sremska 44;Cuprija;35230;101;2013;32-45-21EE;Kombi;1
-2;Misa;Misic;miki;miki;567;657;Muski;67;67;75;fgh;yugjh;gjhb;102;786;87;Putnicki;1
+0;Elena;Kevac;eki;eki;6768;88;Zenski;cgvh@gmail.com;2;2;2;2;2;2;2002;2;Kombi;0
+1;Mile;Kitic;mile;mile;657688898;066577543;Muski;mile@gmail.com;7;7;Sumadijska 33;Novi Sad;11200;101;2009;NS3324;Putnicki;0

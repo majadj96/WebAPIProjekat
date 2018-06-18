@@ -33,3 +33,12 @@
 32;jwfw;6/17/2018 8:03:21 PM;eki;4;4
 33;Predomislio sam se;6/18/2018 11:05:53 AM;majakaca<33;5;5
 34;;6/18/2018 11:22:29 AM;eki;7;0
+35;lalal;6/18/2018 4:37:26 PM;majakaca<33;0;2
+36;uyu;6/18/2018 4:44:48 PM;majakaca<33;0;3
+37;ekekek;6/18/2018 4:47:04 PM;majakaca<33;0;3
+38;lalala;6/18/2018 4:49:11 PM;majakaca<33;0;5
+39;ijk;6/18/2018 4:52:23 PM;majakaca<33;0;2
+40;Caos super je bila voznja;6/18/2018 4:59:44 PM;majakaca<33;2;4
+41;;6/18/2018 5:08:44 PM;majakaca<33;3;0
+42;;6/18/2018 5:19:43 PM;majakaca<33;1;0
+43;SUper je bilo!;6/18/2018 5:20:32 PM;majakaca<33;0;1

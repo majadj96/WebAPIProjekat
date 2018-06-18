@@ -46,7 +46,13 @@ namespace WebAPI.Controllers
                 voki.Iznos = voznja.Iznos;
 
             if (voznja.Komentar != null)
+            {
+                if(voki.Komentar.Opis!=" ")
+                {
+                    return false;
+                }
                 voki.Komentar = voznja.Komentar;
+            }
 
             if (voznja.Lokacija != null)
                 voki.Lokacija = voznja.Lokacija;
@@ -118,7 +124,6 @@ namespace WebAPI.Controllers
             
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
-            List<Voznja> listaKorisnikovihVoznji = new List<Voznja>();
             return true;
 
         }

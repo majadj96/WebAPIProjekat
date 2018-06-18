@@ -12,7 +12,56 @@ namespace WebAPI.Controllers
     public class PrijavaController : ApiController
     {
 
-        public string Post([FromBody]Korisnik korisnik)
+
+
+        public Korisnik Put(string id, [FromBody]Korisnik korisnik) //dodela uloge, u zavisnosti od korisnickog imena
+        {
+
+            Korisnik k = null;
+            Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
+            Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+
+            foreach (var kk in korisnici.list)
+            {
+                if (kk.Value.KorisnickoIme == korisnik.KorisnickoIme)
+                {
+                    k = kk.Value;
+                    k.Uloga = Models.Enums.Enumss.Uloga.Musterija;
+                    return k;
+                }
+            }
+
+            foreach (var kk in dispeceri.list)
+            {
+                if (kk.Value.KorisnickoIme == korisnik.KorisnickoIme)
+                {
+                    k = kk.Value;
+                    k.Uloga = Models.Enums.Enumss.Uloga.Dispecer;
+
+                    return k;
+                }
+            }
+
+            foreach (var kk in vozaci.list)
+            {
+                if (kk.Value.KorisnickoIme == korisnik.KorisnickoIme)
+                {
+                    k = kk.Value;
+                    k.Uloga = Models.Enums.Enumss.Uloga.Vozac;
+
+                    return k;
+                }
+            }
+
+
+            return k;
+        }
+
+
+
+        public string Post([FromBody]Korisnik korisnik) // Ispravnost user-a
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 

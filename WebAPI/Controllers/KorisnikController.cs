@@ -12,10 +12,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class KorisnikController : ApiController
-    {
-
-
+    public class KorisnikController : ApiController // imam put i post za sada
+    {   
         public Korisnik Put(string id, [FromBody]Korisnik korisnik)
         {
             //lalala
@@ -182,7 +180,7 @@ namespace WebAPI.Controllers
 
 
 
-                lines[int.Parse(id)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip;
+                lines[int.Parse(id)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip+";"+vozac.Zauzet;
                 File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
 
                 vozaci = new Vozaci("~/App_Data/vozaci.txt");
@@ -201,31 +199,34 @@ namespace WebAPI.Controllers
 
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 
 
             bool postoji = false;
 
-            foreach (var k in dispeceri.list)
-            {
+            foreach (var k in dispeceri.list){
                 if (k.Value.KorisnickoIme == korisnik.KorisnickoIme)
                 {
                     postoji = true;
                     break;
                 }
-
-
             }
 
 
-            foreach (var k in korisnici.list)
-            {
+            foreach (var k in korisnici.list){
                 if (k.Value.KorisnickoIme == korisnik.KorisnickoIme)
                 {
                     postoji = true;
                     break;
                 }
+            }
 
-
+               foreach (var k in vozaci.list){
+                if (k.Value.KorisnickoIme == korisnik.KorisnickoIme)
+                {
+                    postoji = true;
+                    break;
+                }
             }
 
 
@@ -248,7 +249,7 @@ namespace WebAPI.Controllers
             else
             {
                 return false;
-                //Postoji korisnik
+                //Postoji korisnik sa tim korisnickim imenom
             }
         }
 
