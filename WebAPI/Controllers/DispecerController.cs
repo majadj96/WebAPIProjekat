@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             foreach(var vv in vozaci.list)
             {
-                if (vv.Value.Zauzet == 0)
+                if (vv.Value.Zauzet == 0 && vv.Value.Automobil.Tip==voznja.Automobil)
                 {
                     zauzetVozac = true;
                     vv.Value.Zauzet = 1;
@@ -87,8 +87,9 @@ namespace WebAPI.Controllers
 
         }
 
+        //Obradjivanje voznje
 
-        public bool Put(string id,[FromBody]Voznja voznja)
+        public bool Put(string id,[FromBody]Voznja voznja)//menjam dispecera i dodeljujem mu voznju
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 
@@ -96,18 +97,10 @@ namespace WebAPI.Controllers
 
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
-            Voznja voki = new Voznja();
+            Voznja voki = voznje.list[voznja.Id];
 
-            foreach(var v in voznje.list)
-            {
-                if (v.Key == voznja.Id)
-                {
-                    voki = v.Value;
-                    break;
-                }
-            }
+        
             voki.Automobil = vv.Automobil.Tip;
-
             voki.idDispecer = voznja.idDispecer;
             voki.idVozac = voznja.idVozac;
             voki.StatusVoznje = Models.Enums.Enumss.StatusVoznje.Obradjena;
@@ -118,8 +111,7 @@ namespace WebAPI.Controllers
 
             voznje = new Voznje("~/App_Data/voznje.txt");
             HttpContext.Current.Application["voznje"] = voznje;
-            //Update voznje
-
+          
             //Sada vozaca
           
             vv.Zauzet = 1;

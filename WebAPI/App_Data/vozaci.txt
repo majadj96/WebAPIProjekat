@@ -1,2 +1,2 @@
-0;Elena;Kevac;eki;eki;6768;88;Zenski;cgvh@gmail.com;2;2;2;2;2;2;2002;2;Kombi;0
-1;Mile;Kitic;mile;mile;657688898;066577543;Muski;mile@gmail.com;7;7;Sumadijska 33;Novi Sad;11200;101;2009;NS3324;Putnicki;0
+0;Elena;Kevac;eki;eki;6768;88;Zenski;cgvh@gmail.com;2;2;2;2;2;2;2002;2;Kombi;1
+1;Mile;Kitic;mile;mile;657688898;066577543;Muski;mile@gmail.com;7;7;Sumadijska 33;Novi Sad;11200;101;2009;NS3324;Putnicki;1

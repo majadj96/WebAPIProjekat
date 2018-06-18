@@ -51,6 +51,7 @@ namespace WebAPI.Controllers
                 {
                     return false;
                 }
+                voznja.Komentar.DatumObjave = DateTime.Now.ToString();
                 voki.Komentar = voznja.Komentar;
             }
 
