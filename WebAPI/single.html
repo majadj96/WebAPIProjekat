@@ -138,9 +138,24 @@
             color: #1abc9c;
         }
 
-        #fitriranjeVoznji {
+        #fitriranjeVoznji, #dispecerPretraga {
             color: #1abc9c;
+            border: 1px solid rgba(26, 188, 156,.1);
+            border-radius: 65%;
         }
+
+            #fitriranjeVoznji:hover {
+                color: #1abc9c;
+                border: 1px solid #1abc9c;
+                border-radius: 65%;
+            }
+            #dispecerPretraga:hover {
+                color: #1abc9c;
+                border: 1px solid #1abc9c;
+                border-radius: 65%;
+            }
+
+
 
         /* Show the dropdown menu on hover */
         .dropdown:hover .dropdown-content {
@@ -201,6 +216,7 @@
             $("#dugmeNaruciVoznjuDiv").hide();
             $(".dropdown").hide();
             $("#fitriranjeVoznji").hide();
+            $("#dispecerPretraga").hide();
 
 
             var uloga = '';
@@ -359,6 +375,7 @@
                         alert("Dispecer logovan");
                         $('#dodajVozaca').show();
                         $(".dropdown").show();
+                        $("#dispecerPretraga").show();
 
                         $("#dispecer").css("display", "block");
                         $("#dispecer").css("clear", "both");
@@ -2821,6 +2838,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a id="pocetnaStranica" href="#">POCETNA</a></li>
+                    <li><button class="navbar-toggle, dropbtn" id="dispecerPretraga"><i class="fa fa-search" style="font-size:20px"></i></button></li>
                     <li><a id="dodajVozaca" href="#">DODAJ VOZACA</a></li>
                     <li>
                         <div class="dropdown">
@@ -2835,7 +2853,6 @@
                         </div>
                     </li>
                     <li><a id="naruciVoznju" href="#">NARUCI VOZNJU</a></li>
-
                     <li><button class="navbar-toggle, dropbtn" id="fitriranjeVoznji"><i class="fa fa-search" style="font-size:20px"></i></button></li>
                     <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU I AUTO</a></li>
                     <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
@@ -2848,6 +2865,11 @@
     <div id="filtriranje">
     </div>
     <div id="tabelaPrikaza"></div>
+
+    <div id="pretraga">
+    </div>
+    <div id="tabelaPretraga"></div>
+
 
 
 
