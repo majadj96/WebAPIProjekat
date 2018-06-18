@@ -14,12 +14,6 @@ namespace WebAPI.Controllers
 
         public string Post([FromBody]Korisnik korisnik)
         {
-            /* var session = HttpContext.Current.Session;
-
-
-             if (session != null)
-                 session["korisnik"] = k;*/
-
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
@@ -57,9 +51,6 @@ namespace WebAPI.Controllers
 
 
             }
-
-
-
             return "Neuspesna prijava";
 
 

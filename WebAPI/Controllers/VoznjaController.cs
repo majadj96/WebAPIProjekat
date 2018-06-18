@@ -26,21 +26,40 @@ namespace WebAPI.Controllers
         public void Put(string id, [FromBody]Voznja voznja)
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
+            
+            Voznja voki = voznje.list[id];
+            
 
+            if (voznja.Automobil != 0)
+                voki.Automobil = voznja.Automobil;
+            
+            if (voznja.idDispecer != null)
+                voki.idDispecer = voznja.idDispecer;
+            
+            if (voznja.idKorisnik != null)
+                voki.idKorisnik = voznja.idKorisnik;
 
-            Voznja voki = new Voznja();
-            foreach (var v in voznje.list)
-            {
-                if (v.Value.Id == id)
-                {
-                    voki = v.Value;
-                    break;
-                }
-            }
+            if (voznja.idVozac != null)
+                voki.idVozac = voznja.idVozac;
 
-            voki.Automobil = voznja.Automobil;
-            voki.Lokacija = voznja.Lokacija;
+            if (voznja.Iznos != 0)
+                voki.Iznos = voznja.Iznos;
 
+            if (voznja.Komentar != null)
+                voki.Komentar = voznja.Komentar;
+
+            if (voznja.Lokacija != null)
+                voki.Lokacija = voznja.Lokacija;
+
+            if (voznja.Ocena != 0)
+                voki.Ocena = voznja.Ocena;
+
+            if (voznja.Odrediste != null)
+                voki.Odrediste = voznja.Odrediste;
+
+            if (voznja.StatusVoznje != 0)
+                voki.StatusVoznje = voznja.StatusVoznje;
+            
             var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt");
             lines[int.Parse(id)] = voki.Id + ";" + voki.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voki.Lokacija.X + ";" + voki.Lokacija.Y + ";" + voki.Lokacija.Adresa.UlicaBroj + ";" + voki.Lokacija.Adresa.NaseljenoMesto + ";" + voki.Lokacija.Adresa.PozivniBrojMesta + ";" + voki.Automobil + ";" + voki.idKorisnik + ";" + voki.Odrediste.X + ";" + voki.Odrediste.Y + ";" + voki.Odrediste.Adresa.UlicaBroj + ";" + voki.Odrediste.Adresa.NaseljenoMesto + ";" + voki.Odrediste.Adresa.PozivniBrojMesta + ";" + voki.idDispecer + ";" + voki.idVozac + ";" + voki.Iznos + ";" + voki.Komentar.Opis + ";" + voki.Komentar.DatumObjave + ";" + voki.Komentar.idKorisnik + ";" + voki.Komentar.idVoznja + ";" + voki.Komentar.Ocena + ";" + voki.StatusVoznje;
             File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt", lines);
@@ -79,8 +98,6 @@ namespace WebAPI.Controllers
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
             List<Voznja> listaKorisnikovihVoznji = new List<Voznja>();
-          
-
             return true;
 
         }
@@ -97,11 +114,7 @@ namespace WebAPI.Controllers
             return kreiraneVoznje;
         }
 
-
-
-
-
-
+        
         public bool Post([FromBody]Voznja voznja)
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
