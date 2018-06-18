@@ -732,6 +732,8 @@
                         $("#vozac").css("display", "none");
                         $("#tabelaPrikaza").hide();
                         $("#filtriranje").hide();
+                        $("#pretraga").hide();
+
 
                         $("#naruciVoznjuDiv").hide();
                         $("#dugmeNaruciVoznjuDiv").hide();
@@ -1001,6 +1003,7 @@
 
                     $("#dispecer").css("display", "none");
 
+                    $("#pretraga").hide();
 
                     $("#dugmeDodajVozaca").show();
                     $("#formiranjeVoznjeDispecer").hide();
@@ -1439,6 +1442,7 @@
                         $("#filtriranje").hide();
 
 
+
                         $("#pocetna1").hide();
                         $("#profil").hide();
                         $("#pocetna").hide();
@@ -1808,6 +1812,7 @@
                 if (sadrzaj == "Promeni informacije") {
 
                     $("#dispecer").css("display", "none");
+                    $("#pretraga").hide();
 
                     $("#pocetna1").hide();
                     $("#profil").hide();
@@ -1944,6 +1949,7 @@
 
             $("#obradiVoznju").click(function () {
                 $("#odabirVozaca").hide();
+                $("#pretraga").hide();
 
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
@@ -2811,6 +2817,38 @@
                         
                     }
                 })
+
+
+            });
+
+
+            $("#dispecerPretraga").click(function () {
+                $("#pretraga").show();
+                $("#dispecer").css("display", "none");
+                $("#pocetna").hide();
+                $("#pocetna1").hide();
+                $("#dugmeIzmeni").hide();
+                $('#profil').hide();
+                $('#formiranjeVoznjeDispecer').hide();
+                $('#obradaVoznjeDispecer').hide();
+                $('#odabirVozaca').hide();
+                $('#dodavanjeKorisnikaDiv').hide();
+                $('#dugmeDodajVozaca').hide();
+
+
+                let pretraga = "<h1 style=\"text-align:center\">Pretraga</h1><hr /><br /><ul><li><h3 style=\"margin-left:60px\" >Odaberi tip korisnika ";
+                pretraga += `<select id="tipKorisnika">
+                    <option disabled selected>Tip korisnika</option>
+                    <option value=0>Vozac</option>
+                    <option value=1>Musterija</option>
+                            </select > `;
+              
+                pretraga += "Ime: <input type=\"text\" style=\"width:100px\" id=\"imePolje\"> Prezime: <input type=\"text\" style=\"width:100px\"  id=\"prezimePolje\">       <button id=\"pretraziPoDisp\">Pretrazi</button></h3></li></ul>";
+
+
+                $("#pretraga").html(pretraga);
+
+
 
 
             });
