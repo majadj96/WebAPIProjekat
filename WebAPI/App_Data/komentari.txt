@@ -2,3 +2,5 @@
 1;Zato;6/18/2018 7:08:44 PM;sneska;1;1
 2;Ne valja;6/18/2018 7:12:05 PM;mile;3;2
 3;Super je Kaca kao vozac!;6/18/2018 7:26:24 PM;sneska;2;5
+4;657;6/18/2018 10:48:28 PM;sneska;4;2
+5;4534;6/18/2018 10:48:39 PM;sneska;5;4
