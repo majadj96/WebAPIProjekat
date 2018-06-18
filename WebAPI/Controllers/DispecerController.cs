@@ -32,24 +32,53 @@ namespace WebAPI.Controllers
             //voznja.idVozac
             bool zauzetVozac = false;
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+            bool nebitno = false;
+            if (voznja.Automobil == 0)
+            {
+                nebitno = true;
+            }
+
             foreach(var vv in vozaci.list)
             {
-                if (vv.Value.Zauzet == 0 && vv.Value.Automobil.Tip==voznja.Automobil)
+                if (nebitno)
                 {
-                    zauzetVozac = true;
-                    vv.Value.Zauzet = 1;
-                    voznja.idVozac = vv.Value.Id;
+                    if (vv.Value.Zauzet == 0)
+                    {
+                        zauzetVozac = true;
+                        vv.Value.Zauzet = 1;
+                        voznja.idVozac = vv.Value.Id;
 
-                    //Update zauzetog vozaca
-                    var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
-                    lines[int.Parse(vv.Key)] = vv.Value.Id + ";" + vv.Value.Ime + ";" + vv.Value.Prezime + ";" + vv.Value.KorisnickoIme + ";" + vv.Value.Lozinka + ";" + vv.Value.JMBG + ";" + vv.Value.KontaktTelefon + ";" + vv.Value.Pol + ";" + vv.Value.Email + ";" + vv.Value.Lokacija.X + ";" + vv.Value.Lokacija.Y + ";" + vv.Value.Lokacija.Adresa.UlicaBroj + ";" + vv.Value.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Value.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Value.Automobil.Broj + ";" + vv.Value.Automobil.Godiste + ";" + vv.Value.Automobil.Registracija + ";" + vv.Value.Automobil.Tip + ";" + vv.Value.Zauzet;
-                    File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
+                        //Update zauzetog vozaca
+                        var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+                        lines[int.Parse(vv.Key)] = vv.Value.Id + ";" + vv.Value.Ime + ";" + vv.Value.Prezime + ";" + vv.Value.KorisnickoIme + ";" + vv.Value.Lozinka + ";" + vv.Value.JMBG + ";" + vv.Value.KontaktTelefon + ";" + vv.Value.Pol + ";" + vv.Value.Email + ";" + vv.Value.Lokacija.X + ";" + vv.Value.Lokacija.Y + ";" + vv.Value.Lokacija.Adresa.UlicaBroj + ";" + vv.Value.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Value.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Value.Automobil.Broj + ";" + vv.Value.Automobil.Godiste + ";" + vv.Value.Automobil.Registracija + ";" + vv.Value.Automobil.Tip + ";" + vv.Value.Zauzet;
+                        File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
 
-                    vozaci = new Vozaci("~/App_Data/vozaci.txt");
-                    HttpContext.Current.Application["vozaci"] = vozaci;
+                        vozaci = new Vozaci("~/App_Data/vozaci.txt");
+                        HttpContext.Current.Application["vozaci"] = vozaci;
 
-                    break;
+                        break;
+                    }
                 }
+                else
+                {
+                    if (vv.Value.Zauzet == 0 && vv.Value.Automobil.Tip == voznja.Automobil)
+                    {
+                        zauzetVozac = true;
+                        vv.Value.Zauzet = 1;
+                        voznja.idVozac = vv.Value.Id;
+
+                        //Update zauzetog vozaca
+                        var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+                        lines[int.Parse(vv.Key)] = vv.Value.Id + ";" + vv.Value.Ime + ";" + vv.Value.Prezime + ";" + vv.Value.KorisnickoIme + ";" + vv.Value.Lozinka + ";" + vv.Value.JMBG + ";" + vv.Value.KontaktTelefon + ";" + vv.Value.Pol + ";" + vv.Value.Email + ";" + vv.Value.Lokacija.X + ";" + vv.Value.Lokacija.Y + ";" + vv.Value.Lokacija.Adresa.UlicaBroj + ";" + vv.Value.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Value.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Value.Automobil.Broj + ";" + vv.Value.Automobil.Godiste + ";" + vv.Value.Automobil.Registracija + ";" + vv.Value.Automobil.Tip + ";" + vv.Value.Zauzet;
+                        File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
+
+                        vozaci = new Vozaci("~/App_Data/vozaci.txt");
+                        HttpContext.Current.Application["vozaci"] = vozaci;
+
+                        break;
+                    }
+                }
+
 
 
             }

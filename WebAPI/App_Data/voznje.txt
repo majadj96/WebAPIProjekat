@@ -1,0 +1,3 @@
+0;06/18/2018 19:21;43;345;43;453;43;Svejedno; ;0;0; ; ; ;1;0;0; ; ; ; ; ;Formirana
+1;06/18/2018 19:21;342;434;53;453;234;Putnicki; ;0;0; ; ; ;1;1;0; ; ; ; ; ;Formirana
+2;06/18/2018 19:24;43;42;Sremska 2;Cuprija;35230;Svejedno;6;32;32;Kosanciceva 23;Cuprija;35230; ;2;450;Super je Kaca kao vozac!;6/18/2018 7:26:24 PM;sneska;2;5;Uspesna
