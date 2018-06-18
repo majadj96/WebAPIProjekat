@@ -138,6 +138,10 @@
             color: #1abc9c;
         }
 
+        #fitriranjeVoznji {
+            color: #1abc9c;
+        }
+
         /* Show the dropdown menu on hover */
         .dropdown:hover .dropdown-content {
             display: block;
@@ -196,6 +200,7 @@
             $("#naruciVoznjuDiv").hide();
             $("#dugmeNaruciVoznjuDiv").hide();
             $(".dropdown").hide();
+            $("#fitriranjeVoznji").hide();
 
 
             var uloga = '';
@@ -225,6 +230,7 @@
                         $("#korisnik").css("display", "block");
                         $("#korisnik").css("clear", "both");
                         $("#korisnik").css("position", "sticky");
+                        $("#fitriranjeVoznji").show();
 
                         $('#naruciVoznju').show();
 
@@ -2379,6 +2385,66 @@
                 });
             
 
+            $("#fitriranjeVoznji").click(function () {
+                $("#korisnik").css("display", "none");
+                $("#pocetna").hide();
+                $("#pocetna1").hide();
+                $("#naruciVoznjuDiv").hide();
+                $("#dugmeNaruciVoznjuDiv").hide();
+                $("#dugmeIzmeni").hide();
+                $('#profil').hide();
+
+                let filter = "<h3 align=\"center\">Odaberi status voznje po kom zelis da filtriras: ";
+                filter += `<select id="stanje">
+                    <option disabled selected>Odaberi stanje</option>
+                    <option value=0>Kreirana</option>
+                    <option value=1>Formirana</option>
+                    <option value=2>Obradjena</option>
+                    <option value=3>Prihvacena</option>
+                    <option value=4>Otkazana</option>
+                    <option value=5>Neuspesna</option>
+                    <option value=6>Uspesna</option>
+                            </select > `;
+                filter += "<button id=\"filterPoStanju\">Filtriraj</button></h3>";
+
+                $("#filtriranje").html(filter);
+               // tabelaPrikaza
+
+            });
+
+            $(document).on("click", "#filterPoStanju", function () {
+                let stanje = $("#stanje").val();
+                alert($(this).val() + $("#stanje").val());
+
+                //get sve voznje
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/Voznja',
+                    success: function (data) {
+                        //ispisi samo da je idKorisnika isti i ovaj status prokleti
+
+                        for (var voznja in data) {
+
+                            if (data[voznja].idKorisnik == korisnikovAJDI && data[voznja].StatusVoznje == stanje) {
+
+                                let tabela = `<table></table>`;
+
+
+
+
+                                $("#tabelaPrikaza").html();
+
+                            }
+
+
+                        }
+
+
+                    }
+                })
+
+
+            });
 
         });
 
@@ -2415,7 +2481,9 @@
                             </div>
                         </div>
                     </li>
-                    <li><a id="naruciVoznju" href="#">NARUCI VOZNJU</a></li>
+                    <li><a id="naruciVoznju"href="#">NARUCI VOZNJU</a></li>
+                   
+                    <li><button class="navbar-toggle, dropbtn" id="fitriranjeVoznji"><i class="fa fa-search" style="font-size:20px"></i></button></li>
                     <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU I AUTO</a></li>
                     <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
 
@@ -2423,6 +2491,11 @@
             </div>
         </div>
     </nav>
+
+    <div id="filtriranje">
+        <div id="tabelaPrikaza"></div>
+    </div>
+
 
     <!-- First Container -->
     <div id="pocetna1" class="container-fluid bg-1 text-center">
