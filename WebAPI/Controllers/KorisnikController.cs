@@ -13,7 +13,26 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     public class KorisnikController : ApiController // imam put i post za sada
-    {   
+    {
+        public List<Korisnik> Get()
+        {
+            Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
+            List<Korisnik> korisnicici = new List<Korisnik>();
+            foreach (var k in korisnici.list)
+                korisnicici.Add(k.Value);
+
+            return korisnicici;
+
+        }
+
+        public Korisnik Get(string id)
+        {
+            Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
+
+            return korisnici.list[id];
+
+        }
+
         public Korisnik Put(string id, [FromBody]Korisnik korisnik)
         {
             //lalala

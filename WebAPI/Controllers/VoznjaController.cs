@@ -14,11 +14,11 @@ namespace WebAPI.Controllers
     public class VoznjaController : ApiController
     {
 
-        public Voznja Get(string id)
+        public Voznja Get(int id)
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
-            Voznja v = voznje.list[id];
+            Voznja v = voznje.list[id.ToString()];
 
             return v;
         }

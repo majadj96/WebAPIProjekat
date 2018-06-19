@@ -109,9 +109,29 @@ namespace WebAPI.Controllers
             HttpContext.Current.Application["vozaci"] = vozaci;
             return false;
         }
-   
+
+        public List<Vozac> Get() //treba da se poklapaju tipovi auta voznje i vozaca
+        {
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+            List<Vozac> lista = new List<Vozac>();
+
+            foreach (var v in vozaci.list)
+                lista.Add(v.Value);
+
+            return lista;
+
+        }
 
 
+        public Vozac Get(string id) //treba da se poklapaju tipovi auta voznje i vozaca
+        {
+            Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+            
+            return vozaci.list[id];
+        }
+
+        /*
         public List<Vozac> Get(string id) //treba da se poklapaju tipovi auta voznje i vozaca
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
@@ -149,5 +169,6 @@ namespace WebAPI.Controllers
             return listaSlobodnih;
 
         }
+        */
     }
 }
