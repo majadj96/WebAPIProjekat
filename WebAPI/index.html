@@ -15,6 +15,7 @@
             font: 20px Montserrat, sans-serif;
             line-height: 1.8;
             color: #ef2415;
+            font-size:25px;
         }
 
         p {
@@ -142,17 +143,18 @@
 
             $("#registracija").click(function () {
 
-                let ki = $('#korImeReg').val();
-                let p = $('#korPassReg').val();
-                let i = $('#ime').val();
-                let pr = $('#prezime').val();
-                let j = $('#jmbg').val();
-                let e = $('#emailAdr').val();
-                let t = $('#brTelefona').val();
-
-                if (ki == "" || p == "" || i == "" || pr == "" || j == "" || e == "" || t == "") {
-                    alert("Morate popuniti sva polja!");
+                let x = document.getElementById("korImeReg");
+                let y = document.getElementById("korPassReg");
+                let ub = document.getElementById("ime");
+                let m = document.getElementById("prezime");
+                let p = document.getElementById("jmbg");
+                let p1 = document.getElementById("brTelefona");
+                let p2 = document.getElementById("emailAdr");
+           
+                if (!x.checkValidity() || !y.checkValidity() || !ub.checkValidity() || !m.checkValidity() || !p.checkValidity() || !p1.checkValidity() || !p2.checkValidity()) {
+                    alert("Morate ispreno popuniti sva polja!");
                 } else {
+
 
                     let korisnik = {
                         KorisnickoIme: `${$('#korImeReg').val()}`,
@@ -209,24 +211,24 @@
 
                 <ul class="nav navbar-nav navbar-right"></ul>
             </div>
-            <h3>Flamingo TAXI</h3>
+            <h3 style="font-weight:bold">Flamingo TAXI</h3>
 
         </div>
     </nav>
    
     <div id="prijavaDeo" style="width:800px; margin:0 auto;">
 
-        <h2> Prijava :)</h2>
+        <h2 style="text-align:center;font-size:40px"> Prijavi se</h2><hr />
 
-
+        <div style="margin-left:220px;">
         <table>
             <tr>
-                <td>Ime: </td>
-                <td><input id="korIme" type="text" name="KorisnickoIme" /></td>
+                <td> </td>
+                <td><input id="korIme" type="text" name="KorisnickoIme" placeholder="Korisnicko ime" required/></td>
             </tr>
             <tr>
-                <td>Lozinka: </td>
-                <td><input id="korPass" type="password" name="Lozinka" /></td>
+                <td> </td>
+                <td><input id="korPass" type="password" name="Lozinka" placeholder="Lozinka" required /></td>
             </tr>
             <tr><td><br /> </td><td></td></tr>
             <tr>
@@ -235,7 +237,7 @@
             </tr>
 
         </table>
-
+            </div>
 
         <div id="greskaPrijava"></div>
 
@@ -243,37 +245,37 @@
     </div>
     <br />
     <div id="registracijaDeo" style="width:800px; margin:0 auto;">
-        <h2> Registracija :)</h2>
+        <hr /><h2 style="text-align:left;font-size:30px">Registracija</h2><hr />
 
 
         <table>
             <tr>
                 <td>Korisnicko ime: </td>
                 <td>
-                    <input id="korImeReg" type="text" name="KorisnickoIme" />
+                    <input id="korImeReg" type="text" name="KorisnickoIme" required />
                 </td>
 
 
             </tr>
             <tr>
                 <td>Lozinka: </td>
-                <td><input id="korPassReg" type="password" name="Lozinka" /></td>
+                <td><input id="korPassReg" type="password" name="Lozinka" required /></td>
             </tr>
 
             <tr>
                 <td>Ime: </td>
-                <td><input id="ime" type="text" name="Ime" /></td>
+                <td><input id="ime" type="text" name="Ime" required /></td>
             </tr>
 
             <tr>
                 <td>Prezime: </td>
-                <td><input id="prezime" type="text" name="Prezime" /></td>
+                <td><input id="prezime" type="text" name="Prezime" required /></td>
             </tr>
 
 
             <tr>
                 <td>JMBG: </td>
-                <td><input id="jmbg" type="text" name="JMBG" /></td>
+                <td><input id="jmbg" type="text"  pattern="[0-9]{13}" name="JMBG" title="13 cifara" required /></td>
             </tr>
 
             <tr>
@@ -292,12 +294,12 @@
 
             <tr>
                 <td>Broj telefona: </td>
-                <td><input id="brTelefona" type="text" name="KontaktTelefon" /></td>
+                <td><input id="brTelefona" pattern="[0-9]{20}" type="text" name="KontaktTelefon" required /></td>
             </tr>
 
             <tr>
                 <td>Email adresa:</td>
-                <td><input id="emailAdr" type="email" name="Email" /></td>
+                <td><input id="emailAdr" type="email" name="Email" title="pr. flamingotaxi@gmail.com" required /></td>
             </tr>
             <tr><td><br /></td></tr>
             <tr>

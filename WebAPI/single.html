@@ -271,7 +271,7 @@
                                     }
 
                                     if (korisnikoveVoznje == 1) {
-                                        let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                        let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th>Id korisnika</th><th>Id vozaca</th><th>Id dispecera</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                         tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                         tabelaVoznji += "<th>Komentar</th>";
                                         tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th>"
@@ -293,6 +293,9 @@
                                                     ("0" + currentdate.getUTCMinutes()).slice(-2);
                                                 tabelaVoznji += `<tr>
                                                                 <td>${data[voznja].Id}</td>
+                                                                <td>${data[voznja].idKorisnik}</td>
+                                                                <td>${data[voznja].idVozac}</td>
+                                                                <td>${data[voznja].idDispecer}</td>
                                                                 <td>${datum} u ${vreme}h</td>
                                                                 <td>
 
@@ -376,7 +379,9 @@
                         $('#dodajVozaca').show();
                         $(".dropdown").show();
                         $("#dispecerPretraga").show();
-
+                        $("#lala").hide();
+                        $("#lala1").hide();
+                        $("#lala2").hide();
                         $("#dispecer").css("display", "block");
                         $("#dispecer").css("clear", "both");
                         $("#dispecer").css("position", "sticky");
@@ -396,7 +401,7 @@
 
                                 } else {
                                     if (imaDispecer == 1) {
-                                        let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                        let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th>Id korisnika</th><th>Id vozaca</th><th>Id dispecera</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                         tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                         tabelaVoznji += "<th>Komentar</th>";
                                         tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th></tr>";
@@ -414,6 +419,9 @@
                                                     ("0" + currentdate.getUTCMinutes()).slice(-2);
                                                 tabelaVoznji += `<tr>
                                                                 <td>${data[voznja].Id}</td>
+                                                                <td>${data[voznja].idKorisnik}</td>
+                                                                <td>${data[voznja].idVozac}</td>
+                                                                <td>${data[voznja].idDispecer}</td>
                                                                 <td>${datum} u ${vreme}h</td>
                                                                 <td>
 
@@ -475,7 +483,7 @@
                                     $("#tabelaVoznjiDispecera").html("<h4 align=\"center\">Trenutno nema voznji u sistemu :)</h4>");
 
                                 } else {
-                                    let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                    let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th>Id korisnika</th><th>Id vozaca</th><th>Id dispecera</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                     tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                     tabelaVoznji += "<th>Komentar</th>";
                                     tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th></tr>";
@@ -491,6 +499,9 @@
                                             ("0" + currentdate.getUTCMinutes()).slice(-2);
                                         tabelaVoznji += `<tr>
                                                                 <td>${data[voznja].Id}</td>
+                                                                <td>${data[voznja].idKorisnik}</td>
+                                                                <td>${data[voznja].idVozac}</td>
+                                                                <td>${data[voznja].idDispecer}</td>
                                                                 <td>${datum} u ${vreme}h</td>
                                                                 <td>
 
@@ -538,6 +549,9 @@
                     }
                     else if (data.Uloga == 2) {
                         alert("Vozac logovana");
+                        $("#lala").hide();
+                        $("#lala1").hide();
+                        $("#lala2").hide();
                         $('#promeniLokaciju').show();
 
                         $("#vozac").css("display", "block");
@@ -560,7 +574,7 @@
                                     $("#tabelaVoznjiVozaca").html("<h3 align=\"center\">Nemate ni jednu voznju</h3>");
                                 } else if (ima == 1) {
 
-                                    let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                    let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th>Id korisnika</th><th>Id vozaca</th><th>Id dispecera</th><th width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                     tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                     tabelaVoznji += "<th>Komentar</th>";
                                     tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th><th colspan =\"2\"></th></tr>";
@@ -579,6 +593,9 @@
                                                 ("0" + currentdate.getUTCMinutes()).slice(-2);
                                             tabelaVoznji += `<tr>
                                                                 <td>${data[voznja].Id}</td>
+                                                                <td>${data[voznja].idKorisnik}</td>
+                                                                <td>${data[voznja].idVozac}</td>
+                                                                <td>${data[voznja].idDispecer}</td>
                                                                 <td>${datum} u ${vreme}h</td>
                                                                 <td>
 
@@ -642,7 +659,7 @@
 
 
 
-                                        let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                        let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th>Id korisnika</th><th>Id vozaca</th><th>Id dispecera</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                         tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                         tabelaVoznji += "<th>Komentar</th>";
                                         tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th><th></th></tr>";
@@ -660,6 +677,9 @@
                                                     ("0" + currentdate.getUTCMinutes()).slice(-2);
                                                 tabelaVoznji += `<tr>
                                                                 <td>${data[voznja].Id}</td>
+                                                                <td>${data[voznja].idKorisnik}</td>
+                                                                <td>${data[voznja].idVozac}</td>
+                                                                <td>${data[voznja].idDispecer}</td>
                                                                 <td>${datum} u ${vreme}h</td>
                                                                 <td>
 
@@ -3243,6 +3263,13 @@
                 }
             });
 
+            $("#broj").click(function () {
+                confirm("Pozivanje broja 0643093116...");
+            });
+
+            $("#brojHome").click(function () {
+                confirm("Pozivanje broja 0358470027...");
+            });
 
         });
 
@@ -3304,9 +3331,11 @@
 
     <!-- First Container -->
     <div id="pocetna1" class="container-fluid bg-1 text-center">
-        <h3 class="margin">Dobrodosli!</h3>
-        <img src="flamingo3.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
-        <h3>064 309 3116</h3>
+        <h2 class="margin">DOBRO DOŠLI!</h2><hr />
+        <img src="flamingo3.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="250" height="250"><hr />
+        <h3 id="lala" style="font-size:24px">Brojevi</h3>
+        <h3 id="lala1" style="color:#ef2415" >064 309 3116  <a  href="#" id="broj"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
+        <h3 id="lala2" style="color:#ef2415">035 8470 027  <a href="#"  id="brojHome"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
     </div>
     <!-- Second Container -->
 
@@ -3345,7 +3374,7 @@
     </div>
 
 
-    <div id="vozac">
+    <div id="vozac" style="margin-left:5px;">
         <h3 style="text-align:center;color:#1abc9c;font-weight:bold;">Vase voznje</h3>
         <hr />
         <div id="tabelaVoznjiVozaca">
@@ -3359,7 +3388,7 @@
         <hr />
         <div id="tabelaVoznjiNaCekanju">
         </div>
-
+        <hr />
 
     </div>
 
@@ -3415,10 +3444,13 @@
 
 
     <div id="pocetna" class="container-fluid bg-2 text-center">
-        <h3 class="margin">What Am I?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <h3 class="margin">O kompaniji</h3>
+        <p>Kompanija "Flamingo TAXI" osnovana je 2018.godine. Trudimo se da našim mušterijama pružimo što bržu i pouzdaniju uslugu. Na našem sajtu možete da naručite vožnju i Vaš vozač je tu za tren! Takođe, imate uvid u svim Vašim vožnjama.
+        Možete ostaviti i komentar ukoliko imate neku zamerku ili pohvalu. Možete pretraživati, filtrirati vožnje kao i mnoge druge stvari.. 
+        
+        </p>
         <a href="#" class="btn btn-default btn-lg">
-            <span class="glyphicon glyphicon-search"></span> Search
+            <span class="glyphicon glyphicon-search"></span> Pretrazi sajt
         </a>
     </div>
 
