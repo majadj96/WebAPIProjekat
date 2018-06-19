@@ -4,3 +4,5 @@
 3;Super je Kaca kao vozac!;6/18/2018 7:26:24 PM;sneska;2;5
 4;657;6/18/2018 10:48:28 PM;sneska;4;2
 5;4534;6/18/2018 10:48:39 PM;sneska;5;4
+6;Sorry, morala sam da odem.;6/19/2018 5:28:58 PM;sneska;1;2
+7;Neuspesna voznja;6/19/2018 5:44:02 PM;eki;2;4
