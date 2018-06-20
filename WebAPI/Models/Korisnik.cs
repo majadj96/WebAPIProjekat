@@ -21,10 +21,12 @@ namespace WebAPI.Models
         public string KontaktTelefon { get; set; }
         public string Email { get; set; }
         public Uloga Uloga { get; set; }
+        public int Ban { get; set; }
         public Korisnik() { }
 
-        public Korisnik(string id, string ime, string prezime, string korisnickoIme, string lozinka, string jmbg, string kontakt, string pol, string email) : this()
+        public Korisnik(string id, string ime, string prezime, string korisnickoIme, string lozinka, string jmbg, string kontakt, string pol, string email,int b) : this()
         {
+            Ban = b;
             Id = id;
             Ime = ime;
             Prezime = prezime;

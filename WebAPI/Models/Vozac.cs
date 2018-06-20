@@ -16,8 +16,9 @@ namespace WebAPI.Models
 
         public Vozac(string id, string ime, string prezime, string korisnickoIme, string lozinka, string jmbg, string kontakt, string pol, 
             string email,double x, double y, string ulicaBroj,string mesto,string zip,string brojAuta, int godisteAuta, string registracijaAuta
-            ,string tipAuta,int z) : this()
+            ,string tipAuta,int z,int b) : this()
         {
+            Ban = b;
             Zauzet = z;
             //Licne INFO
             Id = id;

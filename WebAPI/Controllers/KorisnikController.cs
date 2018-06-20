@@ -28,25 +28,19 @@ namespace WebAPI.Controllers
         public Korisnik Get(string id)
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
-
             return korisnici.list[id];
-
         }
 
-        public Korisnik Put(string id, [FromBody]Korisnik korisnik)
+        public Korisnik Put(string id, [FromBody]Korisnik korisnik) // Izmena ? , treba mi i put da promenim da je banovan
         {
-            //lalala
             string[] korisnickaImena = korisnik.KorisnickoIme.Split(';');
-
             string stariUser = korisnickaImena[0];
             string noviUser = korisnickaImena[1];
 
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-
-
-
+            
             bool dispecer = false;
             bool musterija = false;
             bool vozacB = false;
@@ -65,7 +59,6 @@ namespace WebAPI.Controllers
                         vozac = k.Value;
                         break;
                     }
-                    //vec postoji ! greska!
                     kmaja.KorisnickoIme = "postoji";
                     return kmaja;
                 }
@@ -81,11 +74,7 @@ namespace WebAPI.Controllers
                     break;
                 }
             }
-
-
-
-
-
+            
             foreach (var k in dispeceri.list)
             {
                 if (k.Value.KorisnickoIme == noviUser)
@@ -97,7 +86,6 @@ namespace WebAPI.Controllers
                         dispecer = true;
                         break;
                     }
-                    //vec postoji ! greska!
                     kmaja.KorisnickoIme = "postoji";
                     return kmaja;
                 }
@@ -112,11 +100,9 @@ namespace WebAPI.Controllers
                     break;
                 }
             }
-
-
+            
             foreach (var k in korisnici.list)
             {
-
                 if (k.Value.KorisnickoIme == noviUser)
                 {
                     if (stariUser == noviUser)
@@ -126,8 +112,6 @@ namespace WebAPI.Controllers
                         musterija = true;
                         break;
                     }
-
-                    //vec postoji ! greska!
                     kmaja.KorisnickoIme = "postoji";
                     return kmaja;
                 }
@@ -159,7 +143,7 @@ namespace WebAPI.Controllers
 
                 var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt");
                 korisnik = kmaja;
-                lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
+                lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email+";"+korisnik.Ban;
                 File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt", lines);
 
                 korisnici = new Korisnici("~/App_Data/korisnici.txt");
@@ -177,9 +161,7 @@ namespace WebAPI.Controllers
 
                 dispeceri = new Dispeceri("~/App_Data/dispeceri.txt");
                 HttpContext.Current.Application["dispeceri"] = dispeceri;
-
-
-
+                
             }
 
             if (vozacB)
@@ -196,31 +178,24 @@ namespace WebAPI.Controllers
                 vozac.Prezime = korisnik.Prezime;
                 vozac.KontaktTelefon = korisnik.KontaktTelefon;
                 vozac.Email = korisnik.Email;
-
-
-
-                lines[int.Parse(id)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip+";"+vozac.Zauzet;
+                
+                lines[int.Parse(id)] = vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip+";"+vozac.Zauzet+";"+vozac.Ban;
                 File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
 
                 vozaci = new Vozaci("~/App_Data/vozaci.txt");
                 HttpContext.Current.Application["vozaci"] = vozaci;
-
-
-
             }
 
             return korisnik;
         }
 
 
-        public bool Post([FromBody]Korisnik korisnik)
+        public bool Post([FromBody]Korisnik korisnik) // Dodavanje korisnika - DOBRO JE
         {
-
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-
-
+            
             bool postoji = false;
 
             foreach (var k in dispeceri.list){
@@ -230,8 +205,7 @@ namespace WebAPI.Controllers
                     break;
                 }
             }
-
-
+            
             foreach (var k in korisnici.list){
                 if (k.Value.KorisnickoIme == korisnik.KorisnickoIme)
                 {
@@ -254,7 +228,8 @@ namespace WebAPI.Controllers
                 string path = @"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt";
                 StringBuilder sb = new StringBuilder();
                 korisnik.Id = korisnici.list.Count.ToString();
-                sb.Append(korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email + "\n");
+                korisnik.Ban = 0;
+                sb.Append(korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email + ";" + korisnik.Ban + "\n");
 
                 if (!File.Exists(path))
                     File.WriteAllText(path, sb.ToString());
@@ -268,7 +243,6 @@ namespace WebAPI.Controllers
             else
             {
                 return false;
-                //Postoji korisnik sa tim korisnickim imenom
             }
         }
 

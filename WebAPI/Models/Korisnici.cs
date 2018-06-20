@@ -23,7 +23,7 @@ namespace WebAPI.Models
             while ((line = sr.ReadLine()) != null)
             {
                 string[] tokens = line.Split(';');
-                Korisnik p = new Korisnik(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8]);
+                Korisnik p = new Korisnik(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], tokens[5], tokens[6], tokens[7], tokens[8],int.Parse(tokens[9]));
                 p.Id = list.Count.ToString();
                 list.Add(p.Id, p);
             }
