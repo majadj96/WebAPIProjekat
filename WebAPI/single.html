@@ -749,6 +749,7 @@
                 } else {
 
                     if (sadrzaj == "Promeni informacije") {
+                        $("#block").hide();
 
                         $("#korisnik").css("display", "none");
                         $("#dispecer").css("display", "none");
@@ -1018,6 +1019,7 @@
                 if (sadrzaj == "Promeni informacije") {
 
                     $("#dispecer").css("display", "none");
+                    $("#block").hide();
 
                     $("#pretraga").hide();
                     $("#tabelaPretraga").hide();
@@ -1825,7 +1827,7 @@
 
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
-
+                    $("#block").hide();
                     $("#dispecer").css("display", "none");
                     $("#pretraga").hide();
                     $("#tabelaPretraga").hide();
@@ -2027,7 +2029,7 @@
                     $("#odabirVozaca").hide();
                     $("#pretraga").hide();
                     $("#dispecer").css("display", "none");
-
+                    $("#block").hide();
                     $("#pocetna1").hide();
                     $("#profil").hide();
                     $("#pocetna").hide();
@@ -3113,6 +3115,7 @@
                 $("#pocetna1").hide();
                 $("#dugmeIzmeni").hide();
                 $('#profil').hide();
+                $("#block").hide();
                 $('#formiranjeVoznjeDispecer').hide();
                 $('#obradaVoznjeDispecer').hide();
                 $('#odabirVozaca').hide();
@@ -3400,7 +3403,6 @@
                     Zauzet: 2,
                     Ban: 1,
                 };
-
                 $.ajax({
                     type: 'PUT',
                     url: '/api/Vozac/' + $(this).val(),
@@ -3415,8 +3417,6 @@
                         }
                     }
                 })
-
-
             });
 
 
@@ -3441,6 +3441,52 @@
                     }
                 })
             });
+
+
+            $(document).on("click", "#banK", function () {
+                alert($(this).val());
+                let musterija = {
+                    Ban: 1,
+                };
+                $.ajax({
+                    type: 'PUT',
+                    url: '/api/Musterija/' + $(this).val(),
+                    data: JSON.stringify(musterija),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            alert("Uspesno banovan");
+                            $(location).attr('href', 'single.html');
+
+                        }
+                    }
+                })
+            });
+
+
+            $(document).on("click", "#unbanK", function () {
+                let musterija = {
+                    Ban: 0,
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: '/api/Musterija/' + $(this).val(),
+                    data: JSON.stringify(musterija),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            alert("Uspesno unbanovan");
+                            $(location).attr('href', 'single.html');
+
+                        }
+                    }
+                })
+            });
+
+
 
 
         });
