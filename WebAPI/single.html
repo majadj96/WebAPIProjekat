@@ -144,6 +144,11 @@
             border-radius: 65%;
         }
 
+        #blokiranje:hover{
+            color: red;
+        }
+      
+
             #fitriranjeVoznji:hover {
                 color: #1abc9c;
                 border: 1px solid #1abc9c;
@@ -215,6 +220,10 @@
             $("#naruciVoznjuDiv").hide();
             $("#dugmeNaruciVoznjuDiv").hide();
             $(".dropdown").hide();
+            $("#blokiranje").hide();
+            $("#block").hide();
+            
+
             $("#fitriranjeVoznji").hide();
             $("#dispecerPretraga").hide();
 
@@ -247,6 +256,7 @@
                         $("#korisnik").css("clear", "both");
                         $("#korisnik").css("position", "sticky");
                         $("#fitriranjeVoznji").show();
+
 
                         $('#naruciVoznju').show();
 
@@ -378,6 +388,7 @@
                         alert("Dispecer logovan");
                         $('#dodajVozaca').show();
                         $(".dropdown").show();
+                        $("#blokiranje").show();
                         $("#dispecerPretraga").show();
                         $("#lala").hide();
                         $("#lala1").hide();
@@ -2222,7 +2233,6 @@
             });
 
             $(document).on("click", "#neuspesnaDugme", function () {
-                alert($(this).val());
                 $('#neuspesnaVoznjaKomentarDiv').show(500);
 
                 id = $(this).val() + ";" + korisnikovAJDI;
@@ -2233,7 +2243,7 @@
                     url: '/api/Vozac/' + '?' + $.param({ "Id": id }),
 
                     success: function (data) {
-                        if (data == false) { alert("Ova voznja je vec otkazana"); }
+                        if (data == false) { alert("Voznja je vec u stanju neuspesna/uspesna"); }
                         else {
                             let informacije = "<br />Molim Vas, ostavite komentar<table border='1'>";
 
@@ -2292,8 +2302,6 @@
                     dataType: 'json',
                     success: function (data) {
                         if (data) {
-                            alert("Uspesno prihvatanje voznje");
-
 
                             let vozac = {
                                 Zauzet: 0,
@@ -2307,8 +2315,6 @@
                                 dataType: 'json',
                                 success: function (data) {
                                     if (data) {
-                                        alert("Uspesno prihvatanje voznje");
-
                                         let informacije = "<br />Unesite podatke<table border='1'>";
 
                                         informacije += `  <tr>
@@ -2359,7 +2365,7 @@
 
 
                         } else {
-                            alert("Greska");
+                            alert("Voznja je vec u stanju neuspesna/uspesna"); 
                         }
                     }
 
@@ -2369,7 +2375,6 @@
         
 
             $(document).on("click", "#podaciUspesno", function () {
-                alert("saljem, tj apdejtujem voznju");//dodajem joj iznos i odrediste // ne sme da se klikne ni na sta..dodaj
                 let x = document.getElementById("xU");
                 let y = document.getElementById("yU");
                 let ub = document.getElementById("ulicaibrojU");
@@ -3271,6 +3276,36 @@
                 confirm("Pozivanje broja 0358470027...");
             });
 
+            $("#blokiranje").click(function () {
+
+                var sadrzaj = $("#izmeni").text();
+                if (sadrzaj == "Promeni informacije") {
+
+                    $("#pocetna").hide();
+                    $("#pocetna1").hide();
+                    $("#dugmeIzmeni").hide();
+                    $('#profil').hide();
+                    $('#formiranjeVoznjeDispecer').hide();
+                    $('#obradaVoznjeDispecer').hide();
+                    $('#odabirVozaca').hide();
+                    $('#pretraga').hide();
+                    $('#dodavanjeKorisnikaDiv').hide();
+                    $('#dugmeDodajVozaca').hide();
+                    $("#dispecer").css("display", "none");
+                    $("#block").show();
+
+                   
+              
+
+                } else {
+                    alert("Niste sacuvali izmene.");
+                    $("#izmeni").css("background-color", "#ff4d4d");
+                }
+
+
+            });
+
+
         });
 
 
@@ -3310,6 +3345,7 @@
                     <li><a id="naruciVoznju" href="#">NARUCI VOZNJU</a></li>
                     <li><button class="navbar-toggle, dropbtn" id="fitriranjeVoznji"><i class="fa fa-search" style="font-size:20px"></i></button></li>
                     <li><a id="promeniLokaciju" href="#">PROMENI LOKACIJU I AUTO</a></li>
+                    <li><button class="navbar-toggle, dropbtn" id="blokiranje"><i class="fa fa-ban" style="font-size:20px"></i></button></li>
                     <li><a id="odlogovanje" href="#">ODJAVI SE</a></li>
 
                 </ul>
@@ -3321,11 +3357,12 @@
     </div>
     <div id="tabelaPrikaza" style="margin-left:10px;"></div>
 
-    <div id="pretraga" >
+    <div id="pretraga">
     </div>
     <div id="tabelaPretraga" style="margin-left:200px;"></div>
 
-
+    <div id="block">
+    </div>
 
 
 
@@ -3334,15 +3371,13 @@
         <h2 class="margin">DOBRO DOŠLI!</h2><hr />
         <img src="flamingo3.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="250" height="250"><hr />
         <h3 id="lala" style="font-size:24px">Brojevi</h3>
-        <h3 id="lala1" style="color:#ef2415" >064 309 3116  <a  href="#" id="broj"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
-        <h3 id="lala2" style="color:#ef2415">035 8470 027  <a href="#"  id="brojHome"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
+        <h3 id="lala1" style="color:red">064 309 3116  <a href="#" id="broj"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
+        <h3 id="lala2" style="color:red">035 8470 027  <a href="#" id="brojHome"><i style="font-size:24px" class="fa">&#xf095;</i></a></h3>
     </div>
     <!-- Second Container -->
 
 
     <div id="profil" style="width:800px; margin:0 auto;">
-
-        PROFIL
     </div>
 
 
@@ -3405,7 +3440,6 @@
     </div>
 
     <div id="dodavanjeKorisnikaDiv" style="width:800px; margin:0 auto;">
-        DODAJEM KORISNIKA ODJE
     </div>
 
     <div id="dugmeIzmeni" style="width:800px; margin:0 auto;">
@@ -3432,8 +3466,6 @@
 
 
     <div id="naruciVoznjuDiv" style="width:800px; margin:0 auto;">
-
-        NARUCI VOZNJU
     </div>
 
     <div id="dugmeNaruciVoznjuDiv" style="width:800px; margin:0 auto;">
@@ -3445,9 +3477,10 @@
 
     <div id="pocetna" class="container-fluid bg-2 text-center">
         <h3 class="margin">O kompaniji</h3>
-        <p>Kompanija "Flamingo TAXI" osnovana je 2018.godine. Trudimo se da našim mušterijama pružimo što bržu i pouzdaniju uslugu. Na našem sajtu možete da naručite vožnju i Vaš vozač je tu za tren! Takođe, imate uvid u svim Vašim vožnjama.
-        Možete ostaviti i komentar ukoliko imate neku zamerku ili pohvalu. Možete pretraživati, filtrirati vožnje kao i mnoge druge stvari.. 
-        
+        <p>
+            Kompanija "Flamingo TAXI" osnovana je 2018.godine. Trudimo se da našim mušterijama pružimo što bržu i pouzdaniju uslugu. Na našem sajtu možete da naručite vožnju i Vaš vozač je tu za tren! Takođe, imate uvid u svim Vašim vožnjama.
+            Možete ostaviti i komentar ukoliko imate neku zamerku ili pohvalu. Možete pretraživati, filtrirati vožnje kao i mnoge druge stvari..
+
         </p>
         <a href="#" class="btn btn-default btn-lg">
             <span class="glyphicon glyphicon-search"></span> Pretrazi sajt
