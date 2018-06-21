@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{930A28D1-7B9A-49A4-8740-D111242B80DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4DAA3ABD-9629-483F-A413-9C3D327A3E97}"
+	ProjectSection(SolutionItems) = preProject
+		..\800pxtitle.jpg = ..\800pxtitle.jpg
+		..\f.jpg = ..\f.jpg
+		..\flas.jpeg = ..\flas.jpeg
+		..\Healthz-achtergrond-foto-min.jpg = ..\Healthz-achtergrond-foto-min.jpg
+		..\poster-a-flamingos-fancy-1634438.jpg = ..\poster-a-flamingos-fancy-1634438.jpg
+		..\prc_69341325.jpg = ..\prc_69341325.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +28,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B22D8CBF-3484-4AAF-996A-D9DEEFE6E22A}
 	EndGlobalSection
 EndGlobal
