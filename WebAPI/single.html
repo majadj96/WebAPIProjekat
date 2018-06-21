@@ -239,12 +239,22 @@
                 KorisnickoIme: `${ime}`,
             };
 
-
-            $.ajax({
+            //mora post da bi prihvatio karakrete u telu posto u url-u samo nece(preko id-a)
+          /*  $.ajax({
                 type: 'PUT',//promeni na GET jer saljes samo korisnicko ime, ne moze zbog karaktera
                 url: '/api/Prijava/' + 0,
                 data: JSON.stringify(korisnik),
                 contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                */
+
+
+            $.ajax({
+                type: 'GET',//promeni na GET jer saljes samo korisnicko ime, ne moze zbog karaktera
+                url: '/api/Prijava/' + ime,
+                data: JSON.stringify(korisnik),
+                contentType: 'application/json; charset=utf-8',
+                async: false,
                 dataType: 'json',
                 success: function (data) {
                     korisnikovAJDI = data.Id;
