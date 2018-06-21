@@ -264,14 +264,14 @@
             <tr>
                 <td>Korisnicko ime: </td>
                 <td>
-                    <input id="korImeReg" type="text"  name="KorisnickoIme" required />
+                    <input id="korImeReg" type="text" pattern="[0-9a-zA-Z]{4,}" title="Minimum 4 karaktera" name="KorisnickoIme" required />
                 </td>
 
 
             </tr>
             <tr>
                 <td>Lozinka: </td>
-                <td><input id="korPassReg" type="password" name="Lozinka" required /></td>
+                <td><input id="korPassReg" type="password" pattern="[0-9a-zA-Z]{8,}" name="Lozinka" title="Minimum 8 karakreta" required /></td>
             </tr>
 
             <tr>
@@ -306,7 +306,7 @@
 
             <tr>
                 <td>Broj telefona: </td>
-                <td><input id="brTelefona" pattern="[0-9]{20}" type="text" name="KontaktTelefon" required /></td>
+                <td><input id="brTelefona" pattern="[0-9]{9,}" type="text" name="KontaktTelefon" required /></td>
             </tr>
 
             <tr>
