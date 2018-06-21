@@ -939,15 +939,16 @@
                     $("#izmeni").css("background-color", '');
 
                     let korisnik = {
-                        KorisnickoIme: `${korisnik1.KorisnickoIme};` + `${$('#korisnickoImeIzmeni').val()}`,
+                        KorisnickoIme: `${$('#korisnickoImeIzmeni').val()}`,
                         Lozinka: `${$('#lozinkaIzmeni').val()}`,
                         Ime: `${$('#imeIzmeni').val()}`,
                         Prezime: `${$('#prezimeIzmeni').val()}`,
                         Email: `${$('#emailIzmeni').val()}`,
                         KontaktTelefon: `${$('#telefonIzmeni').val()}`,
+                        Uloga:uloga,
                     };
 
-
+                    //put da promenis saljes novog i stari id pa get da dobijes
 
                     $.ajax({
                         type: 'PUT',
@@ -957,18 +958,54 @@
                         dataType: 'json',
                         success: function (data) {
 
-                            if (data.KorisnickoIme == "postoji") {
+                            if (!data) {
                                 alert("Zauzeto korisnicko ime!");
-
                             } else {
-                                $("#izmeni").text("Promeni informacije");
-                                korisnik1 = data;
-                                localStorage.setItem("korisnik", korisnik1.KorisnickoIme);
-                                var ime = localStorage.getItem("korisnik");
-                                $("#wel").text(ime);
+                                 
+                                //get u zavisnosti od uloge.
+                                if (uloga == 0) {//get za korisnika
+
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Korisnik/' + korisnik1.Id,
+                                        async:false,
+                                        success: function (data) {
+                                            korisnik1 = data;
+                                        }
+                                    })
+
+
+                                } else if (uloga == 2) {
+
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Vozac/' + korisnik1.Id,
+                                        async: false,
+                                        success: function (data) {
+                                            korisnik1 = data;
+                                        }
+                                    })
+
+                                } else if (uloga == 1) {
+
+                                    $.ajax({
+                                        type: 'GET',
+                                        url: '/api/Dispecer/' + korisnik1.Id,
+                                        async: false,
+                                        success: function (data) {
+                                            korisnik1 = data;
+                                        }
+                                    })
+                                }
+
+                            $("#izmeni").text("Promeni informacije");
+                               
+                            localStorage.setItem("korisnik", korisnik1.KorisnickoIme);
+                            var ime = localStorage.getItem("korisnik");
+                            $("#wel").text(ime);
                                 $("#tabelaNeobicna").hide(500);
                                 let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaObicna\" border='1'>";
-                                informacije += ` <tr>
+                            informacije += ` <tr>
                                                 <td>JMBG:</td>
                                                 <td>${korisnik1.JMBG}</td>
                                             </tr>
@@ -1002,11 +1039,14 @@
 
 
                                                 `;
-                                informacije += "</table>";
-                                $('#profil').html(informacije);
+                            informacije += "</table>";
+                            $('#profil').html(informacije);
+                   
+
                             }
                         }
                     })
+
                 }
 
 
