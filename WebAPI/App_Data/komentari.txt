@@ -16,3 +16,5 @@
 15;Ne svidja mi se ;6/21/2018 4:57:35 PM;sneska;3;3
 16;haos;6/21/2018 4:59:56 PM;mile;2;2
 17;odustala je;6/21/2018 5:00:14 PM;mile;4;5
+18;lalal;6/21/2018 11:44:14 PM;sneska;6;4
+19;222;6/21/2018 11:44:23 PM;sneska;7;3

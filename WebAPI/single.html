@@ -3052,6 +3052,9 @@
                         }
                     })
                 }
+                $("#stanje").val('Odaberi stanje');
+                pretragica = false;
+
 
             });
 
@@ -3075,6 +3078,7 @@
                     $.ajax({
                         type: 'GET',
                         url: '/api/Voznja',
+                        async:false,
                         success: function (data) {
                             if (fleg.length != 0 && pretragica)
                                 data = fleg;
@@ -3176,18 +3180,13 @@
 
                         }
                     })
-
-
-
-
                 }
+                $("#polje").val('Polje');
+                pretragica = false;
+
             });
            
             $(document).on("click", "#pretraziPo", function () {
-                //sve setuj na prazno
-
-
-                //opcija - datum i to..
                 let oddejt;
                 let dodejt;
                 let D = false;
@@ -3319,11 +3318,8 @@
                                 if (data.length == 0) {
                                     let st = `<h4 align=\"center\">Nema voznji sa tim kriterijumom</h4>`;
                                     $("#tabelaPrikaza").html(st);
-
-
                                 } else {
                                     fleg = data;
-                                    pretragica = true;
                                     let tabelaVoznji = `<table border='1'><tr><th>Id voznje</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                     tabelaVoznji += "<th>Odrediste</td><th>Iznos</th>";
                                     tabelaVoznji += "<th>Komentar</th>";
@@ -3385,7 +3381,9 @@
                             }
 
                         }
+
                     })
+
                 }
 
                 $("#odDate").val('');
@@ -3394,6 +3392,8 @@
                 $("#doOcena").val('');
                 $("#odCena").val('');
                 $("#doCena").val('');
+                pretragica = true;
+
             });
 
 
@@ -3425,6 +3425,12 @@
                 $("#pretraga").html(pretraga);
 
             });
+
+            $(document).on("change", "#tipKorisnika", function () {
+                $("#imePolje").val('');
+                $("#prezimePolje").val('');
+            });
+
 
             $(document).on("click", "#pretraziPoDisp", function () {
 

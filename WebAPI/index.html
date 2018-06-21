@@ -11,11 +11,21 @@
     <script src="Scripts/jquery-1.10.2.js"></script>
 
     <style>
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: white;
+            opacity: 1; /* Firefox */
+        }
+
         body {
             font: 20px Montserrat, sans-serif;
             line-height: 1.8;
-            color: #ef2415;
-            font-size:25px;
+            color: #AF5A76;
+            font-size: 25px;
+        }
+
+        input {
+            background-color: #8ADDCD;
+            border-radius: 8px;
         }
 
         p {
@@ -72,7 +82,23 @@
             background-repeat: repeat;
         }
 
-      
+        button {
+            background-color: palevioletred;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            border-radius: 12px;
+            border: 3px solid palevioletred;
+        }
+
+           button:hover {
+                background-color: white; /* Green */
+                color: palevioletred;
+            }
 
     </style>
     <script type="text/javascript">
