@@ -3200,18 +3200,18 @@
                         for (var k in podaci) {
                             if (kriterijum == 0) // samo po imennu
                             {
-                                if (podaci[k].Ime == imePolje)
+                                if ((podaci[k].Ime).toLowerCase().includes(imePolje.toLowerCase()))
                                     zadovoljavaju.push(podaci[k]);
 
                             } else if (kriterijum == 1)//samo po prezimenu
                             {
-                                if (podaci[k].Prezime == przPolje)
+                                if ((podaci[k].Prezime).toLowerCase().includes(przPolje.toLowerCase()))
                                     zadovoljavaju.push(podaci[k]);
 
 
                             } else if (kriterijum == 2)//po imenu i prezimenu
                             {
-                                if (podaci[k].Prezime == przPolje && podaci[k].Ime == imePolje)
+                                if ((podaci[k].Prezime).toLowerCase().includes(przPolje.toLowerCase()) && (podaci[k].Ime).toLowerCase().includes(imePolje.toLowerCase()))
                                     zadovoljavaju.push(podaci[k]);
 
 

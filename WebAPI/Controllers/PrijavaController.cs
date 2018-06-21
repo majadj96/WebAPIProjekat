@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-            
+
             foreach (var kk in korisnici.list)
             {
                 if (kk.Value.KorisnickoIme == korisnik.KorisnickoIme)
@@ -53,34 +53,66 @@ namespace WebAPI.Controllers
             return k;
         }
 
-        
+
         public string Post([FromBody]Korisnik korisnik) // Prijava , autentifikacija, index str , moram da posaljem username i pass i zbog toga moram post metodu da koristim
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
-            
+
+
+
             foreach (var k in korisnici.list)
             {
-                    if ((k.Value.KorisnickoIme.Equals(korisnik.KorisnickoIme)) && (k.Value.Lozinka.Equals(korisnik.Lozinka)))
-                    return "Uspesno";
+                if ((k.Value.KorisnickoIme.Equals(korisnik.KorisnickoIme)) && (k.Value.Lozinka.Equals(korisnik.Lozinka)))
+                {
+                    if (k.Value.Ban == 0)
+                    {
+                        return "Uspesno";
+                    }
+                    else
+                    {
+                        return "Banovan si";
+                    }
+
+                }
             }
 
-            foreach (var k in dispeceri.list)
-            {
-                if (k.Value.KorisnickoIme == korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
-                    return "Uspesno";
+                foreach (var k in dispeceri.list){
+                    if (k.Value.KorisnickoIme == korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka){
+                    if (k.Value.Ban == 0)
+                    {
+                        return "Uspesno";
+                    }
+                    else
+                    {
+                        return "Banovan si";
+                    }
+
+                }
             }
 
-            foreach (var k in vozaci.list)
-            {
-                if (k.Value.KorisnickoIme == korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
-                    return "Uspesno";
+                foreach (var k in vozaci.list)
+                {
+                    if (k.Value.KorisnickoIme == korisnik.KorisnickoIme && k.Value.Lozinka == korisnik.Lozinka)
+                {
+                    if (k.Value.Ban == 0)
+                    {
+                        return "Uspesno";
+                    }
+                    else
+                    {
+                        return "Banovan si";
+                    }
+
+                }
             }
 
-            return "Neuspesna prijava";
+                return "Neuspesna prijava";
+            }
+        
+
+
+
         }
-
-
     }
-}

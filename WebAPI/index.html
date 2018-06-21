@@ -19,7 +19,9 @@
         }
 
         p {
-            font-size: 16px;
+            font-size: 24px;
+            text-align:center;
+            font-weight:500;
         }
 
         .margin {
@@ -96,11 +98,20 @@
 
             $("#prijava").click(function () {
 
-                let ki = $('#korIme').val();
-                let p = $('#korPass').val();
-                if (ki == "" || p == "") {
+                let x = document.getElementById("korIme");
+                let y = document.getElementById("korPass");
+
+                if (!x.checkValidity() || !y.checkValidity()) {
                     alert("Morate popuniti sva polja!");
+                    if ($("#korIme").val() == "") {
+                        $("#korIme").focus();
+
+                    } else if ($("#korPass").val() == ""){
+                        $("#korPass").focus();
+
+                     }
                 } else {
+
 
                     let korisnik = {
                         KorisnickoIme: `${$('#korIme').val()}`,
@@ -115,14 +126,19 @@
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (data) {
-                            if (data != "Uspesno") {
-                                $("#greskaPrijava").html("<p>" + data + "</p>");
-                            } else {
+                            if (data == "Neuspesna prijava") {
+                                $("#greskaPrijava").html("<hr /><p> Neuspešna prijava </p>");
+                                $("#korIme").focus();
+                            } else if (data == "Uspesno") {
                                 localStorage.setItem("korisnik", korisnik.KorisnickoIme);
                                 $("#greskaPrijava").html("<p>" + " " + "</p>");
                                 alert("Prijavljeno");
                                 $(location).attr('href', 'single.html');
 
+                            } else if (data =="Banovan si") {
+                                $("#greskaPrijava").html("<hr /><p>" + "Banovan profil" + "</p>");
+                                $("#korIme").focus();
+                                alert("Ban");
                             }
                         }
                     })
@@ -131,12 +147,11 @@
 
 
             $("#prikazi").click(function () {
-
+                $("#greskaPrijava").html("<p>" + " " + "</p>");
+                $("#korIme").val('');
+                $("#korPass").val('');
                 $("#prikazi").hide(1000);
                 $("#registracijaDeo").show(1000);
-
-
-
             });
 
 
@@ -191,10 +206,7 @@
                     })
                 }
             });
-
-
-
-
+            
         });
 
 
@@ -224,7 +236,7 @@
         <table>
             <tr>
                 <td> </td>
-                <td><input id="korIme" type="text" name="KorisnickoIme" placeholder="Korisnicko ime" required/></td>
+                <td><input id="korIme" type="text" name="KorisnickoIme" placeholder="Korisnicko ime" required autofocus/></td>
             </tr>
             <tr>
                 <td> </td>
