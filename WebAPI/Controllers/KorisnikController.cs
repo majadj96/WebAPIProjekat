@@ -215,7 +215,7 @@ namespace WebAPI.Controllers
         }
 
 
-        public bool Post([FromBody]Korisnik korisnik) // Dodavanje korisnika - DOBRO JE
+        public bool Post([FromBody]Korisnik korisnik) // Dodavanje korisnika - DOBRO JE, //validacija
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];

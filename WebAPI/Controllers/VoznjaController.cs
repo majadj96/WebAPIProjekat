@@ -87,9 +87,6 @@ namespace WebAPI.Controllers
                     {
                         return false;
                     }
-                }else if (voznja.StatusVoznje == Models.Enums.Enumss.StatusVoznje.Obradjena)
-                {
-                    return false;
                 }
                 
                 voki.StatusVoznje = voznja.StatusVoznje;
