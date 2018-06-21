@@ -114,6 +114,24 @@
             display: inline-block;
         }
 
+        .dugmeSrc {
+            background-color: #1abc9c;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            border-radius: 12px;
+            border: 3px solid #1abc9c;
+        }
+
+            .dugmeSrc:hover {
+                background-color: white; /* Green */
+                color: #1abc9c;
+            }
+
         /* Dropdown Content (Hidden by Default) */
         .dropdown-content {
             display: none;
@@ -2873,9 +2891,9 @@
                 filter = "<h2 style=\"color:#1abc9c; font-weight:bold \" align=\"center\" >Odaberi zeljenu opciju</h2><hr /><ul align=\"left\">";
 
                 filter += "<li><h3>Pretrazi po: ";
-                filter += `<p style=\"margin-left:304px; font-size:24px\">Datumu:<br /> Od : <input type=\"date\"  id=\"odDate\"> Do: <input type=\"date\"  id=\"doDate\"></p><hr />
-                   <p style=\"margin-left:304px; font-size:24px\"> Oceni:<br /> Od : <input type=\"number\" min=\"0\" max=\"5\" style=\"width:40px\" id=\"odOcena\"> Do: <input type=\"number\" min=\"0\" max=\"5\" style=\"width:40px\"  id=\"doOcena\"></p><hr />
-                   <p style=\"margin-left:304px; font-size:24px\"> Ceni:<br /> Od : <input type=\"number\" min=\"0\" style=\"width:90px\" id=\"odCena\"> Do: <input type=\"number\" min=\"0\"  style=\"width:90px\"  id=\"doCena\"></p><button style=\"margin-left:609px;font-size:24px\" id=\"pretraziPo\">Pretrazi</button>
+                    filter += `<p style=\"margin-left:304px; font-size:24px\"><b>Datumu:</b> &emsp; od : <input type=\"date\"  id=\"odDate\"> do: <input type=\"date\"  id=\"doDate\"></p><br />
+                   <p style=\"margin-left:304px; font-size:24px\"> <b>Oceni:</b> &emsp; od : <input type=\"number\" min=\"0\" max=\"5\" style=\"width:40px\" id=\"odOcena\"> do: <input type=\"number\" min=\"0\" max=\"5\" style=\"width:40px\"  id=\"doOcena\"></p><br />
+                   <p style=\"margin-left:304px; font-size:24px\"> <b>Ceni:</b>&emsp;od : <input type=\"number\" min=\"0\" style=\"width:90px\" id=\"odCena\"> do: <input type=\"number\" min=\"0\"  style=\"width:90px\"  id=\"doCena\"></p><button class=\"dugmeSrc\" style=\"margin-left:971px;\" id=\"pretraziPo\">Pretrazi</button>
                     <hr />`;
                 filter += "<li><h3>Odaberi status voznje po kom zelis da filtriras: ";
                 filter += `<select id="stanje">
@@ -2888,7 +2906,7 @@
                     <option value=5>Neuspesna</option>
                     <option value=6>Uspesna</option>
                             </select > `;
-                filter += "<button id=\"filterPoStanju\">Filtriraj</button></h3></li><hr />";
+                    filter += "<button id=\"filterPoStanju\" class=\"dugmeSrc\" style=\"margin-left:71px;\">Filtriraj</button></h3></li><hr />";
 
                 filter += "<li><h3>Odaberi polje po kojem zelis da sortiras: ";
                 filter += `<select id="polje">
@@ -2896,7 +2914,7 @@
                     <option value=0>Datum</option>
                     <option value=1>Ocena</option>
                             </select > `;
-                filter += "<button id=\"sortPo\">Sortiraj</button></h3></li></ul><hr />";
+                    filter += "<button id=\"sortPo\" class=\"dugmeSrc\" style=\"margin-left:61px;\">Sortiraj</button></h3></li></ul><hr />";
 
 
                 konst = filter;
@@ -3388,14 +3406,14 @@
                 $('#dugmeDodajVozaca').hide();
 
 
-                let pretraga = "<h1 style=\"text-align:center\">Pretraga</h1><hr /><br /><ul><li><h3 style=\"margin-left:60px\" >Odaberi tip korisnika ";
+                let pretraga = "<h2 style=\"color:#1abc9c; font-weight:bold ;text-align:center\" >Pretraga</h2><hr /><br /><ul><li style=\"margin-left:60px\"><h3>Odaberi tip korisnika:";
                 pretraga += `<select id="tipKorisnika">
                     <option disabled selected>Tip korisnika</option>
                     <option value=0>Vozac</option>
                     <option value=1>Musterija</option>
                             </select > `;
 
-                pretraga += "Ime: <input type=\"text\" style=\"width:200px\" id=\"imePolje\"> Prezime: <input type=\"text\" style=\"width:200px\"  id=\"prezimePolje\">       <button id=\"pretraziPoDisp\">Pretrazi</button></h3></li></ul>";
+                pretraga += "&emsp;Ime: <input type=\"text\" style=\"width:200px\" id=\"imePolje\"> &emsp;Prezime: <input type=\"text\" style=\"width:200px\"  id=\"prezimePolje\">       <button style=\"margin-left:20px;\" class=\"dugmeSrc\" id=\"pretraziPoDisp\">Pretrazi</button></h3></li></ul>";
 
 
                 $("#pretraga").html(pretraga);

@@ -1,4 +1,4 @@
 0;Elena;Kevac;eki;eki;657688898;066577543;Zenski;eki@gmail.com;7;7;Sumadijska 33;Novi Sad;11200;101;2009;NS3324;Kombi;1;0
-1;Mile;Kitic;mile;mile;657688898;066577543;Muski;mile@gmail.com;4;4;4;4;4;101;2009;NS3324;Putnicki;0;0
+1;Mile;Kitic;mile;mile;657688898;066577543;Muski;mile@gmail.com;4;4;4;4;4;101;2009;NS3324;Putnicki;1;0
 2;Katarina;Djordjevic;kate;angel;1403993;066102068;Zenski;kacaaamoja@gmail.com;45;332;4.juli 25;Cuprija;35230;102;2018;CU002PU;Putnicki;1;0
 3;o;o;o;o;776;6776;Muski;fw@email.com;7;7;77;7;7;103;77;7;Putnicki;0;0
