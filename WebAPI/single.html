@@ -156,6 +156,10 @@
             color: #1abc9c;
         }
 
+        .izmenaTejbl{
+            font-size:24px;
+        }
+
         #fitriranjeVoznji, #dispecerPretraga {
             color: #1abc9c;
             border: 1px solid rgba(26, 188, 156,.1);
@@ -980,16 +984,9 @@
                         $("#pocetna").hide();
                         $("#pocetna1").hide();
                         $('#profil').show(500);
-                        let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaObicna\" border='1'>";
+                        let informacije = "<h2 align=\"center\" style=\"color:#1abc9c\">Vasi licni podaci</h2><hr /><br /><table class=\"izmenaTejbl\" id=\"tabelaObicna\" border='1'>";
                         informacije += `
-                                            <tr>
-                                                <td>JMBG:</td>
-                                                <td>${korisnik1.JMBG}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pol:</td>
-                                                <td>${getEnumPol(korisnik1.Pol)}</td>
-                                            </tr>
+                                           
                                             <tr>
                                                 <td>Korisnicko ime:</td>
                                                 <td>${korisnik1.KorisnickoIme}</td>
@@ -1014,7 +1011,14 @@
                                                 <td>Email:</td>
                                                 <td>${korisnik1.Email}</td>
                                             </tr>
-
+                                                <tr>
+                                                <td>JMBG:</td>
+                                                <td>${korisnik1.JMBG}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pol:</td>
+                                                <td>${getEnumPol(korisnik1.Pol)}</td>
+                                            </tr>
 
                                                 `;
                         informacije += "</table>";
@@ -1100,15 +1104,8 @@
 
 
                     $("#tabelaObicna").hide(500);
-                    let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaNeobicna\" border='1'>";
+                    let informacije = "<h2 align=\"center\" style=\"color:#1abc9c\">Vasi licni podaci</h2><hr /><br /><table class=\"izmenaTejbl\" id=\"tabelaNeobicna\" border='1'>";
                     informacije += ` <tr>
-                                                <td>JMBG:</td>
-                                                <td>${korisnik1.JMBG}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pol:</td>
-                                                <td>${getEnumPol(korisnik1.Pol)}</td>
-                                            </tr><tr>
                                                 <td>Korisnicko ime:</td>
                                                 <td><input type=\"text\" id=\"korisnickoImeIzmeni\" value=\"${korisnik1.KorisnickoIme}\" /></td>
                                             </tr>
@@ -1131,6 +1128,14 @@
                                             <tr>
                                                 <td>Email:</td>
                                                 <td><input type=\"text\" id=\"emailIzmeni\" value=\"${korisnik1.Email}\" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>JMBG:</td>
+                                                <td>${korisnik1.JMBG}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pol:</td>
+                                                <td>${getEnumPol(korisnik1.Pol)}</td>
                                             </tr>
                                             `;
                     informacije += "</table>";
@@ -1205,15 +1210,8 @@
                             var ime = localStorage.getItem("korisnik");
                             $("#wel").text(ime);
                                 $("#tabelaNeobicna").hide(500);
-                                let informacije = "<h3>Vasi licni podaci</h3><hr /><br /><table id=\"tabelaObicna\" border='1'>";
+                                let informacije = "<h2 align=\"center\" style=\"color:#1abc9c\" >Vasi licni podaci</h2><hr /><br /><table class=\"izmenaTejbl\" id=\"tabelaObicna\" border='1'>";
                             informacije += ` <tr>
-                                                <td>JMBG:</td>
-                                                <td>${korisnik1.JMBG}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pol:</td>
-                                                <td>${getEnumPol(korisnik1.Pol)}</td>
-                                            </tr><tr>
                                                 <td>Korisnicko ime:</td>
                                                 <td>${korisnik1.KorisnickoIme}</td>
                                             </tr>
@@ -1236,6 +1234,14 @@
                                             <tr>
                                                 <td>Email:</td>
                                                 <td>${korisnik1.Email}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>JMBG:</td>
+                                                <td>${korisnik1.JMBG}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pol:</td>
+                                                <td>${getEnumPol(korisnik1.Pol)}</td>
                                             </tr>
 
 
@@ -1279,7 +1285,7 @@
                     $("#dugmePromeniLokacijuDiv").hide();
                     $("#obradaVoznjeDispecer").hide();
 
-                    let informacije = "<h3>Unesite podatke za vozaca</h3><hr /><table id=\"tabelaVozaca\" border='1'>";
+                    let informacije = "<h2  align=\"center\" style=\"color:#1abc9c\"  >Unesite podatke za vozaca</h2><hr /><table class=\"izmenaTejbl\" id=\"tabelaVozaca\" border='1'>";
                     informacije += `<tr>
                                                 <td>Ime:</td>
                                                 <td><input type=\"text\" id=\"imeVozac\" required /></td>
@@ -1508,7 +1514,7 @@
                                         <p>Mesto: ${lokacija.Adresa.NaseljenoMesto}</p>
                                         <p>ZIP: ${lokacija.Adresa.PozivniBrojMesta}</p>
                                         <p>Ulica&Broj: ${lokacija.Adresa.UlicaBroj}</p>
-                                    </details><hr />`;
+                                    </details>`;
 
 
                         $('#staraLokacija').html(staraLokacija);
@@ -1527,10 +1533,10 @@
                     $("#dugmeDodajVozaca").hide();
                     $("#dodavanjeKorisnikaDiv").hide();
                     $("#dugmeIzmeni").hide();
-                    $("#promeniLokacijuDiv").show();
-                    $("#dugmePromeniLokacijuDiv").show();
+                    $("#promeniLokacijuDiv").show(500);
+                    $("#dugmePromeniLokacijuDiv").show(500);
 
-                    let informacije = "<h3>Unesite novu lokaciju</h3><table border='1'>";
+                    let informacije = "<h3>Nova lokacija</h3><table class=\"izmenaTejbl\" border='1'>";
                     informacije += `  <tr>
                                             <td>X koorginata</td>
                                                 <td><input type=\"text\" id=\"xPromeni\" required /></td>
@@ -1730,7 +1736,7 @@
                         $("#dugmeNaruciVoznjuDiv").show();
 
 
-                        let informacije = "<br /><table border='1'>";
+                        let informacije = "<h2 align=\"center\" style=\"color:#1abc9c\">Naruči vožnju</h2><hr /><br /><table class=\"izmenaTejbl\" border='1'>";
                         // Tabela ima objekat voznja + tip auta da se izabere
                         informacije += `  <tr>
                                             <td>X koorginata</td>
@@ -2101,7 +2107,7 @@
                     $("#formiranjeVoznjeDispecer").show();//tu dodajem tabelu
 
 
-                    let informacije = "<h3>Formiranje voznje</h3><hr /><br /><table border='1'>";
+                    let informacije = "<h2  align=\"center\" style=\"color:#1abc9c\" >Formiranje voznje</h2><hr /><br /><table class=\"izmenaTejbl\" border='1'>";
                     // Tabela ima objekat voznja + tip auta da se izabere
                     informacije += `  <tr>
                                             <td>X koorginata</td>
@@ -2143,7 +2149,7 @@
                                                 </select>
                                             </td>
                                         </tr>
-                                            <tr><td colspan="2"><button id="formirajVoznjuDugme">Formiraj</button></td></tr>
+                                            <tr><td colspan="2"><button class=\"dugmeSrc\" id="formirajVoznjuDugme">Formiraj</button></td></tr>
 
                                             `;
                     informacije += "</table>";
@@ -2309,7 +2315,7 @@
 
                             if (have) {
                                 
-                                let tabelaVoznji = `<h3>Voznje na cekanju</h3><hr /><table border='1'><tr><th>Musterija</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
+                                let tabelaVoznji = `<h2 align=\"center\" style=\"color:#1abc9c\" >Voznje na cekanju</h2><hr /><table border='1'><tr><th>Musterija</th><th  width="200px">Datum i vreme</th><th width="300px">Lokacija</th>`;
                                 tabelaVoznji += "<th>Tip automobila</th> <th>Status voznje</th> <th  width=\"200px\"></th></tr>";
                                 for (voznja in data) {
                                     if (data[voznja].StatusVoznje == 0) {
@@ -2420,7 +2426,7 @@
                             alert("Ima vozaca slobodnih");
                             $("#odabirVozaca").show();
 
-                            let tabelaVoznji = `<hr /><h3>Izaberi vozaca</h3><hr /><table border='1'><tr><th>Ime</th><th>Prezime</th><th>Lokacija</th>`;
+                            let tabelaVoznji = `<br /><hr /><h3  align=\"left\" style=\"color:#1abc9c\" >Izaberi vozaca</h3><hr /><table border='1'><tr><th>Ime</th><th>Prezime</th><th>Lokacija</th>`;
                             tabelaVoznji += "<th>Tip automobila</th><th></th></tr>";
                             for (vozac in data) {
 
@@ -2888,7 +2894,7 @@
                 $("#dugmeIzmeni").hide();
                 $('#profil').hide();
 
-                filter = "<h2 style=\"color:#1abc9c; font-weight:bold \" align=\"center\" >Odaberi zeljenu opciju</h2><hr /><ul align=\"left\">";
+                filter = "<h2 style=\"color:#1abc9c; \" align=\"center\" >Pretraži svoje vožnje</h2><hr /><ul align=\"left\">";
 
                 filter += "<li><h3>Pretrazi po: ";
                     filter += `<p style=\"margin-left:304px; font-size:24px\"><b>Datumu:</b> &emsp; od : <input type=\"date\"  id=\"odDate\"> do: <input type=\"date\"  id=\"doDate\"></p><br />
@@ -3676,7 +3682,7 @@
                     })
 
 
-                    let tabelaKorisnika = `<h3 margin-left:200px>Banovanje</h3><hr /><table border='1'><tr><th>Ime</th><th  width="200px">Prezime</th><th width="200px">Tip korisnika</th><th></th></tr>`;
+                    let tabelaKorisnika = `<h2 align=\"center\" style=\"color:#1abc9c\" >Banovanje</h2><hr /><table style=\"margin-left:700px\" class="izmenaTejbl" border='1'><tr><th>Ime</th><th  width="200px">Prezime</th><th width="200px">Tip korisnika</th><th></th></tr>`;
                    
                     for (var kor in korisnici) {
                         tabelaKorisnika += `<tr><td>${korisnici[kor].Ime}</td><td>${korisnici[kor].Prezime}</td><td>Musterija</td>`;
@@ -3935,19 +3941,19 @@
 
     <div id="dugmeIzmeni" style="width:800px; margin:0 auto;">
         <br />
-        <button id="izmeni">Promeni informacije</button><br />
+        <button class="dugmeSrc"  id="izmeni">Promeni informacije</button><br />
     </div>
 
-    <div id="dugmeDodajVozaca" style="width:210px; margin:0 auto;">
+    <div id="dugmeDodajVozaca" style="width:800px; margin:0 auto;">
         <br />
-        <button id="subBut">Dodaj vozaca</button>
+        <button class="dugmeSrc" id="subBut">Dodaj vozaca</button>
     </div>
 
     <div id="promeniLokacijuDiv" style="width:800px; margin:0 auto;">
         <div id="staraLokacija" style="margin-left:5px;"></div>
         <div id="tabelaIzmeniLokaciju"></div>
         <div id="dugmePromeniLokacijuDiv" style="width:800px; margin:0 auto;">
-            <button id="promeniLokacijuBut">Promeni</button>
+          <br />  <button class="dugmeSrc" id="promeniLokacijuBut">Promeni</button>
         </div>
         <div id="stariAuto" style="margin-left:5px;"></div>
         <div id="tabelaIzmeniAuto"></div>
@@ -3960,7 +3966,7 @@
     </div>
 
     <div id="dugmeNaruciVoznjuDiv" style="width:800px; margin:0 auto;">
-        <button id="naruciVoznjuBut">Naruci</button>
+       <br /> <button class="dugmeSrc" id="naruciVoznjuBut">Naruci</button>
     </div>
 
 
