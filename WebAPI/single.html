@@ -2960,10 +2960,9 @@
             let pretragica = false;
 
             var opcija;
-
-            $(document).on("click", "#reset", function () { //ovde napravi logiku i onda ti je lakse samo pretrgica na false.
+            $(document).on("click", "#reset", function () {
                 pretragica = false;
-                $("tabelaPrikaza").html('');
+                $("#tabelaPrikaza").html('');
             });
 
             $(document).on("change", "#polje1", function () {
@@ -3004,7 +3003,7 @@
                         url: '/api/Voznja',
                         success: function (data) {
                             //ispisi samo da je idKorisnika isti i ovaj status prokleti
-                            if (fleg.length != 0 && pretragica)
+                            if (pretragica)
                                 data = fleg;
                             let ima = 0;
                             for (var voznja in data) {
@@ -3101,7 +3100,6 @@
                                         }
                                     }
                                 }
-                                pretragica = false;
 
                                 tabelaVoznji += "</table>";
                                 $("#tabelaPrikaza").html(tabelaVoznji);
@@ -3111,7 +3109,8 @@
                     })
                 }
                 $("#stanje").val('Odaberi stanje');
-                pretragica = false;
+                pretragica = true;
+
 
 
             });
@@ -3138,7 +3137,7 @@
                         url: '/api/Voznja',
                         async:false,
                         success: function (data) {
-                            if (fleg.length != 0 && pretragica)
+                            if (pretragica)
                                 data = fleg;
                             if (polje == 1) {//po oceni
                                 for (var voznja in data) {
@@ -3262,7 +3261,6 @@
                                         }
                                     }
                                 }
-                                pretragica = false;
                                 tabelaVoznji += "</table>";
                                 $("#tabelaPrikaza").html(tabelaVoznji);
 
@@ -3274,7 +3272,7 @@
                     })
                 }
                 $("#polje").val('Polje');
-                pretragica = false;
+                pretragica = true;
 
             });
            
@@ -3284,7 +3282,6 @@
                 let D = false;
                 let O = false;
                 let C = false;
-                pretragica = false;
                     oddejt = document.getElementById("odDate").value;
                     dodejt = document.getElementById("doDate").value;
                 
@@ -3339,7 +3336,8 @@
                         type: 'GET',
                         url: '/api/Voznja',
                         success: function (data) {
-
+                            if (pretragica)
+                                data = fleg;
                             let ima = 0;
                             for (var voznja in data) {
                                 if (uloga == 0) {
@@ -3765,6 +3763,9 @@
                         }
                     }
                 }
+                $("#imePolje").val('');
+                $("#przPolje").val('');
+
                 pretragica = true;
             });
 
