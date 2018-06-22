@@ -1059,7 +1059,8 @@
                         } else if (uloga == 2) {
                             $("#vozac").css("display", "block");
                         }
-
+                        $("#filtriranje").hide();
+                        $("#tabelaPrikaz").hide();
                         $("#naruciVoznjuDiv").hide();
                         $("#dugmeNaruciVoznjuDiv").hide();
                         //  $("#dugmeADDVozaca").hide();
@@ -1270,6 +1271,9 @@
 
                     $("#dispecer").css("display", "none");
                     $("#block").hide();
+
+                    $("#filtriranje").hide();
+                    $("#tabelaPrikaz").hide();
 
                     $("#pretraga").hide();
                     $("#tabelaPretraga").hide();
@@ -2098,6 +2102,10 @@
                     $("#dispecer").css("display", "none");
                     $("#pretraga").hide();
                     $("#tabelaPretraga").hide();
+
+                    $("#filtriranje").hide();
+                    $("#tabelaPrikaz").hide();
+
                     $("#pocetna1").hide();
                     $("#profil").hide();
                     $("#pocetna").hide();
@@ -2293,6 +2301,10 @@
                 if (sadrzaj == "Promeni informacije") {
                     alert("Obradjujem voznju");
                     $("#tabelaPretraga").hide();
+
+                    $("#filtriranje").hide();
+                    $("#tabelaPrikaz").hide();
+
                     $("#odabirVozaca").hide();
                     $("#pretraga").hide();
                     $("#dispecer").css("display", "none");
@@ -2890,11 +2902,18 @@
                 if (sadrzaj == "Promeni informacije") {
                 //isto restuj
                 $("#filtriranje").show();
-
                     $("#korisnik").css("display", "none");
                     $("#vozac").css("display", "none");
 
                     $("#dispecer").css("display", "none");
+                   
+                    $('#profil').hide();
+                    $("#block").hide();
+                    $('#formiranjeVoznjeDispecer').hide();
+                    $('#obradaVoznjeDispecer').hide();
+                    $('#odabirVozaca').hide();
+                    $('#dodavanjeKorisnikaDiv').hide();
+                    $('#dugmeDodajVozaca').hide();
 
                 $("#pocetna").hide();
                 $("#pocetna1").hide();
@@ -3784,6 +3803,10 @@
 
                     $("#pocetna").hide();
                     $("#tabelaPretraga").hide();
+
+                    $("#filtriranje").hide();
+                    $("#tabelaPrikaz").hide();
+
                     $("#pocetna1").hide();
                     $("#dugmeIzmeni").hide();
                     $('#profil').hide();
