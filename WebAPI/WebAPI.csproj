@@ -217,6 +217,7 @@
     <Content Include="poster-a-flamingos-fancy-1634438.jpg" />
     <Content Include="prc_69341325.jpg" />
     <Content Include="Scripts\demo.js" />
+    <Content Include="Scripts\ol.js" />
     <Content Include="single.html" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
