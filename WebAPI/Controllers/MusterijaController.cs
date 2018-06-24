@@ -35,9 +35,9 @@ namespace WebAPI.Controllers
             string path = "~/App_Data/korisnici.txt";
             path = HostingEnvironment.MapPath(path);
 
-            var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt");
+            var lines = File.ReadAllLines(path);
             lines[id] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email + ";" + korisnik.Ban;
-            File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt", lines);
+            File.WriteAllLines(path, lines);
 
             korisnici = new Korisnici("~/App_Data/korisnici.txt");
             HttpContext.Current.Application["korisnici"] = korisnici;

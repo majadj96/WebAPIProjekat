@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using WebAPI.Models;
 
@@ -92,10 +93,12 @@ namespace WebAPI.Controllers
                 voki.StatusVoznje = voznja.StatusVoznje;
             }
 
+            string path = "~/App_Data/voznje.txt";
+            path = HostingEnvironment.MapPath(path);
 
-            var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt");
+            var lines = File.ReadAllLines(path);
             lines[int.Parse(id)] = voki.Id + ";" + voki.DatumVreme.ToString("MM/dd/yyyy HH:mm") + ";" + voki.Lokacija.X + ";" + voki.Lokacija.Y + ";" + voki.Lokacija.Adresa.UlicaBroj + ";" + voki.Lokacija.Adresa.NaseljenoMesto + ";" + voki.Lokacija.Adresa.PozivniBrojMesta + ";" + voki.Automobil + ";" + voki.idKorisnik + ";" + voki.Odrediste.X + ";" + voki.Odrediste.Y + ";" + voki.Odrediste.Adresa.UlicaBroj + ";" + voki.Odrediste.Adresa.NaseljenoMesto + ";" + voki.Odrediste.Adresa.PozivniBrojMesta + ";" + voki.idDispecer + ";" + voki.idVozac + ";" + voki.Iznos + ";" + voki.Komentar.Opis + ";" + voki.Komentar.DatumObjave + ";" + voki.Komentar.idKorisnik + ";" + voki.Komentar.idVoznja + ";" + voki.Komentar.Ocena + ";" + voki.StatusVoznje;
-            File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt", lines);
+            File.WriteAllLines(path, lines);
 
             voznje = new Voznje("~/App_Data/voznje.txt");
             HttpContext.Current.Application["voznje"] = voznje;
@@ -117,7 +120,9 @@ namespace WebAPI.Controllers
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
-            string path = @"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\voznje.txt";
+            string path = "~/App_Data/voznje.txt";
+            path = HostingEnvironment.MapPath(path);
+
             StringBuilder sb = new StringBuilder();
             voznja.Id = voznje.list.Count.ToString();
             voznja.DatumVreme = DateTime.Now;

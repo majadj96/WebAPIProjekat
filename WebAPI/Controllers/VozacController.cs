@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using WebAPI.Models;
 using WebAPI.Models.Enums;
@@ -14,12 +15,8 @@ namespace WebAPI.Controllers
 {
     public class VozacController : ApiController
     {
-        //put za uspesno
-
-
-
+       
         public bool Put(string id, [FromBody]Vozac vozac)//menjam samo vozaca
-
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];//sve voznje
             
@@ -34,9 +31,12 @@ namespace WebAPI.Controllers
                 vv.Zauzet = vozac.Zauzet;
             }
 
-            var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+            string path = "~/App_Data/vozaci.txt";
+            path = HostingEnvironment.MapPath(path);
+
+            var lines = File.ReadAllLines(path);
             lines[int.Parse(id)] = vv.Id + ";" + vv.Ime + ";" + vv.Prezime + ";" + vv.KorisnickoIme + ";" + vv.Lozinka + ";" + vv.JMBG + ";" + vv.KontaktTelefon + ";" + vv.Pol + ";" + vv.Email + ";" + vv.Lokacija.X + ";" + vv.Lokacija.Y + ";" + vv.Lokacija.Adresa.UlicaBroj + ";" + vv.Lokacija.Adresa.NaseljenoMesto + ";" + vv.Lokacija.Adresa.PozivniBrojMesta + ";" + vv.Automobil.Broj + ";" + vv.Automobil.Godiste + ";" + vv.Automobil.Registracija + ";" + vv.Automobil.Tip + ";" + vv.Zauzet+";"+vv.Ban;
-            File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt", lines);
+            File.WriteAllLines(path, lines);
 
             vozaci = new Vozaci("~/App_Data/vozaci.txt");
             HttpContext.Current.Application["vozaci"] = vozaci;
@@ -68,7 +68,9 @@ namespace WebAPI.Controllers
                     return true;
             }
 
-            string path = @"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt";
+            string path = "~/App_Data/vozaci.txt";
+            path = HostingEnvironment.MapPath(path);
+
             StringBuilder sb = new StringBuilder();
             vozac.Id = vozaci.list.Count.ToString();
             vozac.Automobil.Broj = (vozaci.list.Count + 100).ToString();

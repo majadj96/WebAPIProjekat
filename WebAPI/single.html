@@ -1455,6 +1455,8 @@
                                 alert("Vozac dodat!")
                                 $("#pocetna1").show();
                                 $("#pocetna").show();
+                                $(location).attr('href', 'single.html');
+
                                 $("#dugmeDodajVozaca").hide();
                                 $("#dodavanjeKorisnikaDiv").hide();
                                 $("#promeniLokacijuDiv").hide();
@@ -2246,10 +2248,13 @@
                 if (voznja.Automobil == 0) // svejedno
                     bul = 1;
 
+                let dolaznaAdresa = voznja.Lokacija;
+
                 $.ajax({
                     type: 'GET',
                     url: '/api/Vozac',
                     contentType: 'application/json; charset=utf-8',
+                    async:false,
                     success: function (data) {
                         let data1 = [];
                         for (var vozac in data) {
@@ -2263,17 +2268,50 @@
                                 }
                             }
                         }
-                        data = data1;
+
+                        data = data1;//tu su mi odgovarajuci
 
                         if (data.length != 0) {
                             alert("Ima vozaca slobodnih");
                             $("#odabirVozaca").show();
+                            let petNajblizih = [];
+                            
+                                if (data.length > 5) {
+
+                                    for (var vozac in data) {
+                                        // c = √ ((xA − xB) ² + (yA − yB) ² )
+                                        let rastojanje;
+                                        rastojanje = Math.sqrt(Math.pow(dolaznaAdresa.X - data[vozac].Lokacija.X, 2) + Math.pow(dolaznaAdresa.Y- data[vozac].Lokacija.Y, 2));
+
+                                        let vozac1 = {
+                                            Id: data[vozac].Id,
+                                            Rastojanje: rastojanje,
+                                        }
+                                        petNajblizih.push(vozac1);
+                                    }
+                                }
+                            
+                                    petNajblizih.sort(function (a, b) {
+                                        return a.Rastojanje - b.Rastojanje;
+                                    })
+                                    let petOnly = [];
+
+                                      for (var pet in petNajblizih) {
+                                        for (var vozac in data) {
+                                            if (data[vozac].Id == petNajblizih[pet].Id) {
+                                                petOnly.push(data[vozac]);
+                                            }
+
+                                        }
+                                    }
+
+                                    data = petOnly; // xD
 
                             let tabelaVoznji = `<br /><hr /><h3  align=\"left\" style=\"color:#1abc9c\" >Izaberi vozaca</h3><hr /><table border='1'><tr><th>Ime</th><th>Prezime</th><th>Lokacija</th>`;
                             tabelaVoznji += "<th>Tip automobila</th><th></th></tr>";
-                            for (vozac in data) {
+                                for (var vozac in data) {
 
-                                tabelaVoznji += `<tr>
+                                    tabelaVoznji += `<tr>
 
                                                                         <td>${data[vozac].Ime}</td>
                                                                         <td>${data[vozac].Prezime}
@@ -2288,10 +2326,12 @@
                                 tabelaVoznji += `<td>${getEnumTipAutomobila(data[vozac].Automobil.Tip)}</td>
                                                                         <td><button value="${data[vozac].Id}" id="dodavanjeVozacaVoznji">Izaberi</button></td>
                                                                         `;
-
+                                    if (vozac == 4)
+                                        break;
                             }
                             tabelaVoznji += "</table>";
                             $("#odabirVozaca").html(tabelaVoznji);
+                        
 
                         } else {
                             $("#odabirVozaca").show();

@@ -4,3 +4,9 @@
 3;o;o;o;o;776;6776;Muski;fw@email.com;7;7;77;7;7;103;77;7;Putnicki;0;1
 4;Radoje;Rodic;rodojko;radojko;2222;2222;Muski;re@gmail.com;43.7037968472869;19.3233388379216;Unnamed Road; Bosnia and Herzegovina;;104;2015;300;Kombi;0;0
 5;u;u;u;u;u;u;Zenski;u;43.775234492224;20.3999989941716;Unnamed Road; Premeća;;105;65;5;Putnicki;0;0
+6;Laki;Faki;laki;laki;765;456;Muski;laki@gmail.com;45.2446126840807;19.8449780305498;Bulevar cara Lazara 11; Novi Sad 21000;;106;654;67;Putnicki;0;0
+7;Mai;Mai;mai;mai;345;45;Zenski;mai@gmail.com;45.2487569548567;19.8387841897631;Bulevar oslobođenja 103; Novi Sad 21000;;107;543;345;Putnicki;0;0
+8;Oli;Oli;oli;oli;654;567;Muski;oli@gmail.com;45.2517883150484;19.8371534066821;Bulevar oslobođenja; Novi Sad 21000;;108;654;654;Putnicki;0;0
+9;Foki;Foki;foki;foki;345;234;Zenski;foki@gmail.com;45.2517883150484;19.8371534066821;Bulevar oslobođenja; Novi Sad 21000;;109;45;54;Putnicki;0;0
+10;Rale;Rale;rale;rale;3242;64;Muski;rale@gmail.com;45.2517883150484;19.8371534066821;Bulevar oslobođenja; Novi Sad 21000;;110;435;536;Putnicki;0;0
+11;Tufi;Tufi;tufi;tufi;654;7654;Zenski;tufi@gmail.com;45.2544580750978;19.8357372003222;Bulevar oslobođenja 77; Novi Sad 21000;;111;54;56;Putnicki;0;0

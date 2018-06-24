@@ -30,11 +30,7 @@ namespace WebAPI.Controllers
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             return korisnici.list[id];
         }
-
-        //mozda da saljem korisnik sve novo a id da mi bude od njega i tu imam username , put da vraca false ako ima korisnicko ime
-
-        //u zavisnosti koja je uloga citam iz te aplikacije i onda radim logiku
-
+        
         public bool Put(string id, [FromBody]Korisnik korisnik) // Izmena ? , treba mi i put da promenim da je banovan
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
@@ -86,7 +82,7 @@ namespace WebAPI.Controllers
                 string path = "~/App_Data/korisnici.txt";
                 path = HostingEnvironment.MapPath(path);
 
-                var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt");
+                var lines = File.ReadAllLines(path);
                 korisnikLoc.KorisnickoIme = korisnik.KorisnickoIme;
                 korisnikLoc.Lozinka = korisnik.Lozinka;
                 korisnikLoc.Email = korisnik.Email;
@@ -95,7 +91,7 @@ namespace WebAPI.Controllers
                 korisnikLoc.KontaktTelefon = korisnik.KontaktTelefon;
                 korisnik = korisnikLoc;
                 lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email + ";" + korisnik.Ban;
-                File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt", lines);
+                File.WriteAllLines(path, lines);
 
                 korisnici = new Korisnici("~/App_Data/korisnici.txt");
                 HttpContext.Current.Application["korisnici"] = korisnici;
@@ -138,7 +134,7 @@ namespace WebAPI.Controllers
                 string path = "~/App_Data/vozaci.txt";
                 path = HostingEnvironment.MapPath(path);
 
-                var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\vozaci.txt");
+                var lines = File.ReadAllLines(path);
 
                 vozacLoc.KorisnickoIme = korisnik.KorisnickoIme;
                 vozacLoc.Lozinka = korisnik.Lozinka;
@@ -192,7 +188,7 @@ namespace WebAPI.Controllers
                 string path = "~/App_Data/dispeceri.txt";
                 path = HostingEnvironment.MapPath(path);
 
-                var lines = File.ReadAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\dispeceri.txt");
+                var lines = File.ReadAllLines(path);
 
                 dispecerLoc.KorisnickoIme = korisnik.KorisnickoIme;
                 dispecerLoc.Lozinka = korisnik.Lozinka;
@@ -203,7 +199,7 @@ namespace WebAPI.Controllers
                 korisnik = dispecerLoc;
 
                 lines[int.Parse(id)] = korisnik.Id + ";" + korisnik.Ime + ";" + korisnik.Prezime + ";" + korisnik.KorisnickoIme + ";" + korisnik.Lozinka + ";" + korisnik.JMBG + ";" + korisnik.KontaktTelefon + ";" + korisnik.Pol + ";" + korisnik.Email;
-                File.WriteAllLines(@"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\dispeceri.txt", lines);
+                File.WriteAllLines(path, lines);
 
                 dispeceri = new Dispeceri("~/App_Data/dispeceri.txt");
                 HttpContext.Current.Application["dispeceri"] = dispeceri;
@@ -253,7 +249,10 @@ namespace WebAPI.Controllers
 
             if (!postoji)
             {
-                string path = @"C:\Users\john\Desktop\WebAPI\WebAPI\App_Data\korisnici.txt";
+
+                string path = "~/App_Data/korisnici.txt";
+                path = HostingEnvironment.MapPath(path);
+
                 StringBuilder sb = new StringBuilder();
                 korisnik.Id = korisnici.list.Count.ToString();
                 korisnik.Ban = 0;

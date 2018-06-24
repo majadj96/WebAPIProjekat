@@ -13,3 +13,4 @@
 12;06/23/2018 23:32;45.2423803239848;19.8423618995078;Bulevar oslobođenja 102; Novi Sad 21000;;Kombi;7;0;0; ; ; ; ;1;0;lalalalal;6/24/2018 12:06:04 AM;majadj96;12;2;Uspesna
 13;06/24/2018 00:06;45.242837355446;19.8433221303351;Dr Ivana Ribara 7; Novi Sad;;Putnicki;7;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
 14;06/24/2018 12:17;45.2426535359657;19.842029306081;Bulеvar oslobođenja; Novi Sad;;Svejedno; ;0;0; ; ; ;0;1;0; ; ; ; ; ;Formirana
+15;06/24/2018 13:23;45.2437300043213;19.8414284912617;Bulеvar oslobođenja 100; Novi Sad 21000;;Svejedno;6;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
