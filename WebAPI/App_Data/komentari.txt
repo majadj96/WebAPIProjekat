@@ -32,3 +32,8 @@
 31;ocena;6/24/2018 8:38:26 PM;eki;26;5
 32;lala;6/24/2018 8:43:21 PM;eki;27;2
 33;232d;6/24/2018 8:51:50 PM;eki;32;1
+34;Komentar ostavljam;6/25/2018 12:31:58 AM;saki;3;3
+35;Otkazujem jer kasni vozac;6/25/2018 12:33:47 AM;saki;4;2
+36;Musterija je izasla u sred voznje...;6/25/2018 12:53:00 AM;eki;6;5
+37;LALA;6/25/2018 12:56:05 AM;eki;9;3
+38;;6/25/2018 1:19:13 AM;eki;5;0

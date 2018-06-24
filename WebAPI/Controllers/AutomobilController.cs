@@ -29,6 +29,17 @@ namespace WebAPI.Controllers
             vv.Automobil.Tip = automobil.Tip;
             vv.Automobil.Godiste = automobil.Godiste;
 
+            foreach(var v in vozaci.list)
+            {
+                if (v.Value.Automobil.Broj == vv.Automobil.Broj)
+                {
+                    if (v.Key != vv.Id)
+                    {
+                        return false;
+                    }
+                }
+            }
+
             string path = HostingEnvironment.MapPath("~/App_Data/vozaci.txt");
 
 
