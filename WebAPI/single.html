@@ -944,9 +944,11 @@
             //LINK U MENIJU PROFIL
             $("#korisnikProfil").click(function () {
 
-                var sadrzaj = $("#izmeni").text();
-                if ($("#iznosU").val() == "") {
-                    alert("Unesite i iznos!");
+                let sadrzaj = $("#izmeni").text();
+                let sadrzaj1 = $("#podaciUspesno").text();
+                let sadrzaj2 = $("#dodajKomentar").text();
+                if (sadrzaj1 == "OK" || sadrzaj2=="OK") {
+                    alert("Pritisite OK");
                 } else {
                     if ($("#opis").val() == "") {
                         alert("Unesite komentar!");
@@ -1038,54 +1040,61 @@
 
             //LINK POCETNA STRANICA
             $("#pocetnaStranica").click(function () {
-                if ($("#iznosU").val() == "") {
-                    alert("Unesite i iznos!");
+
+                let sadrzaj1 = $("#podaciUspesno").text();
+                let sadrzaj2 = $("#dodajKomentar").text();
+                if (sadrzaj1 == "OK" || sadrzaj2 == "OK") {
+                    alert("Pritisite OK");
                 } else {
-                    if ($("#opis").val() == "") {
-                        alert("Unesite komentar!");
+                    if ($("#iznosU").val() == "") {
+                        alert("Unesite i iznos!");
                     } else {
-                        var sadrzaj = $("#izmeni").text();
-                        if (sadrzaj == "Promeni informacije") {
-
-                            $(location).attr('href', 'single.html');
-
-                            if (uloga == 0) {
-                                $("#korisnik").css("display", "block");
-                                $("#korisnik").css("clear", "both");
-                                $("#korisnik").css("position", "sticky");
-                            } else if (uloga == 1) {
-                                $("#dispecer").css("display", "block");
-
-                                //dispecer tabele
-                            } else if (uloga == 2) {
-                                $("#vozac").css("display", "block");
-                            }
-                            $("#filtriranje").hide();
-                            $("#tabelaPrikaz").hide();
-                            $("#naruciVoznjuDiv").hide();
-                            $("#dugmeNaruciVoznjuDiv").hide();
-                            $('#dodavanjeKorisnikaDiv').hide();
-                            $("#dugmeDodajVozaca").hide();
-                            $("#formiranjeVoznjeDispecer").hide();
-                            $("#obradaVoznjeDispecer").hide();
-
-                            $("#odabirVozaca").hide();
-
-
-                            $("#profil").hide();
-                            $("#pocetna1").show();
-                            $("#pocetna").show();
-                            $('#dugmeIzmeni').hide();
-
-                            $("#promeniLokacijuDiv").hide();
-                            $("#dugmePromeniLokacijuDiv").hide();
+                        if ($("#opis").val() == "") {
+                            alert("Unesite komentar!");
                         } else {
-                            alert("Niste sacuvali izmene.");
-                            $("#izmeni").css("background-color", "#ff4d4d");
+                            var sadrzaj = $("#izmeni").text();
+                            if (sadrzaj == "Promeni informacije") {
 
+                                $(location).attr('href', 'single.html');
+
+                                if (uloga == 0) {
+                                    $("#korisnik").css("display", "block");
+                                    $("#korisnik").css("clear", "both");
+                                    $("#korisnik").css("position", "sticky");
+                                } else if (uloga == 1) {
+                                    $("#dispecer").css("display", "block");
+
+                                    //dispecer tabele
+                                } else if (uloga == 2) {
+                                    $("#vozac").css("display", "block");
+                                }
+                                $("#filtriranje").hide();
+                                $("#tabelaPrikaz").hide();
+                                $("#naruciVoznjuDiv").hide();
+                                $("#dugmeNaruciVoznjuDiv").hide();
+                                $('#dodavanjeKorisnikaDiv').hide();
+                                $("#dugmeDodajVozaca").hide();
+                                $("#formiranjeVoznjeDispecer").hide();
+                                $("#obradaVoznjeDispecer").hide();
+
+                                $("#odabirVozaca").hide();
+
+
+                                $("#profil").hide();
+                                $("#pocetna1").show();
+                                $("#pocetna").show();
+                                $('#dugmeIzmeni').hide();
+
+                                $("#promeniLokacijuDiv").hide();
+                                $("#dugmePromeniLokacijuDiv").hide();
+                            } else {
+                                alert("Niste sacuvali izmene.");
+                                $("#izmeni").css("background-color", "#ff4d4d");
+
+                            }
                         }
-                    }
 
+                    }
                 }
             });
 
@@ -1379,25 +1388,30 @@
 
             //LOGOUT
             $('#odlogovanje').click(function () {
-                if ($("#iznosU").val() == "") {
-                    alert("Unesite i iznos!");
+                let sadrzaj1 = $("#podaciUspesno").text();
+                let sadrzaj2 = $("#dodajKomentar").text();
+                if (sadrzaj1 == "OK" || sadrzaj2 == "OK") {
+                    alert("Pritisite OK");
                 } else {
-                if ($("#opis").val() == "") {
-                    alert("Unesite komentar!");
-                } else {
-                    var sadrzaj = $("#izmeni").text();
-                    if (sadrzaj == "Promeni informacije") {
-                        localStorage.setItem("korisnik", "");
-                        $(location).attr('href', 'index.html');
+                    if ($("#iznosU").val() == "") {
+                        alert("Unesite i iznos!");
                     } else {
-                        alert("Niste sacuvali izmene.");
-                        $("#izmeni").css("background-color", "#ff4d4d");
+                        if ($("#opis").val() == "") {
+                            alert("Unesite komentar!");
+                        } else {
+                            var sadrzaj = $("#izmeni").text();
+                            if (sadrzaj == "Promeni informacije") {
+                                localStorage.setItem("korisnik", "");
+                                $(location).attr('href', 'index.html');
+                            } else {
+                                alert("Niste sacuvali izmene.");
+                                $("#izmeni").css("background-color", "#ff4d4d");
+
+                            }
+                        }
 
                     }
                 }
-
-                    }
-
             });
             //DODAVANJE VOZAZCA, sta se radi kada se klikne na dugme
             $('#subBut').click(function () {
@@ -1480,24 +1494,29 @@
 
             //LINK U MENIJU - PROMENI LOKACIJU - VOZAC ima to
             $('#promeniLokaciju').click(function () {
-                if ($("#iznosU").val() == "") {
-                    alert("Unesite i iznos!");
+                let sadrzaj1 = $("#podaciUspesno").text();
+                let sadrzaj2 = $("#dodajKomentar").text();
+                if (sadrzaj1 == "OK" || sadrzaj2 == "OK") {
+                    alert("Pritisite OK");
                 } else {
-                    if ($("#opis").val() == "") {
-                        alert("Unesite komentar!");
+                    if ($("#iznosU").val() == "") {
+                        alert("Unesite i iznos!");
                     } else {
-                        $("#map1").show();
-                        $("#voznjeNaCekanjuVozac").hide();
+                        if ($("#opis").val() == "") {
+                            alert("Unesite komentar!");
+                        } else {
+                            $("#map1").show();
+                            $("#voznjeNaCekanjuVozac").hide();
 
-                        $("#vozac").css("display", "none");
+                            $("#vozac").css("display", "none");
 
-                        let lokacija = '';
-                        $.ajax({
-                            type: 'GET',
-                            url: '/api/Lokacija/' + korisnik1.Id,
-                            success: function (data) {
-                                lokacija = data;
-                                let staraLokacija = `<br />
+                            let lokacija = '';
+                            $.ajax({
+                                type: 'GET',
+                                url: '/api/Lokacija/' + korisnik1.Id,
+                                success: function (data) {
+                                    lokacija = data;
+                                    let staraLokacija = `<br />
                                             <details id="staraLokacijaP">
                                                 <summary>Stara lokacija</summary>
                                                 <p>X: ${lokacija.X}</p>
@@ -1507,27 +1526,27 @@
                                             </details>`;
 
 
-                                $('#staraLokacija').html(staraLokacija);
+                                    $('#staraLokacija').html(staraLokacija);
 
-                            }
-                        })
+                                }
+                            })
 
-                        var sadrzaj = $("#izmeni").text();
-                        if (sadrzaj == "Promeni informacije") {
+                            var sadrzaj = $("#izmeni").text();
+                            if (sadrzaj == "Promeni informacije") {
 
-                            $("#pocetna1").hide();
-                            $("#profil").hide();
-                            $("#pocetna").hide();
-                            $("#dugmeDodajVozaca").hide();
-                            $("#dodavanjeKorisnikaDiv").hide();
-                            $("#dugmeIzmeni").hide();
-                            $("#tabelaPrikaza").hide();
-                            $("#filtriranje").hide();
-                            $("#promeniLokacijuDiv").show(500);
-                            $("#dugmePromeniLokacijuDiv").show(500);
+                                $("#pocetna1").hide();
+                                $("#profil").hide();
+                                $("#pocetna").hide();
+                                $("#dugmeDodajVozaca").hide();
+                                $("#dodavanjeKorisnikaDiv").hide();
+                                $("#dugmeIzmeni").hide();
+                                $("#tabelaPrikaza").hide();
+                                $("#filtriranje").hide();
+                                $("#promeniLokacijuDiv").show(500);
+                                $("#dugmePromeniLokacijuDiv").show(500);
 
-                            let informacije = "<h3>Nova lokacija</h3><table class=\"izmenaTejbl\" border='1'>";
-                            informacije += `  <tr>
+                                let informacije = "<h3>Nova lokacija</h3><table class=\"izmenaTejbl\" border='1'>";
+                                informacije += `  <tr>
                                                     <td>X koorginata</td>
                                                         <td><input type=\"text\" id=\"xPromeni\" required /></td>
                                                 </tr>
@@ -1548,14 +1567,14 @@
                                                 </tr>
 
                                                     `;
-                            informacije += "</table>";
+                                informacije += "</table>";
 
-                            $.ajax({
-                                type: 'GET',
-                                url: '/api/Automobil/' + korisnikovAJDI,
-                                success: function (data) {
-                                    automobil = data;
-                                    let stariAuto = `<hr />
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/api/Automobil/' + korisnikovAJDI,
+                                    success: function (data) {
+                                        automobil = data;
+                                        let stariAuto = `<hr />
                                             <details id="stariAuto">
                                                 <summary>Podaci o automobilu</summary>
                                                 <p>Broj: ${automobil.Broj}</p>
@@ -1574,18 +1593,18 @@
                                             <tr><td></td><td><button id="sacuvajAuto">Sacuvaj</button></td></tr>
                                             </table>
                                             </details><hr />`;
-                                    $('#stariAuto').html(stariAuto);
-                                }
+                                        $('#stariAuto').html(stariAuto);
+                                    }
 
-                            })
-                        } else {
-                            alert("Niste sacuvali izmene.");
-                            $("#izmeni").css("background-color", "#ff4d4d");
+                                })
+                            } else {
+                                alert("Niste sacuvali izmene.");
+                                $("#izmeni").css("background-color", "#ff4d4d");
 
+                            }
                         }
                     }
                 }
-
             });
 
 
@@ -1682,8 +1701,10 @@
 
             //LINK U MENIJU NARUCI VOZNJU _ DISPECER to ima
             $('#naruciVoznju').click(function () {
-                if ($("#iznosU").val() == "") {
-                    alert("Unesite i iznos!");
+
+                let sadrzaj2 = $("#dodajKomentar").text();
+                if (sadrzaj2 == "OK") {
+                    alert("Pritisite OK");
                 } else {
                     if ($("#opis").val() == "") {
                         alert("Unesite komentar!");
@@ -1846,16 +1867,18 @@
 
 
             $(document).on("click", "#dodajKomentar", function () {
-            
+
                 $(':button').prop('disabled', false);
-                
+
                 alert("dodaj kom, posalji ajaxom" + $("#otkaziVoznju").val() + korisnikovAJDI);
                 let o = $('#ocena').val();
                 let x = document.getElementById("opis");
-
-                if (!x.checkValidity() && o != "0") {
-                    alert("Morate uneti sva komentar!");
-                } else {
+                if ((!x.checkValidity() || o == "0") && uloga == 2) {
+                    alert("Morate uneti komentar i ocenu!");
+                } else if ((!x.checkValidity() && o != "0") && uloga == 0) {
+                    alert("Morate uneti komentar i ocenu!");
+            }else
+                {
                     let ime = localStorage.getItem("korisnik");
                     let komentar = {
                         Opis: `${$('#opis').val()}`,
@@ -1887,6 +1910,7 @@
                             if (data) {
                                 alert("Uspesno dodeljen komentar voznji");
                                 alert("2");
+                                $('#dodajKomentar').text('OK!');
                                 $(location).attr('href', 'single.html');
                             } else {
                                 alert("Vec je postavljen komentar");
@@ -2450,9 +2474,7 @@
             });
 
             $(document).on("click", "#neuspesnaDugme", function () {
-                if ($("#opis").val() == "") {
-                    alert("Unesite komentar!");
-                } else {
+               
                     $('#neuspesnaVoznjaKomentarDiv').show(500);
 
                     id = $(this).val() + ";" + korisnikovAJDI;
@@ -2521,13 +2543,11 @@
                             }
                         }
                     })
-                }
+                
             });
             let idVoznjee = '';
             $(document).on("click", "#uspesnaDugme", function () {
-                    if ($("#opis").val() == "") {
-                        alert("Unesite komentar!");
-                    } else {
+                 
                         idVoznjee = $(this).val();
                         $('#neuspesnaVoznjaKomentarDiv').show(500);
                         id = $(this).val() + ";" + korisnikovAJDI;//ne koristim
@@ -2574,8 +2594,6 @@
                                                 informacije += "</table><br />";
                                                 $('#neuspesnaVoznjaKomentarDiv').html(informacije);
                                                 $("#map1").show(500);
-
-
                                             } else {
                                                 alert("Neuspesno");
                                             }
@@ -2590,11 +2608,11 @@
                             }
 
                         })
-                    }
+                    
                 
             });
 
-
+        
             $(document).on("click", "#podaciUspesno", function () {
                 $(':button').prop('disabled', false);
                 if (fulAdresa == '') {
@@ -2652,6 +2670,7 @@
                             dataType: 'json',
                             success: function (data) {
                                 alert("Uspesno dodavanje iznosa i odredista");
+                                $("#podaciUspesno").text("OK!");
                                 $(location).attr('href', 'single.html');
 
                             }
@@ -2660,7 +2679,7 @@
                 }
             });
 
-            $(document).on("click", "#prihvatiDugme", function () {
+            $(document).on("click", "#prihvatiDugme", function () {//bice disejblovano
                 if ($("#iznosU").val() == "") {
                     alert("Unesite iznos!");
                 } else {
@@ -2755,7 +2774,6 @@
             });
             
             $(document).on("click", "#korisnikDodajKomentar", function () {
-                
                 idVoznje = $(this).val();
                 $('#izmenaPojedinacneVoznjeDiv').show();
                 let informacije = "<br />Molim Vas, ostavite komentar<table border='1'>";
@@ -2786,18 +2804,15 @@
                 informacije += "</table><br />";
                 $('#izmenaPojedinacneVoznjeDiv').html(informacije);
 
-
-
-
-
-
             });
 
             var filter;
             var konst;
             $("#fitriranjeVoznji").click(function () {
-                if ($("#iznosU").val() == "") {
-                    alert("Unesite i iznos!");
+                let sadrzaj1 = $("#podaciUspesno").text();
+                let sadrzaj2 = $("#dodajKomentar").text();
+                if (sadrzaj1 == "OK" || sadrzaj2 == "OK") {
+                    alert("Pritisite OK");
                 } else {
                     if ($("#opis").val() == "") {
                         alert("Unesite komentar!");
@@ -2884,7 +2899,6 @@
                         }
                     }
                 }
-
             });
             let fleg = [];
             let pretragica = false;
@@ -4097,17 +4111,17 @@
                     for (var kor in korisnici) {
                         tabelaKorisnika += `<tr><td>${korisnici[kor].Ime}</td><td>${korisnici[kor].Prezime}</td><td>Musterija</td>`;
                         if (korisnici[kor].Ban == 0) {
-                            tabelaKorisnika += `<td><button id="banK" value=${korisnici[kor].Id}>Ban</button></td></tr>`;
+                            tabelaKorisnika += `<td><button id="banK" class="dugmeSrc" value=${korisnici[kor].Id}>Ban</button></td></tr>`;
                         } else {
-                            tabelaKorisnika += `<td><button id="unbanK" value=${korisnici[kor].Id}>Unban</button></td></tr>`;
+                            tabelaKorisnika += `<td><button id="unbanK" class="dugmeSrc" value=${korisnici[kor].Id}>Unban</button></td></tr>`;
                         }
                     }
                     for (var voz in vozaci) {
                         tabelaKorisnika += `<tr><td>${vozaci[voz].Ime}</td><td>${vozaci[voz].Prezime}</td><td>Vozac</td>`;
                         if (vozaci[voz].Ban == 0) {
-                            tabelaKorisnika += `<td><button id="banV" value=${vozaci[voz].Id}>Ban</button></td></tr>`;
+                            tabelaKorisnika += `<td><button id="banV" class="dugmeSrc" value=${vozaci[voz].Id}>Ban</button></td></tr>`;
                         } else {
-                            tabelaKorisnika += `<td><button id="unbanV" value=${vozaci[voz].Id}>Unban</button></td></tr>`;
+                            tabelaKorisnika += `<td><button id="unbanV" class="dugmeSrc" value=${vozaci[voz].Id}>Unban</button></td></tr>`;
                         }
                     }
 

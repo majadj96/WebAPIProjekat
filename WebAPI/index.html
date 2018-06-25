@@ -95,7 +95,7 @@
             border: none;
             color: palevioletred;
             font-weight:bold;
-            padding: 10px 28px;
+            padding: 9px 24px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -116,21 +116,6 @@
 
 
             $("#registracijaDeo").css('display', 'none');
-
-
-            $("p").click(function () {
-                alert($(this).text());
-            });
-            $("#load-products").click(function () {
-                $.get("/api/registracija", function (data, status) {
-                    let tableOfProducts = "<table border='1'>";
-                    for (korisnik in data) {
-                        tableOfProducts += `<tr><td>${data[korisnik].KorisnickoIme}</td><td>${data[korisnik].Lozinka}</td></tr>`;
-                    }
-                    tableOfProducts += "</table>";
-                    $("#content").html(tableOfProducts);
-                });
-            });
 
             $("#prijava").click(function () {
 
@@ -153,8 +138,7 @@
                         KorisnickoIme: `${$('#korIme').val()}`,
                         Lozinka: `${$('#korPass').val()}`,
                     };
-
-
+                    
                     $.ajax({
                         type: 'POST',
                         url: '/api/Prijava',
@@ -190,10 +174,12 @@
                 $("#registracijaDeo").show(1000);
             });
 
-
+            $("#skloniSe").click(function () {
+                $("#prikazi").show(1000);
+                $("#registracijaDeo").hide(1000);
+            });
 
             $("#registracija").click(function () {
-
                 let x = document.getElementById("korImeReg");
                 let y = document.getElementById("korPassReg");
                 let ub = document.getElementById("ime");
@@ -201,7 +187,6 @@
                 let p = document.getElementById("jmbg");
                 let p1 = document.getElementById("brTelefona");
                 let p2 = document.getElementById("emailAdr");
-           
                 if (!x.checkValidity() || !y.checkValidity() || !ub.checkValidity() || !m.checkValidity() || !p.checkValidity() || !p1.checkValidity() || !p2.checkValidity()) {
                     alert("Morate ispreno popuniti sva polja!");
                 } else {
@@ -265,22 +250,19 @@
     </nav>
    
     <div id="prijavaDeo" style="width:800px; margin:0 auto;">
-
+        <br/>
         <h2 style="text-align:center;font-size:40px;font-weight:bold;text-shadow: -1px 0 palevioletred, 0 2px palevioletred, 2px 0 palevioletred, 0 -1px palevioletred;"> Prijavi se</h2><br />
 
         <div style="margin-left:220px;">
-        <table>
+        <table width="440">
             <tr>
-                <td> </td>
-                <td><input id="korIme" type="text" name="KorisnickoIme" placeholder="Korisnicko ime" required autofocus/></td>
+                <td><input size="21" id="korIme" type="text" name="KorisnickoIme" placeholder="Korisnicko ime" required autofocus/></td>
             </tr>
             <tr>
-                <td> </td>
-                <td><input id="korPass" type="password" name="Lozinka" placeholder="Lozinka" required /></td>
+                <td><input size="21" id="korPass" type="password" name="Lozinka" placeholder="Lozinka" required /></td>
             </tr>
             <tr><td><br /> </td><td></td></tr>
             <tr>
-                <td></td>
                 <td>  <button id="prikazi" type="button">Nemas nalog?</button>  <button id="prijava" type="button">Prijavi se</button></td>
             </tr>
 
@@ -351,8 +333,10 @@
             </tr>
             <tr><td><br /></td></tr>
             <tr>
-                <td></td>
+                <td align="center"> <button id="skloniSe" type="button">Odustani</button></td>
+
                 <td align="right"> <button id="registracija" type="button">Registruj se</button></td>
+
             </tr>
 
         </table>
