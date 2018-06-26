@@ -1,4 +1,4 @@
-0;Elena;Kevac;eki1;eki11111111;657688898;066577543;Zenski;eki@gmail.com;45.2461661468623;19.8363913027317;Danila Kiša 29; Novi Sad;;102;2015;NS324KD;Putnicki;1;0
+0;Elena;Kevac;eki1;eki1;657688898;066577543;Zenski;eki@gmail.com;45.2461661468623;19.8363913027317;Danila Kiša 29; Novi Sad;;102;2015;NS324KD;Putnicki;1;0
 1;Mile;Kitic;mile;mile;657688898;066577543;Muski;mile@gmail.com;45.2466798007905;19.8448885408909;Sutjeska; Novi Sad;;101;2009;NS22;Kombi;0;0
 2;Bogi;Dobrijević;bogi;bogitaxi;0506973734523;064555444;Muski;bogi@gmail.com;45.2405307561423;19.8494375673802;Drage Spasić 3; Novi Sad;;104;2015;NS213ER;Putnicki;0;0
 3;Ratko;Ratkos;ratko;ratkotaxi;0301977231405;065332076;Muski;ratko@gmail.com;45.2453201185027;19.8393095461399;Vladimira Nikolića 1; Novi Sad 21000;;103;2018;NS231QW;Putnicki;0;0
