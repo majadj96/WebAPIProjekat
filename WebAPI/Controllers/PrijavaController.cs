@@ -100,6 +100,8 @@ namespace WebAPI.Controllers
 
         public string Post([FromBody]Korisnik korisnik) // Prijava , autentifikacija, index str , moram da posaljem username i pass i zbog toga moram post metodu da koristim
         {
+           
+
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];

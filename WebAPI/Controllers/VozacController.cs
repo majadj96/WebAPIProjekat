@@ -19,7 +19,8 @@ namespace WebAPI.Controllers
         public bool Put(string id, [FromBody]Vozac vozac)//menjam samo vozaca
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];//sve voznje
-            
+
+           
             Vozac vv = vozaci.list[id];
             if (vozac.Ban != 2)
             {
@@ -46,6 +47,8 @@ namespace WebAPI.Controllers
 
         public bool Post([FromBody]Vozac vozac)
         {
+            //validacija svakog polja ako je null ili equals "" // u novu metodu
+
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
@@ -72,8 +75,8 @@ namespace WebAPI.Controllers
             path = HostingEnvironment.MapPath(path);
 
             StringBuilder sb = new StringBuilder();
-            vozac.Id = vozaci.list.Count.ToString();
-            vozac.Automobil.Broj = (vozaci.list.Count + 100).ToString();
+            vozac.Id = vozaci.list.Count.ToString();//generise se automatski
+            vozac.Automobil.Broj = (vozaci.list.Count + 100).ToString();//generise se automatski
             sb.Append(vozac.Id + ";" + vozac.Ime + ";" + vozac.Prezime + ";" + vozac.KorisnickoIme + ";" + vozac.Lozinka + ";" + vozac.JMBG + ";" + vozac.KontaktTelefon + ";" + vozac.Pol + ";" + vozac.Email + ";" + vozac.Lokacija.X + ";" + vozac.Lokacija.Y + ";" + vozac.Lokacija.Adresa.UlicaBroj + ";" + vozac.Lokacija.Adresa.NaseljenoMesto + ";" + vozac.Lokacija.Adresa.PozivniBrojMesta + ";" + vozac.Automobil.Broj + ";" + vozac.Automobil.Godiste + ";" + vozac.Automobil.Registracija + ";" + vozac.Automobil.Tip + ";" + vozac.Zauzet+";" + vozac.Ban+ "\n");
 
             if (!File.Exists(path))

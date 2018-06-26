@@ -14,8 +14,6 @@ namespace WebAPI.Controllers
 {
     public class KomentarController : ApiController
     {
-
-
         public bool Post([FromBody]Komentar komentar) //Za postavljanje komentara
         {
             
