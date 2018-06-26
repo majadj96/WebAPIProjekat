@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static WebAPI.Models.Enums.Enumss;
 
 namespace WebAPI.Models
 {
@@ -9,17 +10,17 @@ namespace WebAPI.Models
     {
         public Lokacija Lokacija { get; set; }
         public Automobil Automobil { get; set; }
-        public int Zauzet { get; set; } // 0 - nije zauzet i 1 jeste
+        public Zauzet Zauzet { get; set; } // 0 - nije zauzet i 1 jeste
 
         public Vozac() { }
        
 
         public Vozac(string id, string ime, string prezime, string korisnickoIme, string lozinka, string jmbg, string kontakt, string pol, 
             string email,double x, double y, string ulicaBroj,string mesto,string zip,string brojAuta, int godisteAuta, string registracijaAuta
-            ,string tipAuta,int z,int b) : this()
+            ,string tipAuta,string z,string b) : this()
         {
-            Ban = b;
-            Zauzet = z;
+            if (b.Equals("DA")) { Ban = Banovan.DA; } else if (b.Equals("NE")) { Ban = Banovan.NE; } else { Ban = Banovan.IGNORE; }
+            if (z.Equals("DA")) { Zauzet = Zauzet.DA; } else if(z.Equals("NE")){ Zauzet = Zauzet.NE; } else { Zauzet = Zauzet.IGNORE; }
             //Licne INFO
             Id = id;
             Ime = ime;

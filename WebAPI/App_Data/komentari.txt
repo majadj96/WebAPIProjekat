@@ -57,3 +57,5 @@
 56;Vozac je mnogo brzo vozio!;6/26/2018 1:29:19 PM;sneska;0;1
 57;Klijent je samo ispao iz auta nisam ni video.;6/26/2018 1:48:35 PM;mile;1;5
 58;Mile je jako prijatan i oprezan.;6/26/2018 1:52:24 PM;sneska;3;5
+59;TOP!đđđ;6/26/2018 8:17:06 PM;sneska;6;3
+60;JU;6/26/2018 8:29:21 PM;mile;10;5

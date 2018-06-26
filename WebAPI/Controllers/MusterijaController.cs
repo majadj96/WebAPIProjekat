@@ -30,6 +30,7 @@ namespace WebAPI.Controllers
 
             Korisnik korisnik = korisnici.list[id.ToString()];
 
+            if(value.Ban != Models.Enums.Enumss.Banovan.IGNORE)
             korisnik.Ban = value.Ban;
 
             string path = "~/App_Data/korisnici.txt";

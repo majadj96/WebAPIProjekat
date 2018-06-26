@@ -22,12 +22,12 @@ namespace WebAPI.Controllers
 
            
             Vozac vv = vozaci.list[id];
-            if (vozac.Ban != 2)
+            if (vozac.Ban != Enumss.Banovan.IGNORE)
             {
                 vv.Ban = vozac.Ban;
             }
 
-            if (vozac.Zauzet != 2)
+            if (vozac.Zauzet != Enumss.Zauzet.IGNORE)
             {
                 vv.Zauzet = vozac.Zauzet;
             }

@@ -25,5 +25,19 @@ namespace WebAPI.Models.Enums
             Utoku,
         }
 
+        public enum Zauzet
+        {
+            NE,
+            DA,
+            IGNORE
+        }
+
+        public enum Banovan
+        {
+            NE,
+            DA,
+            IGNORE
+        }
+
     }
 }

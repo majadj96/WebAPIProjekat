@@ -4,6 +4,8 @@
 3;06/26/2018 13:33;45.2628228374928;19.8149781811145;Kornelija Stankovića 15; Novi Sad;;Svejedno;1;45.2286689253548;19.8584497896702;Tunel Mišeluk; Petrovaradin;; ;1;430;Mile je jako prijatan i oprezan.;6/26/2018 1:52:24 PM;sneska;3;5;Uspesna
 4;06/26/2018 13:35;45.2467266338039;19.8334516016514;Gogoljeva 23; Novi Sad 21000;;Putnicki;1;0;0; ; ; ;0;6;0; ; ; ; ; ;Obradjena
 5;06/26/2018 13:55;45.2533621231849;19.8436010805638;Nadgrobni Spomenik Jermenske Porodice Čenazi; Novi Sad;;Svejedno; ;45.2635562153805;19.8163715380902;Kornelija Stankovića 7; Novi Sad;;0;1;200; ; ; ; ; ;Uspesna
-6;06/26/2018 13:57;45.2405856517861;19.8285377947361;Bulevar cara Lazara 79a; Novi Sad;;Svejedno;1;45.2439178364965;19.8422318935125;Bulevar cara Lazara 19; Novi Sad 21000;; ;1;200; ; ; ; ; ;Uspesna
+6;6/26/2018 1:57:00 PM;45.2405856517861;19.8285377947361;Bulevar cara Lazara 79a; Novi Sad;;Svejedno;1;45.2439178364965;19.8422318935125;Bulevar cara Lazara 19; Novi Sad 21000;; ;1;200;TOP!đđđ;6/26/2018 8:17:06 PM;sneska;6;3;Uspesna
 7;06/26/2018 14:36;45.2469547549925;19.8385048834355;Lasla Gala 12; Novi Sad 409848;;Putnicki;1;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
-8;06/26/2018 14:36;45.2392797144187;19.8352325884373;Narodnog fronta 25a; Novi Sad 21102;;Kombi;1;0;0; ; ; ; ;1;0; ; ; ; ; ;Prihvacena
+8;6/26/2018 2:36:00 PM;45.2392797144187;19.8352325884373;Narodnog fronta 25a; Novi Sad 21102;;Kombi;1;45.2403267837977;19.8388803926975;Narodnog fronta; Novi Sad 21102;; ;1;28; ; ; ; ; ;Uspesna
+9;6/26/2018 8:14:57 PM;45.2440888225739;19.8429144350559;Bulevar cara Lazara 19; Novi Sad 21000;;Svejedno; ;0;0; ; ; ;0;3;0; ; ; ; ; ;Formirana
+10;6/26/2018 8:15:51 PM;45.2436657945002;19.8412836519749;Bulevar cara Lazara 19; Novi Sad 21000;;Svejedno;1;0;0; ; ; ; ;1;0;JU;6/26/2018 8:29:21 PM;mile;10;5;Neuspesna
