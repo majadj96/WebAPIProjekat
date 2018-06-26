@@ -408,7 +408,6 @@
             })
             let imaVoznji = false;
             if (uloga == 0) {
-                alert("Musterija logovana");
                 $("#korisnik").css("display", "block");
                 $("#korisnik").css("clear", "both");
                 $("#korisnik").css("position", "sticky");
@@ -511,7 +510,6 @@
                     }
                 }
             } else if (uloga == 1) {
-                alert("Dispecer logovan");
                 $('#dodajVozaca').show();
                 $(".dropdown").show();
                 $("#blokiranje").show();
@@ -1489,7 +1487,7 @@
                         })
 
                     } else {
-                        alert("U toku voznje ste");
+                        alert("U toku voznje ste!");
                     }
                 }
             });
@@ -1650,8 +1648,6 @@
             $(document).on("click", "#dodajKomentar", function () {
 
                 $(':button').prop('disabled', false);
-
-                alert("dodaj kom, posalji ajaxom" + $("#otkaziVoznju").val() + korisnikovAJDI);
                 let o = $('#ocena').val();
                 let x = document.getElementById("opis");
                 if ((!x.checkValidity() || o == "0") && uloga == 2) {
@@ -1689,7 +1685,6 @@
                         success: function (data) {
                             if (data) {
                                 alert("Uspesno dodeljen komentar voznji");
-                                alert("2");
                                 $('#dodajKomentar').text('OK!');
                                 $(location).attr('href', 'single.html');
                             } else {
@@ -1876,7 +1871,7 @@
                 } else {
                     var sadrzaj = $("#izmeni").text();
                     if (sadrzaj == "Promeni informacije") {
-                        alert("Saljem voznju na formiranje");
+                       //alert("Saljem voznju na formiranje");
 
                         let tipAuta = $('#automobilFormiranje').val();
                         let bitno = true;
@@ -1982,7 +1977,6 @@
 
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
-                    alert("Obradjujem voznju");
                     $("#tabelaPrikaza").hide();
                     $("#tabelaPretraga").hide();
                     $("#filtriranje").hide();
@@ -2077,7 +2071,6 @@
             let odabranaVoznja = '';
             $(document).on("click", "#dodavanjeVoznjeVozacu", function () {
                 odabranaVoznja = $(this).val();
-                alert("Saljem voznju" + odabranaVoznja + "..treba da se otovori lista slobodnih vozaca");
 
                 let voznja = {};
                 let bul = 0;//0 /1
@@ -2447,7 +2440,6 @@
                             contentType: 'application/json; charset=utf-8',
                             dataType: 'json',
                             success: function (data) {
-                                alert("Uspesno dodavanje iznosa i odredista");
                                 $("#podaciUspesno").text("OK!");
                                 $(location).attr('href', 'single.html');
 
@@ -3027,7 +3019,6 @@
 
             $(document).on("click", "#sortPo", function () {
                 let polje = $("#polje").val();
-                alert($("#polje").val());
                 if (polje == null) {
                     alert("Morate odabrati sort :)");
                 } else {
@@ -3920,7 +3911,6 @@
             });
 
             $(document).on("click", "#banV", function () {
-                alert($(this).val());
                 let vozac = {
                     Zauzet: 2,
                     Ban: 1,
@@ -3966,7 +3956,6 @@
 
 
             $(document).on("click", "#banK", function () {
-                alert($(this).val());
                 let musterija = {
                     Ban: 1,
                 };
