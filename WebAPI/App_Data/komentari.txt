@@ -54,3 +54,6 @@
 53;OK;6/26/2018 2:57:29 AM;sneska;35;4
 54;TOP;6/26/2018 3:03:12 AM;sneska;16;5
 55;hehe;6/26/2018 3:08:19 AM;sneska;38;2
+56;Vozac je mnogo brzo vozio!;6/26/2018 1:29:19 PM;sneska;0;1
+57;Klijent je samo ispao iz auta nisam ni video.;6/26/2018 1:48:35 PM;mile;1;5
+58;Mile je jako prijatan i oprezan.;6/26/2018 1:52:24 PM;sneska;3;5

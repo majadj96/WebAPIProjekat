@@ -1,4 +1,3 @@
 0;Maja;Đorđević;majakaca<33;kaca;m;53453;Zenski;mejl@gmail.com;0
-1;Snezana;Djordjevic;sneska;7patuljaka;18069653854;0642531532;Zenski;sdjsimsa2009@gmail.com;0
+1;Snežana;Đorđević;sneska;7patuljaka;18069653854;0642531532;Zenski;sdjsimsa2009@gmail.com;0
 2;Saška;Mičić;saki;saki1111;1412992432324;064555222999;Zenski;saska@gmail.com;0
-3;yhgvgy;ggjhfgju;bravo;7656567667;2222222222222;4444444444;Zenski;gyhj@mail.com;0

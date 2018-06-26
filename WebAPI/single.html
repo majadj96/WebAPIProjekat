@@ -201,8 +201,6 @@
 
     <script type="text/javascript">
 
-     
-
         function getEnumStatus(id) {
             switch (id) {
                 case 0: return "Kreirana";
@@ -532,7 +530,6 @@
                                 }
                     }
                     else if (uloga == 2) {
-                        alert("Vozac logovana");
                         $("#lala").hide();
                         $("#voznjeNaCekanjuVozac").show();
                         $("#lala1").hide();
@@ -752,7 +749,7 @@
                                     $("#vozac").css("display", "block");
                                 }
                                 $("#filtriranje").hide();
-                                $("#tabelaPrikaz").hide();
+                                $("#tabelaPrikaza").hide();
                                 $("#naruciVoznjuDiv").hide();
                                 $("#dugmeNaruciVoznjuDiv").hide();
                                 $('#dodavanjeKorisnikaDiv').hide();
@@ -971,9 +968,9 @@
 
                     $("#dispecer").css("display", "none");
                     $("#block").hide();
+                    $("#tabelaPrikaza").hide();
                     $("#map1").show();
                     $("#filtriranje").hide();
-                    $("#tabelaPrikaz").hide();
                     $("#pretraga").hide();
                     $("#tabelaPretraga").hide();
                     $("#dugmeDodajVozaca").show();
@@ -993,7 +990,7 @@
                     let informacije = "<h2  align=\"center\" style=\"color:#1abc9c\" >Unesite podatke za vozaca</h2><hr /><table class=\"izmenaTejbl\" id=\"tabelaVozaca\" border='1'>";
                     informacije += `<tr>
                                                         <td>Ime:</td>
-                                                        <td><input type=\"text\" id=\"imeVozac\" required title="Obavezno"/></td>
+                                                        <td><input type=\"text\" id=\"imeVozac\"  required title="Obavezno"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Prezime:</td>
@@ -1017,7 +1014,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Emal:</td>
-                                                        <td><input type=\"email\" id=\"emailVozac\" title="ex. flamingo@taxi.com" required /></td>
+                                                        <td><input type=\"email\" id=\"emailVozac\" title="e.g. flamingo@taxi.com" required /></td>
                                                     </tr>
 
                                                     <tr>
@@ -1036,12 +1033,12 @@
 
                                                 <tr>
                                                     <td>Godiste auta</td>
-                                                        <td><input type=\"number\" min=2013 max=2018   pattern="[0-9]{4}" id=\"godisteAutaVozac\" title="Minimum 4 cifara" required /></td>
+                                                        <td><input type=\"number\" min=2011 max=2018   pattern="[0-9]{4}" id=\"godisteAutaVozac\" title="2011-2018" required /></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td>Registracija auta</td>
-                                                        <td><input type=\"text\" id=\"registracijaAutaVozac\" pattern="[A-Z]{2}[0-9]{3}[A-Z]{2}" title="ex.NS002PU" required /></td>
+                                                        <td><input type=\"text\" id=\"registracijaAutaVozac\" pattern="[A-Z]{2}[0-9]{3}[A-Z]{2}" title="e.g. NS111PU" required /></td>
                                                 </tr>
 
                                                  <tr>
@@ -1207,10 +1204,7 @@
                                                 <p>Mesto: ${lokacija.Adresa.NaseljenoMesto}</p>
                                                 <p>Ulica&Broj: ${lokacija.Adresa.UlicaBroj}</p>
                                             </details>`;
-
-
                                     $('#staraLokacija').html(staraLokacija);
-
                                 }
                             })
 
@@ -1713,7 +1707,7 @@
                     $("#tabelaPretraga").hide();
 
                     $("#filtriranje").hide();
-                    $("#tabelaPrikaz").hide();
+                    $("#tabelaPrikaza").hide();
 
                     $("#pocetna1").hide();
                     $("#profil").hide();
@@ -1871,9 +1865,9 @@
                 var sadrzaj = $("#izmeni").text();
                 if (sadrzaj == "Promeni informacije") {
                     alert("Obradjujem voznju");
+                    $("#tabelaPrikaza").hide();
                     $("#tabelaPretraga").hide();
                     $("#filtriranje").hide();
-                    $("#tabelaPrikaz").hide();
                     $("#map1").hide();
                     $("#odabirVozaca").hide();
                     $("#pretraga").hide();
@@ -2013,7 +2007,7 @@
                             $("#odabirVozaca").show();
                             let petNajblizih = [];
                             
-                            if (data.length > 5) {
+                           // if (data.length >= 5) { - Svakako sortiraj pa koliko ih bude
 
                                 for (var vozac in data) {
                                     // c = √ ((xA − xB) ² + (yA − yB) ² )
@@ -2043,7 +2037,7 @@
                                 }
 
                                 data = petOnly; // xD
-                            }
+                            //}
                             let tabelaVoznji = `<br /><hr /><h3  align=\"left\" style=\"color:#1abc9c\" >Izaberi vozaca</h3><hr /><table border='1'><tr><th>Ime</th><th>Prezime</th><th>Lokacija</th>`;
                             tabelaVoznji += "<th>Tip automobila</th><th></th></tr>";
                                 for (var vozac in data) {
@@ -2494,6 +2488,7 @@
                             $("#filtriranje").show();
                             $("#korisnik").css("display", "none");
                             $("#vozac").css("display", "none");
+                            $("#tabelaPrikaza").html('');
 
                             $("#dispecer").css("display", "none");
                             $("#map1").hide();
@@ -2579,6 +2574,8 @@
             });
             
             $(document).on("click", "#sortirajPoUdaljenosti", function () {
+                $("#tabelaPrikaza").show();
+
                 let vozacevaLokacija;
                 $.ajax({
                     type: 'GET',
@@ -3732,7 +3729,7 @@
                     $("#tabelaPretraga").hide();
 
                     $("#filtriranje").hide();
-                    $("#tabelaPrikaz").hide();
+                    $("#tabelaPrikaza").hide();
 
                     $("#pocetna1").hide();
                     $("#map1").hide();
@@ -4062,13 +4059,14 @@
 
 
     <div id="promeniLokacijuDiv" style="width:800px; margin:0 auto;">
-        <div id="staraLokacija" style="margin-left:5px;"></div>
+
 
 
         <div id="tabelaIzmeniLokaciju"></div>
         <div id="dugmePromeniLokacijuDiv" style="width:800px; margin:0 auto;">
             <br />  <button class="dugmeSrc" id="promeniLokacijuBut">Promeni</button>
         </div>
+        <div id="staraLokacija" style="margin-left:5px;"></div>
         <div id="stariAuto" style="margin-left:5px;"></div>
         <div id="tabelaIzmeniAuto"></div>
     </div>
