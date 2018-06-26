@@ -19,18 +19,38 @@ namespace WebAPI.Controllers
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
-            Voznja v = voznje.list[id.ToString()];
+            if (voznje.list == null)
+                voznje.list = new Dictionary<string, Voznja>();
 
-            return v;
+            //Validacija
+            if (id >= 0 && id < voznje.list.Count)
+            {
+                Voznja v = voznje.list[id.ToString()];
+                return v;
+            }
+            else
+            {
+                return null;//Ili nesto drugo..exception?
+            }
         }
 
         public bool Put(string id, [FromBody]Voznja voznja)
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
 
+            //Validacija
+            if (voznje.list == null)
+                voznje.list = new Dictionary<string, Voznja>();
+
+            if (!(int.Parse(id) >= 0 && int.Parse(id) < voznje.list.Count))
+                return false;
+
+            //Auto validacija
+            if (voznja.Automobil != Models.Enums.Enumss.TipAuta.Kombi && voznja.Automobil != Models.Enums.Enumss.TipAuta.Putnicki && voznja.Automobil != Models.Enums.Enumss.TipAuta.Svejedno)
+                return false;
+
             Voznja voki = voznje.list[id];
-
-
+            
             if (voznja.Automobil != 0)
                 voki.Automobil = voznja.Automobil;
 
@@ -89,7 +109,6 @@ namespace WebAPI.Controllers
                         return false;
                     }
                 }
-                
                 voki.StatusVoznje = voznja.StatusVoznje;
             }
 
@@ -109,8 +128,14 @@ namespace WebAPI.Controllers
         {
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
             List<Voznja> kreiraneVoznje = new List<Voznja>();
+
+            //Validacija - ako se slucajno preuzme null iz applications-a
+            if (voznje.list == null)
+                voznje.list = new Dictionary<string, Voznja>();
+
             foreach (var v in voznje.list)
                 kreiraneVoznje.Add(v.Value);
+            
 
             return kreiraneVoznje;
         }
@@ -118,7 +143,25 @@ namespace WebAPI.Controllers
 
         public bool Post([FromBody]Voznja voznja)
         {
+            //Validacija
+            if (voznja == null)
+                return false;
+            if (voznja.Lokacija == null)
+                return false;
+
+            //Samo KREIRANA ili FORMIRANA
+            if (voznja.StatusVoznje != Models.Enums.Enumss.StatusVoznje.Kreirana && voznja.StatusVoznje != Models.Enums.Enumss.StatusVoznje.Formirana)
+                return false;
+
+            if (voznja.Automobil != Models.Enums.Enumss.TipAuta.Kombi && voznja.Automobil != Models.Enums.Enumss.TipAuta.Putnicki && voznja.Automobil != Models.Enums.Enumss.TipAuta.Svejedno)
+                return false;
+            
             Voznje voznje = (Voznje)HttpContext.Current.Application["voznje"];
+
+            //Validacija
+            if (voznje.list == null)
+                voznje.list = new Dictionary<string, Voznja>();
+            
 
             string path = "~/App_Data/voznje.txt";
             path = HostingEnvironment.MapPath(path);

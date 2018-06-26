@@ -1,8 +1,8 @@
 0;Elena;Kevac;eki1;eki1;657688898;066577543;Zenski;eki@gmail.com;45.2461661468623;19.8363913027317;Danila Kiša 29; Novi Sad;;102;2015;NS324KD;Putnicki;DA;NE
-1;Mile;Kitić;mile;miletaksista;657688898;066577543;Muski;mile@gmail.com;45.2403267837977;19.8388803926975;Narodnog fronta; Novi Sad 21102;;101;2009;NS22;Kombi;NE;NE
+1;Mile;Kitić;mile;miletaksista;657688898;066577543;Muski;mile@gmail.com;45.2611281218306;19.8116634177677;Kornelija Stankovića 33; Novi Sad;;111;2018;NS456TR;Putnicki;NE;NE
 2;Bogi;Dobrijević;bogi;bogitaxi;0506973734523;064555444;Muski;bogi@gmail.com;45.2405307561423;19.8494375673802;Drage Spasić 3; Novi Sad;;104;2015;NS213ER;Putnicki;DA;DA
-3;Ratko;Ratkos;ratko;ratkotaxi;0301977231405;065332076;Muski;ratko@gmail.com;45.2453201185027;19.8393095461399;Vladimira Nikolića 1; Novi Sad 21000;;103;2018;NS231QW;Putnicki;DA;DA
-4;Tamaro;Tamić;tamaro;tamarotaxi;1212975435234;064223103;Muski;tamaro@gmail.com;45.2472412807817;19.8492373211698;Bulevar cara Lazara 3; Novi Sad 21000;;104;2014;NS984PE;Kombi;NE;NE
-5;Ranka;Račić;ranka;rankataxi;1403983289312;061231943;Zenski;ranka@gmail.com;45.2553958643499;19.8115900511376;Bulevar Evrope; Novi Sad 21000;;105;2017;NS003LE;Putnicki;NE;NE
+3;Ratko;Ratkos;ratko;ratkotaxi;0301977231405;065332076;Muski;ratko@gmail.com;45.2453201185027;19.8393095461399;Vladimira Nikolića 1; Novi Sad 21000;;103;2018;NS231QW;Putnicki;DA;NE
+4;Tamaro;Tamić;tamaro;tamarotaxi;1212975435234;064223103;Muski;tamaro@gmail.com;45.2472412807817;19.8492373211698;Bulevar cara Lazara 3; Novi Sad 21000;;104;2014;NS984PE;Kombi;DA;NE
+5;Ranka;Račić;ranka;rankataxi;1403983289312;061231943;Zenski;ranka@gmail.com;45.2553958643499;19.8115900511376;Bulevar Evrope; Novi Sad 21000;;105;2017;NS003LE;Putnicki;DA;NE
 6;Dobrivoje;Katić;dobrica;dobrica1;1234567890987;123456765;Muski;dobrica@hotmail.com;45.2468006598633;19.8331726519139;Gogoljeva 29; Novi Sad 21000;;106;2013;NS444TR;Putnicki;DA;NE
 7;Pablo;Eskobar;pablo;pablotaksista;1902952543402;063444222;Muski;pablo@eskobar.com;45.2610724535651;19.8115540831449;Kornelija Stankovića 35; Novi Sad;;107;2017;NS231PE;Putnicki;NE;NE

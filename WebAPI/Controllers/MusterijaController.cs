@@ -14,10 +14,15 @@ namespace WebAPI.Controllers
     public class MusterijaController : ApiController
     {
 
-        public List<Korisnik> Get()
+        public List<Korisnik> Get() // Niko ne koristi
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             List<Korisnik> korisnicici = new List<Korisnik>();
+
+            //Validacija u slucaju da aplikacija vrati null
+            if (korisnici.list == null)
+                korisnici.list = new Dictionary<string, Korisnik>();
+
             foreach (var k in korisnici.list)
                 korisnicici.Add(k.Value);
 
@@ -28,9 +33,20 @@ namespace WebAPI.Controllers
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
 
+            //Validacija
+            if (korisnici.list == null)
+                korisnici.list = new Dictionary<string, Korisnik>();
+            
+            if (!(id >= 0 && id < korisnici.list.Count))
+                return false;
+
             Korisnik korisnik = korisnici.list[id.ToString()];
 
-            if(value.Ban != Models.Enums.Enumss.Banovan.IGNORE)
+            //Nije u validnom stanju - proveri
+            if (value.Ban != Models.Enums.Enumss.Banovan.IGNORE && value.Ban != Models.Enums.Enumss.Banovan.DA && value.Ban != Models.Enums.Enumss.Banovan.NE)
+                return false;
+
+            if (value.Ban != Models.Enums.Enumss.Banovan.IGNORE)
             korisnik.Ban = value.Ban;
 
             string path = "~/App_Data/korisnici.txt";

@@ -161,7 +161,6 @@
     <Compile Include="Controllers\AutomobilController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DispecerController.cs" />
-    <Compile Include="Controllers\KomentarController.cs" />
     <Compile Include="Controllers\KorisnikController.cs" />
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
@@ -178,7 +177,6 @@
     <Compile Include="Models\Dispeceri.cs" />
     <Compile Include="Models\Enums\Enumss.cs" />
     <Compile Include="Models\Komentar.cs" />
-    <Compile Include="Models\Komentari.cs" />
     <Compile Include="Models\Korisnici.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Lokacija.cs" />

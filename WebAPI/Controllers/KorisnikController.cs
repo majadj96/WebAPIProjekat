@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
@@ -14,10 +15,15 @@ namespace WebAPI.Controllers
 {
     public class KorisnikController : ApiController // imam put i post za sada
     {
-        public List<Korisnik> Get()
+        public List<Korisnik> Get()//Koristi se a u musteriji ne
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             List<Korisnik> korisnicici = new List<Korisnik>();
+
+            //Validacija
+            if (korisnici.list == null)
+                korisnici.list = new Dictionary<string, Korisnik>();
+
             foreach (var k in korisnici.list)
                 korisnicici.Add(k.Value);
 
@@ -28,14 +34,50 @@ namespace WebAPI.Controllers
         public Korisnik Get(string id)
         {
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
-            return korisnici.list[id];
+            //Validacija
+            if(int.Parse(id)>=0 && int.Parse(id) < korisnici.list.Count)
+            {
+                return korisnici.list[id];
+            }
+            else
+            {
+                return null;
+            }
+
         }
         
-        public bool Put(string id, [FromBody]Korisnik korisnik) // Izmena ? , treba mi i put da promenim da je banovan
+        public bool Put(string id, [FromBody]Korisnik korisnik) // Izmena za sve korisnike(musterija,vozac,admin)
         {
+            #region VALIDACIJA
+            if (korisnik == null)
+                return false;
+
+            if (String.IsNullOrEmpty(korisnik.KorisnickoIme) || String.IsNullOrEmpty(korisnik.Lozinka) || String.IsNullOrEmpty(korisnik.Ime) || String.IsNullOrEmpty(korisnik.Prezime) || String.IsNullOrEmpty(korisnik.KontaktTelefon) || String.IsNullOrEmpty(korisnik.Email))
+                return false;
+
+            Regex telefonReg = new Regex("[0-9]{6,14}");
+            Regex emailReg = new Regex(@"[a-z0-9._% +-]+@[a-z0-9.-]+\.[a-z]{2,3}$");
+            Regex korImeReg = new Regex("[0-9a-zA-Z]{4,}");
+            Regex lozinkaReg = new Regex("[0-9a-zA-Z]{8,}");
+
+            if (!telefonReg.IsMatch(korisnik.KontaktTelefon) || !emailReg.IsMatch(korisnik.Email) || !korImeReg.IsMatch(korisnik.KorisnickoIme) || !lozinkaReg.IsMatch(korisnik.Lozinka))
+                return false;
+            #endregion
+
+
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+            //Validacija 
+            if (korisnici.list == null)
+                korisnici.list = new Dictionary<string, Korisnik>();
+
+            if (dispeceri.list == null)
+                dispeceri.list = new Dictionary<string, Dispecer>();
+
+            if (vozaci.list == null)
+                vozaci.list = new Dictionary<string, Vozac>();
 
             Korisnik korisnikLoc = null;
             Vozac vozacLoc = null;
@@ -211,11 +253,40 @@ namespace WebAPI.Controllers
         }
 
 
-        public bool Post([FromBody]Korisnik korisnik) // Dodavanje korisnika - DOBRO JE, //validacija
+        public bool Post([FromBody]Korisnik korisnik) // Registracija
         {
+            #region VALIDACIJA
+            if (korisnik == null)
+                return false;
+
+          if (String.IsNullOrEmpty(korisnik.KorisnickoIme) || String.IsNullOrEmpty(korisnik.Lozinka) || String.IsNullOrEmpty(korisnik.Ime) || String.IsNullOrEmpty(korisnik.Prezime) || String.IsNullOrEmpty((korisnik.Pol).ToString()) || String.IsNullOrEmpty(korisnik.JMBG) || String.IsNullOrEmpty(korisnik.KontaktTelefon) || String.IsNullOrEmpty(korisnik.Email))
+                return false;
+            
+            Regex jmbgReg = new Regex("[0-9]{13}");
+            Regex telefonReg = new Regex("[0-9]{6,14}");
+            Regex emailReg = new Regex(@"[a-z0-9._% +-]+@[a-z0-9.-]+\.[a-z]{2,3}$");
+            Regex korImeReg = new Regex("[0-9a-zA-Z]{4,}");
+            Regex lozinkaReg = new Regex("[0-9a-zA-Z]{8,}");
+            
+            if (!jmbgReg.IsMatch(korisnik.JMBG) || !telefonReg.IsMatch(korisnik.KontaktTelefon) || !emailReg.IsMatch(korisnik.Email) || !korImeReg.IsMatch(korisnik.KorisnickoIme) || !lozinkaReg.IsMatch(korisnik.Lozinka))
+                return false;
+            #endregion
+            
+
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+            //Validacija 
+            if (korisnici.list == null)
+                korisnici.list = new Dictionary<string, Korisnik>();
+
+            if (dispeceri.list == null)
+                dispeceri.list = new Dictionary<string, Dispecer>();
+
+            if (vozaci.list == null)
+                vozaci.list = new Dictionary<string, Vozac>();
+
 
             bool postoji = false;
 
@@ -247,9 +318,8 @@ namespace WebAPI.Controllers
             }
 
 
-            if (!postoji)
+            if (!postoji)//Ako korisnicko ime nije zauzeto
             {
-
                 string path = "~/App_Data/korisnici.txt";
                 path = HostingEnvironment.MapPath(path);
 

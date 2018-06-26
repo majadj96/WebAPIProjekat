@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
@@ -18,9 +19,24 @@ namespace WebAPI.Controllers
        
         public bool Put(string id, [FromBody]Vozac vozac)//menjam samo vozaca
         {
+
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];//sve voznje
 
-           
+            //Validacija
+            if (vozaci.list == null)
+                vozaci.list = new Dictionary<string, Vozac>();
+
+            if (!(int.Parse(id) >= 0 && int.Parse(id) < vozaci.list.Count))
+                return false;
+
+            //Nije u validnom stanju 
+            if (vozac.Ban != Models.Enums.Enumss.Banovan.IGNORE && vozac.Ban != Models.Enums.Enumss.Banovan.DA && vozac.Ban != Models.Enums.Enumss.Banovan.NE)
+                return false;
+
+            if (vozac.Zauzet != Models.Enums.Enumss.Zauzet.IGNORE && vozac.Zauzet != Models.Enums.Enumss.Zauzet.DA && vozac.Zauzet != Models.Enums.Enumss.Zauzet.NE)
+                return false;
+
+
             Vozac vv = vozaci.list[id];
             if (vozac.Ban != Enumss.Banovan.IGNORE)
             {
@@ -49,9 +65,43 @@ namespace WebAPI.Controllers
         {
             //validacija svakog polja ako je null ili equals "" // u novu metodu
 
+            if (vozac == null)
+                return false;
+            if (vozac.Lokacija == null)
+                return false;
+            if (vozac.Automobil == null)
+                return false;
+
+            if (String.IsNullOrEmpty(vozac.KorisnickoIme) || String.IsNullOrEmpty(vozac.Lozinka) || String.IsNullOrEmpty(vozac.Ime) || String.IsNullOrEmpty(vozac.Prezime) || String.IsNullOrEmpty((vozac.Pol).ToString()) || String.IsNullOrEmpty(vozac.JMBG) || String.IsNullOrEmpty(vozac.KontaktTelefon) || String.IsNullOrEmpty(vozac.Email))
+                return false;
+
+            Regex jmbgReg = new Regex("[0-9]{13}");
+            Regex telefonReg = new Regex("[0-9]{6,14}");
+            Regex emailReg = new Regex(@"[a-z0-9._% +-]+@[a-z0-9.-]+\.[a-z]{2,3}$");
+            Regex korImeReg = new Regex("[0-9a-zA-Z]{4,}");
+            Regex lozinkaReg = new Regex("[0-9a-zA-Z]{8,}");
+
+            if (!jmbgReg.IsMatch(vozac.JMBG) || !telefonReg.IsMatch(vozac.KontaktTelefon) || !emailReg.IsMatch(vozac.Email) || !korImeReg.IsMatch(vozac.KorisnickoIme) || !lozinkaReg.IsMatch(vozac.Lozinka))
+                return false;
+
+            if (vozac.Automobil.Tip != Enumss.TipAuta.Kombi && vozac.Automobil.Tip != Enumss.TipAuta.Putnicki)
+                return false;
+
+
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
             Korisnici korisnici = (Korisnici)HttpContext.Current.Application["korisnici"];
             Dispeceri dispeceri = (Dispeceri)HttpContext.Current.Application["dispeceri"];
+
+            //Validacija 
+            if (korisnici.list == null)
+                korisnici.list = new Dictionary<string, Korisnik>();
+
+            if (dispeceri.list == null)
+                dispeceri.list = new Dictionary<string, Dispecer>();
+
+            if (vozaci.list == null)
+                vozaci.list = new Dictionary<string, Vozac>();
+
 
             foreach (var v in vozaci.list)
             {
@@ -92,8 +142,12 @@ namespace WebAPI.Controllers
         public List<Vozac> Get() 
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-            List<Vozac> lista = new List<Vozac>();
 
+            //Validacija
+            if (vozaci.list == null)
+                vozaci.list = new Dictionary<string, Vozac>();
+
+            List<Vozac> lista = new List<Vozac>();
             foreach (var v in vozaci.list)
                 lista.Add(v.Value);
 
@@ -104,7 +158,15 @@ namespace WebAPI.Controllers
         public Vozac Get(string id) 
         {
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
-            return vozaci.list[id];
+
+            if (int.Parse(id)>= 0 && int.Parse(id) < vozaci.list.Count)
+            {
+                return vozaci.list[id];
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -15,8 +15,19 @@ namespace WebAPI.Controllers
     {
         public bool Put(string id, [FromBody]Lokacija lokacija)
         {
+            //Validacija
+            if (lokacija == null)
+                return false;
 
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
+
+            //Validacija
+            if (vozaci.list == null)
+                vozaci.list = new Dictionary<string, Vozac>();
+
+            if (!(int.Parse(id) >= 0 && int.Parse(id) < vozaci.list.Count))
+                return false;
+
             Vozac vv = vozaci.list[id];
           
             vv.Lokacija = lokacija;
@@ -40,7 +51,15 @@ namespace WebAPI.Controllers
             Lokacija lokacija = new Lokacija();
             Vozaci vozaci = (Vozaci)HttpContext.Current.Application["vozaci"];
 
-            lokacija = vozaci.list[id.ToString()].Lokacija;
+            //Validacija
+            if (id >= 0 && id < vozaci.list.Count)
+            {
+                lokacija = vozaci.list[id.ToString()].Lokacija;
+            }
+            else
+            {
+                lokacija = null;
+            }
 
 
             return lokacija;

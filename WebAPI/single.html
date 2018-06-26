@@ -1377,7 +1377,7 @@
                                                     <p>Tip: ${getEnumTipAutomobila(automobil.Tip)}</p>
                                                 <hr /><h3><b>Promeni podatke</b></h3><table>
                                                 <tr><td>Broj auta:</td><td><input type="text" id="brojAuta" required></td></tr>
-                                                <tr><td>Godiste auta:</td><td><input type="number" title="2013-2018" min=2013 max=2018 id="godAuta" required></td></tr>
+                                                <tr><td>Godiste auta:</td><td><input type="number" title="2013-2018" min=2011 max=2018 id="godAuta" required></td></tr>
                                                 <tr><td>Registracija auta:</td><td><input type="text" pattern="[A-Z]{2}[0-9]{3}[A-Z]{2}" title="ex.NS002PU" id="regAuta" required></td></tr>
                                                 <tr><td>Tip auta:</td><td>
                                                 <select id="tipAuta">
@@ -1668,14 +1668,7 @@
                         Komentar: komentar,
                     };
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/Komentar',
-                        data: JSON.stringify(komentar),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                    })
-
+                
                     $.ajax({
                         type: 'PUT',
                         url: '/api/Voznja/' + idVoznje,
@@ -3996,10 +3989,7 @@
                     }
                 })
             });
-
-
-
-
+            
         });
 
 
@@ -4180,11 +4170,6 @@
         <div id="tabelaIzmeniAuto"></div>
     </div>
 
-
-
-
-
-
     <div id="pocetna" class="container-fluid bg-2 text-center">
         <h3 class="margin">O kompaniji</h3>
         <p>
@@ -4208,11 +4193,7 @@
         <a href="#" class="fa fa-google"></a>&nbsp;&nbsp;
         <a href="#" class="fa fa-linkedin"></a>&nbsp;&nbsp;
         <a href="#" class="fa fa-rss"></a>&nbsp;&nbsp;
-
     </div>
-    
-
-
 </footer>
 
 
