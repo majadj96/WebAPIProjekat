@@ -1,5 +1,6 @@
-0;Maja;Đorđević;majakaca<33;kaca;m;53453;Zenski;mejl@gmail.com;NE
+0;Maja;Đorđević;majakaca;kacamoja;1404993243523;066102068;Zenski;mejl@gmail.com;NE
 1;Snežana;Đorđević;sneska;7patuljaka;18069653854;0642531532;Zenski;sdjsimsa2009@gmail.com;NE
-2;Saška;Mičić;saki;saki1111;1412992432324;064555222999;Zenski;saska@gmail.com;DA
+2;Saška;Mičić;saki;saki1111;1412992432324;064555222999;Zenski;saska@gmail.com;NE
 3;Gorica;Mitrov;gorica;goricacar;1210988765423;065444333;Zenski;gorica@hi.com;NE
-4;Maja;Djordjevic;maja;maja1111;1212996123212;064555666;Zenski;maja@gmail.com;NE
+4;Maja;Đorđević;maja;maja1111;1212996123212;064555666;Zenski;maja@gmail.com;NE
+5;Nejmar de Silva;Santos;nejmar;brazil31;1212992342312;0641112223;Muski;nejmar@gmail.com;NE

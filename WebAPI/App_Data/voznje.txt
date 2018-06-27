@@ -1,16 +1,12 @@
-0;06/26/2018 13:25;45.2403352502456;19.8337227006332;Balzakova 15; Novi Sad;;Putnicki;1;0;0; ; ; ; ; ;0;Vozac je mnogo brzo vozio!;6/26/2018 1:29:19 PM;sneska;0;1;Otkazana
-1;06/26/2018 13:31;45.2602241788764;19.8399461859906;Lukijana Mušickog 27; Novi Sad 21000;;Svejedno; ;0;0; ; ; ;0;1;0;Klijent je samo ispao iz auta nisam ni video.;6/26/2018 1:48:35 PM;mile;1;5;Neuspesna
-2;06/26/2018 13:32;45.2519783396797;19.8451031176121;Vase Stajića 1c; Novi Sad 21000;;Svejedno; ;0;0; ; ; ;0;2;0; ; ; ; ; ;Formirana
-3;06/26/2018 13:33;45.2628228374928;19.8149781811145;Kornelija Stankovića 15; Novi Sad;;Svejedno;1;45.2286689253548;19.8584497896702;Tunel Mišeluk; Petrovaradin;; ;1;430;Mile je jako prijatan i oprezan.;6/26/2018 1:52:24 PM;sneska;3;5;Uspesna
-4;06/26/2018 13:35;45.2467266338039;19.8334516016514;Gogoljeva 23; Novi Sad 21000;;Putnicki;1;0;0; ; ; ;0;6;0; ; ; ; ; ;Obradjena
-5;06/26/2018 13:55;45.2533621231849;19.8436010805638;Nadgrobni Spomenik Jermenske Porodice Čenazi; Novi Sad;;Svejedno; ;45.2635562153805;19.8163715380902;Kornelija Stankovića 7; Novi Sad;;0;1;200; ; ; ; ; ;Uspesna
-6;6/26/2018 1:57:00 PM;45.2405856517861;19.8285377947361;Bulevar cara Lazara 79a; Novi Sad;;Svejedno;1;45.2439178364965;19.8422318935125;Bulevar cara Lazara 19; Novi Sad 21000;; ;1;200;TOP!đđđ;6/26/2018 8:17:06 PM;sneska;6;3;Uspesna
-7;6/26/2018 2:36:00 PM;45.2469547549925;19.8385048834355;Lasla Gala 12; Novi Sad 409848;;Putnicki;1;45.2475409160732;19.8367346254856;Braće Ribnikar 25; Novi Sad;; ;1;200; ; ; ; ; ;Uspesna
-8;6/26/2018 2:36:00 PM;45.2392797144187;19.8352325884373;Narodnog fronta 25a; Novi Sad 21102;;Kombi;1;45.2403267837977;19.8388803926975;Narodnog fronta; Novi Sad 21102;; ;1;28; ; ; ; ; ;Uspesna
-9;6/26/2018 8:14:57 PM;45.2440888225739;19.8429144350559;Bulevar cara Lazara 19; Novi Sad 21000;;Svejedno; ;0;0; ; ; ;0;3;0; ; ; ; ; ;Formirana
-10;6/26/2018 8:15:51 PM;45.2436657945002;19.8412836519749;Bulevar cara Lazara 19; Novi Sad 21000;;Svejedno;1;0;0; ; ; ; ;1;0;JU;6/26/2018 8:29:21 PM;mile;10;5;Neuspesna
-11;6/26/2018 11:16:17 PM;45.2492980349888;19.8385236780764;Bulevar oslobođenja 99; Novi Sad 21000;;Kombi;1;0;0; ; ; ; ; ;0;Pogresio sam ipak imam auto svoj hihi;6/26/2018 11:16:39 PM;sneska;11;5;Otkazana
-12;6/27/2018 1:00:45 AM;45.2445420634429;19.8412836519749;Bulevar oslobođenja 100; Novi Sad 21102;;Svejedno; ;45.2433636296619;19.8405970064671;Bulеvar oslobođenja 102; Novi Sad 21000;;0;1;200; ; ; ; ; ;Uspesna
-13;6/27/2018 1:00:59 AM;45.2424269084497;19.8393524614842;Bulevar cara Lazara 25; Novi Sad 21000;;Putnicki; ;0;0; ; ; ;0;5;0; ; ; ; ; ;Formirana
-14;6/27/2018 1:01:17 AM;45.2469895016497;19.8493517366917;Dr Sime Miloševića 5; Novi Sad;;Kombi; ;0;0; ; ; ;0;4;0; ; ; ; ; ;Formirana
-15;6/27/2018 1:01:52 AM;45.2391709266797;19.8437727419407;Most slobode; Novi Sad;;Kombi;1;0;0; ; ; ; ; ;0;lala;6/27/2018 1:02:17 AM;sneska;15;1;Otkazana
+0;6/23/2018 10:43:16 PM;45.243104270842;19.8399103609593;Podgorička 2; Novi Sad 21000;;Putnicki;1;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+1;6/23/2018 10:23:26 PM;45.2475459524114;19.8319281069309;Antona Čehova 13d; Novi Sad;;Kombi;1;45.2471330209875;19.8250558278281;Cara Dušana 14; Novi Sad;; ;1;560; ; ; ; ; ;Uspesna
+2;6/23/2018 10:13:33 PM;45.2492379302302;19.8365629641087;Školska 10; Novi Sad;;Svejedno;1;0;0; ; ; ; ; ;0;Ipak idem pešaka;6/27/2018 11:34:53 PM;sneska;2;5;Otkazana
+3;6/24/2018 10:53:47 PM;45.2547165273603;19.8307990294925;Novosadskog sajma 29; Novi Sad 21101;;Putnicki;1;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+4;6/24/2018 10:54:05 PM;45.2435191847498;19.8234909570987;Teodora Pavlovića 15; Novi Sad 403824;;Svejedno;1;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+5;6/24/2018 10:45:00 PM;45.2453402627963;19.8524187024818;Trg Dositeja Obradovića 3; Novi Sad 21000;;Kombi;5;0;0; ; ; ; ;1;0; ; ; ; ; ;Prihvacena
+6;6/25/2018 10:15:10 PM;45.2686562530612;19.8386370158885;Radoja Domanovića 28; Novi Sad;;Kombi;5;0;0; ; ; ; ; ;0; ; ; ; ; ;Kreirana
+7;6/25/2018 10:15:18 PM;45.2554615577874;19.8533857790501;Vojvode Putnika 3; Novi Sad;;Kombi;5;0;0; ; ; ;0;8;0; ; ; ; ; ;Obradjena
+8;6/25/2018 11:16:06 PM;45.2604655175112;19.8321824312922;Bulеvar oslobođenja 30a; Novi Sad;;Putnicki; ;0;0; ; ; ;0;0;0; ; ; ; ; ;Formirana
+9;6/26/2018 11:26:37 PM;45.2612502831889;19.8490425838027;Marka Miljanova 2; Novi Sad;;Kombi; ;0;0; ; ; ;0;1;0;Iz nekog razloga je napustio vozilo;6/27/2018 11:31:59 PM;mile;9;2;Neuspesna
+10;6/26/2018 11:35:28 PM;45.2484080411856;19.8338500245843;Braće Ribnikar 45; Novi Sad;;Svejedno;1;0;0; ; ; ; ;6;0;Pijana mušterija povraća;6/27/2018 11:36:48 PM;dobrica;10;2;Neuspesna
+11;6/27/2018 1:03:46 PM;45.2488718934482;19.8332540456502;Braće Ribnikar 54; Novi Sad 403529;;Putnicki; ;45.2471855619088;19.8252020490817;Cara Dušana 13; Novi Sad;;0;2;570; ; ; ; ; ;Uspesna

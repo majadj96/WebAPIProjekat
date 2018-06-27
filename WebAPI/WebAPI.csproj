@@ -165,7 +165,6 @@
     <Compile Include="Controllers\LokacijaController.cs" />
     <Compile Include="Controllers\MusterijaController.cs" />
     <Compile Include="Controllers\PrijavaController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VozacController.cs" />
     <Compile Include="Controllers\VoznjaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,7 +187,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="800pxtitle.jpg" />
     <Content Include="App_Data\dispeceri.txt" />
     <Content Include="App_Data\korisnici.txt" />
     <Content Include="App_Data\vozaci.txt" />
@@ -196,25 +194,12 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="f.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fin.jpg" />
     <Content Include="fin1.jpg" />
     <Content Include="flagmingos1.jpg" />
-    <Content Include="flamingo.jpg" />
-    <Content Include="flamingo1.jpg" />
-    <Content Include="flamingo2.jpg" />
-    <Content Include="flamingo3.jpg" />
-    <Content Include="flamingo33.jpg" />
-    <Content Include="flamingo333.jpg" />
-    <Content Include="flamingo3333.jpg" />
-    <Content Include="flamingo33333.jpg" />
-    <Content Include="flas.jpeg" />
     <Content Include="Global.asax" />
     <Content Include="App_Data\komentari.txt" />
-    <Content Include="Healthz-achtergrond-foto-min.jpg" />
-    <Content Include="poster-a-flamingos-fancy-1634438.jpg" />
-    <Content Include="prc_69341325.jpg" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\ol.js" />
     <Content Include="single.html" />

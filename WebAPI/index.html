@@ -152,7 +152,6 @@
                             } else if (data == "Uspesno") {
                                 localStorage.setItem("korisnik", korisnik.KorisnickoIme);
                                 $("#greskaPrijava").html("<p>" + " " + "</p>");
-                                alert("Prijavljeno");
                                 $(location).attr('href', 'single.html');
 
                             } else if (data =="Banovan si") {
@@ -188,7 +187,7 @@
                 let p1 = document.getElementById("brTelefona");
                 let p2 = document.getElementById("emailAdr");
                 if (!x.checkValidity() || !y.checkValidity() || !ub.checkValidity() || !m.checkValidity() || !p.checkValidity() || !p1.checkValidity() || !p2.checkValidity()) {
-                    alert("Morate ispreno popuniti sva polja!");
+                    alert("Morate ispravno popuniti sva polja! \nZadržite kursor na polje da biste videli očekivanu vrednost.");
                 } else {
 
 
@@ -215,7 +214,7 @@
                                 $("#greska").css("color", "red");
                                 // $("#greska").text("Postoji korisnik sa tim username-om");
                                 $("#korImeReg").focus();
-                                alert("Korisnicko ime je zauzeto");
+                                alert("Korisničko ime je zauzeto");
                             }
                             else {
                                 $("#greska").text("");
@@ -256,14 +255,14 @@
         <div style="margin-left:220px;">
         <table width="440">
             <tr>
-                <td><input size="21" id="korIme" type="text" name="KorisnickoIme" placeholder="Korisnicko ime" required autofocus/></td>
+                <td><input size="21" id="korIme" type="text" name="KorisnickoIme" placeholder="Korisničko ime" required autofocus/></td>
             </tr>
             <tr>
                 <td><input size="21" id="korPass" type="password" name="Lozinka" placeholder="Lozinka" required /></td>
             </tr>
             <tr><td><br /> </td><td></td></tr>
             <tr>
-                <td>  <button id="prikazi" type="button">Nemas nalog?</button>  <button id="prijava" type="button">Prijavi se</button></td>
+                <td>  <button id="prikazi" type="button">Nemaš nalog?</button>  <button id="prijava" type="button">Prijavi se</button></td>
             </tr>
 
         </table>
@@ -278,9 +277,9 @@
         <h2 style="text-align:left;color:white;font-weight:bold;text-shadow: -1px 0 palevioletred, 0 1px palevioletred, 1px 0 palevioletred, 0 -1px palevioletred;">Registracija</h2>
 
 
-        <table style="color:white;text-shadow: -1px 0 palevioletred, 0 1px palevioletred, 1px 0 palevioletred, 0 -1px palevioletred;"">
+        <table style="color:white;text-shadow: -1px 0 palevioletred, 0 1px palevioletred, 1px 0 palevioletred, 0 -1px palevioletred;">
             <tr>
-                <td>Korisnicko ime: </td>
+                <td>Korisničko ime: </td>
                 <td>
                     <input id="korImeReg" type="text" pattern="[0-9a-zA-Z]{4,}" title="Minimum 4 karaktera" name="KorisnickoIme" required />
                 </td>
@@ -294,12 +293,12 @@
 
             <tr>
                 <td>Ime: </td>
-                <td><input id="ime" type="text" name="Ime" required /></td>
+                <td><input id="ime" type="text" name="Ime" title="Obavezno" required /></td>
             </tr>
 
             <tr>
                 <td>Prezime: </td>
-                <td><input id="prezime" type="text" name="Prezime" required /></td>
+                <td><input id="prezime" type="text" title="Obavezno" name="Prezime" required /></td>
             </tr>
 
 
@@ -324,12 +323,12 @@
 
             <tr>
                 <td>Broj telefona: </td>
-                <td><input id="brTelefona" pattern="[0-9]{9,}" type="text" name="KontaktTelefon" required /></td>
+                <td><input id="brTelefona" pattern="[0-9]{9,}" type="text" title="e.g.061222333" name="KontaktTelefon" required /></td>
             </tr>
 
             <tr>
                 <td>Email adresa:</td>
-                <td><input id="emailAdr" type="email" name="Email" title="pr. flamingotaxi@gmail.com" required /></td>
+                <td><input id="emailAdr" type="email" name="Email" title="e.g.flamingotaxi@gmail.com" required /></td>
             </tr>
             <tr><td><br /></td></tr>
             <tr>
